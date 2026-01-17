@@ -1,7 +1,6 @@
 'use client';
 
-import { useState } from 'react';
-import { Input } from '@/components/ui/input';
+import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -28,8 +27,13 @@ import {
   DialogHeader,
   DialogTitle,
 } from '@/components/ui/dialog';
+import { Input } from '@/components/ui/input';
+import { AutocompleteInput } from '@/components/ui/autocomplete-input';
 import { useMarket, FlattenedItem } from '@/hooks/useMarket';
-import { useTrackedItems } from '@/hooks/useTrackedItems';
+import { useSupabaseItems } from '@/hooks/useSupabaseItems';
+import { useExchangeRate } from '@/hooks/useExchangeRate';
+import { normalizeSearchInput } from '@/lib/chinese-converter';
+import { getLevelSuffix, hasDisplayLevel, getLevelColors, LEVEL_NAMES } from '@/lib/item-level';
 import { toast } from 'sonner';
 
 const SERVER_NAMES: Record<number, string> = {
@@ -45,6 +49,14 @@ const CURRENCY_NAMES: Record<number, string> = {
   0: '金幣',
   1: '魔晶',
 };
+
+// Convert price to 金幣 equivalent for comparison
+function normalizeToGold(price: number, priceType: number, rate: number): number {
+  if (priceType === 1) {
+    return price * rate;
+  }
+  return price;
+}
 
 // Format large numbers with K suffix
 function formatPrice(price: number): string {
@@ -64,17 +76,157 @@ function formatPriceWithCurrency(price: number, priceType: number): string {
   return `${formatted} ${currency}`;
 }
 
+// Grouped item type
+interface GroupedItem {
+  item: FlattenedItem;
+  count: number;      // Number of listings grouped together
+  quantity: number;   // Total quantity (sum of ITEM_REMAIN for items, count for pets)
+  key: string;
+}
+
+// Group items by same name, level (for items), price, server, stall, location
+function groupItems(items: FlattenedItem[], rate: number): GroupedItem[] {
+  const groups = new Map<string, GroupedItem>();
+
+  for (const item of items) {
+    // Include item level in key for non-pets (items with same name but different levels are different)
+    const itemLevel = item.isPet ? 0 : (item.itemData?.ITEM_LEVEL ?? 0);
+    const key = `${item.name}-${itemLevel}-${item.price}-${item.pricetype}-${item.stall.server}-${item.stall.name}-${item.stall.coords}-${item.isPet}`;
+
+    // Get actual quantity from ITEM_REMAIN for items, default to 1 for pets
+    const itemQuantity = item.isPet ? 1 : (item.itemData?.ITEM_REMAIN ?? 1);
+
+    if (groups.has(key)) {
+      const group = groups.get(key)!;
+      group.count++;
+      group.quantity += itemQuantity;
+    } else {
+      groups.set(key, { item, count: 1, quantity: itemQuantity, key });
+    }
+  }
+
+  // Sort by normalized price (金幣 equivalent) ascending
+  return Array.from(groups.values()).sort((a, b) => {
+    const priceA = normalizeToGold(a.item.price, a.item.pricetype, rate);
+    const priceB = normalizeToGold(b.item.price, b.item.pricetype, rate);
+    return priceA - priceB;
+  });
+}
+
 export function MarketSearch() {
   const [searchTerm, setSearchTerm] = useState('');
+  const [convertedTerm, setConvertedTerm] = useState('');
+  const [isConverted, setIsConverted] = useState(false);
   const [server, setServer] = useState<string>('all');
   const [type, setType] = useState<string>('all');
   const [showOtherItems, setShowOtherItems] = useState(false);
-  const { matchingItems, otherItems, loading, error, search } = useMarket();
-  const { trackedItems, addTrackedItem, addPriceRecord, checkAlerts, getAveragePrice } = useTrackedItems();
+  const { matchingItems, otherItems, loading, loadingMore, error, search, progress, hasMore, loadMore } = useMarket();
+  const {
+    trackedItems,
+    addTrackedItem,
+    savePriceSnapshots,
+    checkAlert,
+    upsertItem,
+  } = useSupabaseItems();
 
   const [trackDialogOpen, setTrackDialogOpen] = useState(false);
   const [selectedItem, setSelectedItem] = useState<FlattenedItem | null>(null);
   const [alertThreshold, setAlertThreshold] = useState('50');
+  const [trackingLoading, setTrackingLoading] = useState(false);
+
+  // Exchange rate from database
+  const { currentRate, DEFAULT_GOLD_PER_CRYSTAL } = useExchangeRate();
+  const crystalRate = currentRate?.goldPerCrystal ?? DEFAULT_GOLD_PER_CRYSTAL;
+
+  // Saved searches (stored in localStorage)
+  interface SavedSearch {
+    term: string;
+    exact: boolean;
+  }
+  const [savedSearches, setSavedSearches] = useState<SavedSearch[]>([]);
+  const [saveAsExact, setSaveAsExact] = useState(true); // Default to exact match
+
+  // Load saved searches from localStorage on mount
+  useEffect(() => {
+    const saved = localStorage.getItem('market-saved-searches-v2');
+    if (saved) {
+      try {
+        setSavedSearches(JSON.parse(saved));
+      } catch {
+        // Invalid JSON, ignore
+      }
+    } else {
+      // Migrate old format (string[]) to new format
+      const oldSaved = localStorage.getItem('market-saved-searches');
+      if (oldSaved) {
+        try {
+          const oldTerms = JSON.parse(oldSaved) as string[];
+          const migrated = oldTerms.map(term => ({ term, exact: false }));
+          setSavedSearches(migrated);
+          localStorage.setItem('market-saved-searches-v2', JSON.stringify(migrated));
+          localStorage.removeItem('market-saved-searches');
+        } catch {
+          // Invalid JSON, ignore
+        }
+      }
+    }
+  }, []);
+
+  // Save to localStorage whenever savedSearches changes
+  const updateSavedSearches = (searches: SavedSearch[]) => {
+    setSavedSearches(searches);
+    localStorage.setItem('market-saved-searches-v2', JSON.stringify(searches));
+  };
+
+  const addSavedSearch = () => {
+    if (!searchTerm.trim()) return;
+    const term = searchTerm.trim();
+    if (savedSearches.some(s => s.term === term)) {
+      toast.info('Search already saved');
+      return;
+    }
+    updateSavedSearches([...savedSearches, { term, exact: saveAsExact }]);
+    toast.success(`Saved: ${term} (${saveAsExact ? 'exact' : 'partial'})`);
+  };
+
+  const removeSavedSearch = (term: string) => {
+    updateSavedSearches(savedSearches.filter(s => s.term !== term));
+  };
+
+  const toggleSavedSearchExact = (term: string) => {
+    updateSavedSearches(savedSearches.map(s =>
+      s.term === term ? { ...s, exact: !s.exact } : s
+    ));
+  };
+
+  const triggerSavedSearch = (saved: SavedSearch) => {
+    setSearchTerm(saved.term);
+    // Trigger search after a short delay to let state update
+    setTimeout(() => {
+      const normalized = normalizeSearchInput(saved.term);
+      const searchQuery = normalized.traditional;
+      setConvertedTerm(searchQuery);
+      setIsConverted(normalized.isConverted);
+      search({
+        search: searchQuery,
+        server: server as 'all' | '1' | '2' | '3' | '4' | '5',
+        type: type as 'all' | '道具攤位' | '寵物攤位',
+        exact: saved.exact,
+        page: 1,
+      });
+    }, 50);
+  };
+
+  // Format with currency and show gold equivalent if crystal
+  const formatPriceWithEquivalent = (price: number, priceType: number): string => {
+    const formatted = formatPrice(price);
+    const currency = CURRENCY_NAMES[priceType] || '金幣';
+    if (priceType === 1) {
+      const goldEquiv = normalizeToGold(price, priceType, crystalRate);
+      return `${formatted} ${currency} (~${formatPrice(goldEquiv)} 金)`;
+    }
+    return `${formatted} ${currency}`;
+  };
 
   const handleSearch = async () => {
     if (!searchTerm.trim()) {
@@ -82,11 +234,21 @@ export function MarketSearch() {
       return;
     }
 
+    // Convert simplified Chinese to traditional Chinese for search
+    const normalized = normalizeSearchInput(searchTerm);
+    const searchQuery = normalized.traditional;
+    setConvertedTerm(searchQuery);
+    setIsConverted(normalized.isConverted);
+
+    if (normalized.isConverted) {
+      toast.info(`Searching with Traditional Chinese: ${searchQuery}`, { duration: 3000 });
+    }
+
     const result = await search({
-      search: searchTerm,
+      search: searchQuery,
       server: server as 'all' | '1' | '2' | '3' | '4' | '5',
       type: type as 'all' | '道具攤位' | '寵物攤位',
-      exact: false,
+      exact: false, // Use partial match (includes) for item names
       page: 1,
     });
 
@@ -94,36 +256,43 @@ export function MarketSearch() {
       toast.success(`Found ${matchingItems.length} matching items`);
 
       // Check for alerts on tracked items
-      trackedItems.forEach(tracked => {
+      for (const tracked of trackedItems) {
         const matches = matchingItems.filter(
-          item => item.ITEM_TRUENAME.includes(tracked.itemName) ||
-                  item.ITEM_ID === tracked.itemId
+          item => item.name.includes(tracked.itemName)
         );
 
         if (matches.length > 0) {
-          const prices = matches.map(i => i.price);
-          const alertResult = checkAlerts(tracked.id, prices);
+          // Find lowest price match
+          const lowestMatch = matches.reduce((min, item) =>
+            item.price < min.price ? item : min
+          );
+
+          const alertResult = checkAlert(tracked, lowestMatch.price, lowestMatch.pricetype);
 
           if (alertResult?.triggered) {
             toast.warning(
-              `ALERT: ${tracked.itemName} is ${alertResult.threshold}% below average! Current: ${alertResult.lowestPrice}, Avg: ${alertResult.avgPrice}`,
+              `ALERT: ${tracked.itemName} is ${alertResult.percentBelow}% below average!\n` +
+              `Current: ${formatPrice(alertResult.currentPrice)} | Avg: ${formatPrice(alertResult.averagePrice)}\n` +
+              `Location: S${lowestMatch.stall.server} ${lowestMatch.stall.coords}`,
               { duration: 10000 }
             );
           }
 
-          // Record prices
-          addPriceRecord(
-            tracked.id,
+          // Save price snapshots to Supabase
+          await savePriceSnapshots(
+            tracked.itemName,
             matches.map(item => ({
               price: item.price,
+              pricetype: item.pricetype,
               server: item.stall.server,
-              stallName: item.stall.name,
+              stall_name: item.stall.name,
+              stall_cdkey: item.stall.cdkey,
               coords: item.stall.coords,
-              timestamp: new Date().toISOString(),
+              source: 'market' as const,
             }))
           );
         }
-      });
+      }
     }
   };
 
@@ -132,11 +301,19 @@ export function MarketSearch() {
     setTrackDialogOpen(true);
   };
 
-  const confirmTrackItem = () => {
+  const confirmTrackItem = async () => {
     if (!selectedItem) return;
 
+    const itemLevel = selectedItem.itemData?.ITEM_LEVEL ?? null;
+    // Include level suffix for items (not pets) with level >= 5
+    const trackingName = selectedItem.isPet
+      ? selectedItem.name
+      : hasDisplayLevel(itemLevel)
+        ? `${selectedItem.name}${getLevelSuffix(itemLevel)}`
+        : selectedItem.name;
+
     const existing = trackedItems.find(
-      t => t.itemName === selectedItem.ITEM_TRUENAME
+      t => t.itemName === trackingName
     );
 
     if (existing) {
@@ -145,16 +322,41 @@ export function MarketSearch() {
       return;
     }
 
-    addTrackedItem({
-      itemName: selectedItem.ITEM_TRUENAME,
-      itemId: selectedItem.ITEM_ID,
-      targetPrice: selectedItem.price,
-      alertThreshold: parseInt(alertThreshold) || 50,
-      isActive: true,
-    });
+    setTrackingLoading(true);
+    try {
+      const success = await addTrackedItem(
+        trackingName,
+        selectedItem.isPet ? 'pet' : 'item',
+        selectedItem.itemData?.ITEM_ID,
+        selectedItem.itemData?.ITEM_BASEIMAGENUMBER || selectedItem.petData?.BaseImgnum,
+        parseInt(alertThreshold) || 50,
+        selectedItem.price,
+        itemLevel
+      );
 
-    toast.success(`Now tracking: ${selectedItem.ITEM_TRUENAME}`);
-    setTrackDialogOpen(false);
+      if (success) {
+        toast.success(`Now tracking: ${trackingName}`);
+
+        // Save initial price snapshot
+        await savePriceSnapshots(trackingName, [{
+          price: selectedItem.price,
+          pricetype: selectedItem.pricetype,
+          server: selectedItem.stall.server,
+          stall_name: selectedItem.stall.name,
+          stall_cdkey: selectedItem.stall.cdkey,
+          coords: selectedItem.stall.coords,
+          source: 'market' as const,
+        }]);
+      } else {
+        toast.error('Failed to track item. It may already be tracked.');
+      }
+    } catch (err) {
+      toast.error('Error tracking item');
+      console.error(err);
+    } finally {
+      setTrackingLoading(false);
+      setTrackDialogOpen(false);
+    }
   };
 
   // Calculate price statistics for matching items only
@@ -165,23 +367,51 @@ export function MarketSearch() {
     count: matchingItems.length,
   } : null;
 
-  const renderItemRow = (item: FlattenedItem, index: number) => {
+  // Group matching items
+  const groupedMatchingItems = groupItems(matchingItems, crystalRate);
+  const groupedOtherItems = groupItems(otherItems, crystalRate);
+
+  const renderGroupedRow = (grouped: GroupedItem) => {
+    const { item, quantity } = grouped;
+    const itemLevel = item.itemData?.ITEM_LEVEL ?? null;
+    // For matching tracked items, include level for non-pets
+    const trackingKey = item.isPet ? item.name : `${item.name}${getLevelSuffix(itemLevel)}`;
     const isTracked = trackedItems.some(
-      t => t.itemName === item.ITEM_TRUENAME
+      t => t.itemName === trackingKey || t.itemName === item.name
     );
     const tracked = trackedItems.find(
-      t => t.itemName === item.ITEM_TRUENAME
+      t => t.itemName === trackingKey || t.itemName === item.name
     );
-    const avgPrice = tracked ? getAveragePrice(tracked.id) : null;
-    const isBelowAvg = avgPrice && item.price < avgPrice * 0.5;
+    const refPrice = tracked?.referencePrice ?? null;
+    const isBelowAvg = refPrice && item.price < refPrice * 0.5;
 
     return (
       <TableRow
-        key={`${item.cdkey}-${item.ITEM_ID}-${index}`}
+        key={grouped.key}
         className={isBelowAvg ? 'bg-green-500/10' : ''}
       >
         <TableCell className="font-medium">
-          {item.ITEM_TRUENAME}
+          {item.name}
+          {/* Show level suffix for items (not pets) with level >= 5 */}
+          {!item.isPet && hasDisplayLevel(itemLevel) && (() => {
+            const colors = getLevelColors(itemLevel);
+            return (
+              <Badge
+                variant="outline"
+                className={`ml-2 ${colors.text} ${colors.bg} ${colors.border}`}
+              >
+                {LEVEL_NAMES[itemLevel!] || `Lv${itemLevel}`}
+              </Badge>
+            );
+          })()}
+          {item.isPet && (
+            <Badge variant="outline" className="ml-2 text-purple-600">
+              Pet
+            </Badge>
+          )}
+          <Badge variant="secondary" className="ml-2">
+            x{quantity}
+          </Badge>
           {isTracked && (
             <Badge variant="outline" className="ml-2">
               Tracked
@@ -190,11 +420,11 @@ export function MarketSearch() {
         </TableCell>
         <TableCell>
           <span className={isBelowAvg ? 'text-green-600 font-bold' : ''}>
-            {formatPriceWithCurrency(item.price, item.pricetype)}
+            {formatPriceWithEquivalent(item.price, item.pricetype)}
           </span>
-          {avgPrice && (
+          {refPrice && (
             <span className="text-muted-foreground text-xs ml-2">
-              (avg: {formatPrice(avgPrice)})
+              (ref: {formatPrice(refPrice)})
             </span>
           )}
         </TableCell>
@@ -230,13 +460,22 @@ export function MarketSearch() {
         </CardHeader>
         <CardContent>
           <div className="flex flex-wrap gap-4">
-            <Input
-              placeholder="Search items... (e.g., 一箱壽喜鍋)"
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              onKeyDown={(e) => e.key === 'Enter' && handleSearch()}
-              className="flex-1 min-w-[200px]"
-            />
+            <div className="flex-1 min-w-[200px]">
+              <AutocompleteInput
+                value={searchTerm}
+                onChange={setSearchTerm}
+                onSelect={(itemName) => {
+                  setSearchTerm(itemName);
+                }}
+                onEnter={handleSearch}
+                placeholder="Search items... (支持简体/繁體)"
+              />
+              {isConverted && convertedTerm && (
+                <span className="text-xs text-muted-foreground mt-1 block">
+                  → Searching: {convertedTerm}
+                </span>
+              )}
+            </div>
             <Select value={server} onValueChange={setServer}>
               <SelectTrigger className="w-[120px]">
                 <SelectValue placeholder="Server" />
@@ -263,7 +502,66 @@ export function MarketSearch() {
             <Button onClick={handleSearch} disabled={loading}>
               {loading ? 'Searching...' : 'Search'}
             </Button>
+            <Button
+              variant="outline"
+              onClick={addSavedSearch}
+              disabled={!searchTerm.trim()}
+              title="Save this search for quick access"
+            >
+              ⭐ Save
+            </Button>
+            <Button
+              variant={saveAsExact ? 'default' : 'ghost'}
+              size="icon"
+              onClick={() => setSaveAsExact(!saveAsExact)}
+              className="h-10 w-10"
+              title={saveAsExact ? 'Will save as exact match' : 'Will save as partial match'}
+            >
+              {saveAsExact ? '=' : '≈'}
+            </Button>
           </div>
+
+          {/* Saved Searches */}
+          {savedSearches.length > 0 && (
+            <div className="mt-4 pt-4 border-t">
+              <div className="flex items-center gap-2 flex-wrap">
+                <span className="text-sm text-muted-foreground">Quick search:</span>
+                {savedSearches.map((saved) => (
+                  <div key={saved.term} className="inline-flex items-center gap-0.5 group">
+                    <Button
+                      variant="secondary"
+                      size="sm"
+                      onClick={() => triggerSavedSearch(saved)}
+                      disabled={loading}
+                      className="h-7 px-2 text-sm"
+                    >
+                      <span
+                        className={`mr-1 text-xs ${saved.exact ? 'text-green-600' : 'text-orange-500'}`}
+                        title={saved.exact ? 'Exact match' : 'Partial match'}
+                      >
+                        {saved.exact ? '=' : '≈'}
+                      </span>
+                      {saved.term}
+                    </Button>
+                    <button
+                      onClick={() => toggleSavedSearchExact(saved.term)}
+                      className="text-muted-foreground hover:text-blue-500 px-0.5 opacity-0 group-hover:opacity-100 transition-opacity"
+                      title={`Switch to ${saved.exact ? 'partial' : 'exact'} match`}
+                    >
+                      ⇄
+                    </button>
+                    <button
+                      onClick={() => removeSavedSearch(saved.term)}
+                      className="text-muted-foreground hover:text-red-500 px-0.5 opacity-0 group-hover:opacity-100 transition-opacity"
+                      title="Remove saved search"
+                    >
+                      ×
+                    </button>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
         </CardContent>
       </Card>
 
@@ -278,7 +576,7 @@ export function MarketSearch() {
       {priceStats && (
         <Card>
           <CardContent className="pt-4">
-            <div className="flex flex-wrap gap-4">
+            <div className="flex flex-wrap gap-4 items-center">
               <Badge variant="outline" className="text-sm">
                 Matches: {priceStats.count}
               </Badge>
@@ -294,6 +592,11 @@ export function MarketSearch() {
               {otherItems.length > 0 && (
                 <Badge variant="outline" className="text-sm text-muted-foreground">
                   +{otherItems.length} other items in stalls
+                </Badge>
+              )}
+              {progress && (
+                <Badge variant="outline" className="text-sm">
+                  Loading page {progress.current}/{progress.total}...
                 </Badge>
               )}
             </div>
@@ -321,13 +624,24 @@ export function MarketSearch() {
                 </TableRow>
               </TableHeader>
               <TableBody>
-                {matchingItems.slice(0, 50).map((item, index) => renderItemRow(item, index))}
+                {groupedMatchingItems.slice(0, 50).map((grouped) => renderGroupedRow(grouped))}
               </TableBody>
             </Table>
-            {matchingItems.length > 50 && (
+            {groupedMatchingItems.length > 50 && (
               <p className="text-sm text-muted-foreground mt-4">
-                Showing first 50 of {matchingItems.length} matching items
+                Showing first 50 of {groupedMatchingItems.length} groups ({matchingItems.length} total items)
               </p>
+            )}
+            {hasMore && (
+              <div className="mt-4 flex justify-center">
+                <Button
+                  variant="outline"
+                  onClick={loadMore}
+                  disabled={loadingMore}
+                >
+                  {loadingMore ? 'Loading more...' : 'Load More Pages'}
+                </Button>
+              </div>
             )}
           </CardContent>
         </Card>
@@ -363,12 +677,12 @@ export function MarketSearch() {
                   </TableRow>
                 </TableHeader>
                 <TableBody>
-                  {otherItems.slice(0, 50).map((item, index) => renderItemRow(item, index + 1000))}
+                  {groupedOtherItems.slice(0, 50).map((grouped) => renderGroupedRow(grouped))}
                 </TableBody>
               </Table>
-              {otherItems.length > 50 && (
+              {groupedOtherItems.length > 50 && (
                 <p className="text-sm text-muted-foreground mt-4">
-                  Showing first 50 of {otherItems.length} other items
+                  Showing first 50 of {groupedOtherItems.length} groups ({otherItems.length} total items)
                 </p>
               )}
             </CardContent>
@@ -381,7 +695,7 @@ export function MarketSearch() {
           <DialogHeader>
             <DialogTitle>Track Item Price</DialogTitle>
             <DialogDescription>
-              Set up price alerts for {selectedItem?.ITEM_TRUENAME}
+              Set up price alerts for {selectedItem?.name}
             </DialogDescription>
           </DialogHeader>
           <div className="space-y-4 py-4">
@@ -410,13 +724,16 @@ export function MarketSearch() {
             </div>
           </div>
           <DialogFooter>
-            <Button variant="outline" onClick={() => setTrackDialogOpen(false)}>
+            <Button variant="outline" onClick={() => setTrackDialogOpen(false)} disabled={trackingLoading}>
               Cancel
             </Button>
-            <Button onClick={confirmTrackItem}>Start Tracking</Button>
+            <Button onClick={confirmTrackItem} disabled={trackingLoading}>
+              {trackingLoading ? 'Tracking...' : 'Start Tracking'}
+            </Button>
           </DialogFooter>
         </DialogContent>
       </Dialog>
+
     </div>
   );
 }
