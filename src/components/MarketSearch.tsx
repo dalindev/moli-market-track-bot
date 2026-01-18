@@ -420,8 +420,9 @@ export function MarketSearch() {
           {item.name}
           {/* Show level for all items (not pets) */}
           {!item.isPet && hasDisplayLevel(itemLevel) && (() => {
-            // 改造圖 items (level 5-7) get special names and colors
-            if (isGaiZaoTuLevel(itemLevel)) {
+            // Only 改造圖 items get special names (普通/银/金) and colors
+            const isGaiZaoTu = item.name.includes('改造圖') && isGaiZaoTuLevel(itemLevel);
+            if (isGaiZaoTu) {
               const colors = getLevelColors(itemLevel);
               return (
                 <Badge
@@ -432,7 +433,7 @@ export function MarketSearch() {
                 </Badge>
               );
             }
-            // Regular items just show "Lv{x}" with neutral styling
+            // All other items just show "Lv{x}" with neutral styling
             return (
               <Badge variant="secondary" className="ml-2">
                 Lv{itemLevel}
