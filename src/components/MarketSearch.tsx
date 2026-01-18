@@ -410,7 +410,6 @@ export function MarketSearch() {
     // Calculate average durability for grouped items
     const avgDurability = durabilityCount > 0 ? Math.round(totalDurability / durabilityCount) : null;
     const avgMaxDurability = durabilityCount > 0 ? Math.round(totalMaxDurability / durabilityCount) : null;
-    const isDamaged = avgDurability !== null && avgMaxDurability !== null && avgDurability < avgMaxDurability;
 
     return (
       <TableRow
@@ -465,11 +464,27 @@ export function MarketSearch() {
           )}
         </TableCell>
         <TableCell>
-          {avgDurability !== null && avgMaxDurability !== null ? (
-            <span className={isDamaged ? 'text-red-500 font-medium' : 'text-muted-foreground'}>
-              {avgDurability}/{avgMaxDurability}
-            </span>
-          ) : (
+          {avgDurability !== null && avgMaxDurability !== null && avgMaxDurability > 0 ? (() => {
+            const percentage = Math.round((avgDurability / avgMaxDurability) * 100);
+            const isFull = percentage === 100;
+
+            if (isFull) {
+              // Full durability - green, no percentage shown
+              return (
+                <span className="text-green-600">
+                  {avgDurability}/{avgMaxDurability}
+                </span>
+              );
+            }
+
+            // Damaged - red with percentage
+            return (
+              <span className="text-red-500">
+                {avgDurability}/{avgMaxDurability}
+                <span className="text-xs ml-1 opacity-75">({percentage}%)</span>
+              </span>
+            );
+          })() : (
             <span className="text-muted-foreground">-</span>
           )}
         </TableCell>
