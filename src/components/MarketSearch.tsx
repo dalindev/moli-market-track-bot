@@ -687,14 +687,9 @@ export function MarketSearch() {
                 </TableRow>
               </TableHeader>
               <TableBody>
-                {groupedMatchingItems.slice(0, 50).map((grouped) => renderGroupedRow(grouped))}
+                {groupedMatchingItems.map((grouped) => renderGroupedRow(grouped))}
               </TableBody>
             </Table>
-            {groupedMatchingItems.length > 50 && (
-              <p className="text-sm text-muted-foreground mt-4">
-                Showing first 50 of {groupedMatchingItems.length} groups ({matchingItems.length} total items)
-              </p>
-            )}
             {hasMore && (
               <div className="mt-4 flex justify-center">
                 <Button
@@ -742,14 +737,9 @@ export function MarketSearch() {
                   </TableRow>
                 </TableHeader>
                 <TableBody>
-                  {groupedOtherItems.slice(0, 50).map((grouped) => renderGroupedRow(grouped))}
+                  {groupedOtherItems.map((grouped) => renderGroupedRow(grouped))}
                 </TableBody>
               </Table>
-              {groupedOtherItems.length > 50 && (
-                <p className="text-sm text-muted-foreground mt-4">
-                  Showing first 50 of {groupedOtherItems.length} groups ({otherItems.length} total items)
-                </p>
-              )}
             </CardContent>
           )}
         </Card>
