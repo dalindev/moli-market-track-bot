@@ -33,7 +33,7 @@ import { useMarket, FlattenedItem } from '@/hooks/useMarket';
 import { useSupabaseItems } from '@/hooks/useSupabaseItems';
 import { useExchangeRate } from '@/hooks/useExchangeRate';
 import { normalizeSearchInput } from '@/lib/chinese-converter';
-import { getLevelSuffix, hasDisplayLevel, getLevelColors, LEVEL_NAMES } from '@/lib/item-level';
+import { getLevelSuffix, hasDisplayLevel, getLevelColors, LEVEL_NAMES, isGaiZaoTuLevel } from '@/lib/item-level';
 import { toast } from 'sonner';
 
 const SERVER_NAMES: Record<number, string> = {
@@ -419,15 +419,24 @@ export function MarketSearch() {
       >
         <TableCell className="font-medium">
           {item.name}
-          {/* Show level suffix for items (not pets) with level >= 5 */}
+          {/* Show level for all items (not pets) */}
           {!item.isPet && hasDisplayLevel(itemLevel) && (() => {
-            const colors = getLevelColors(itemLevel);
+            // 改造圖 items (level 5-7) get special names and colors
+            if (isGaiZaoTuLevel(itemLevel)) {
+              const colors = getLevelColors(itemLevel);
+              return (
+                <Badge
+                  variant="outline"
+                  className={`ml-2 ${colors.text} ${colors.bg} ${colors.border}`}
+                >
+                  {LEVEL_NAMES[itemLevel!]}
+                </Badge>
+              );
+            }
+            // Regular items just show "Lv{x}" with neutral styling
             return (
-              <Badge
-                variant="outline"
-                className={`ml-2 ${colors.text} ${colors.bg} ${colors.border}`}
-              >
-                {LEVEL_NAMES[itemLevel!] || `Lv${itemLevel}`}
+              <Badge variant="secondary" className="ml-2">
+                Lv{itemLevel}
               </Badge>
             );
           })()}

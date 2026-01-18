@@ -28,9 +28,14 @@ export function getItemDisplayName(name: string, level: number | null | undefine
   return name + getLevelSuffix(level);
 }
 
-// Check if item has a meaningful level to display
+// Check if item has a meaningful level to display (any level > 0)
 export function hasDisplayLevel(level: number | null | undefined): boolean {
-  return level != null && level >= 5;
+  return level != null && level > 0;
+}
+
+// Check if item is a 改造圖 type (uses special names 普通/银/金)
+export function isGaiZaoTuLevel(level: number | null | undefined): boolean {
+  return level != null && level >= 5 && level <= 7;
 }
 
 // Get color classes for a level
