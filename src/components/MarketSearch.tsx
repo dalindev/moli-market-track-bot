@@ -444,14 +444,14 @@ export function MarketSearch() {
               Pet
             </Badge>
           )}
-          <Badge variant="secondary" className="ml-2">
-            x{quantity}
-          </Badge>
           {isTracked && (
             <Badge variant="outline" className="ml-2">
               Tracked
             </Badge>
           )}
+        </TableCell>
+        <TableCell className="text-center">
+          {quantity}
         </TableCell>
         <TableCell>
           <span className={isBelowAvg ? 'text-green-600 font-bold' : ''}>
@@ -676,6 +676,7 @@ export function MarketSearch() {
               <TableHeader>
                 <TableRow>
                   <TableHead>Item</TableHead>
+                  <TableHead className="text-center">Qty</TableHead>
                   <TableHead>Price</TableHead>
                   <TableHead>耐久</TableHead>
                   <TableHead>Server</TableHead>
@@ -730,6 +731,7 @@ export function MarketSearch() {
                 <TableHeader>
                   <TableRow>
                     <TableHead>Item</TableHead>
+                    <TableHead className="text-center">Qty</TableHead>
                     <TableHead>Price</TableHead>
                     <TableHead>耐久</TableHead>
                     <TableHead>Server</TableHead>
