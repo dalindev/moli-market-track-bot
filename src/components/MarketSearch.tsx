@@ -82,6 +82,10 @@ interface GroupedItem {
   count: number;      // Number of listings grouped together
   quantity: number;   // Total quantity (sum of ITEM_REMAIN for items, count for pets)
   key: string;
+  // Durability tracking (for averaging across grouped items)
+  totalDurability: number;
+  totalMaxDurability: number;
+  durabilityCount: number;  // Number of items with durability data
 }
 
 // Group items by same name, level (for items), price, server, stall, location
@@ -96,12 +100,30 @@ function groupItems(items: FlattenedItem[], rate: number): GroupedItem[] {
     // Get actual quantity from ITEM_REMAIN for items, default to 1 for pets
     const itemQuantity = item.isPet ? 1 : (item.itemData?.ITEM_REMAIN ?? 1);
 
+    // Get durability data (only for non-pets)
+    const durability = item.itemData?.ITEM_DURABILITY ?? 0;
+    const maxDurability = item.itemData?.ITEM_MAXDURABILITY ?? 0;
+    const hasDurability = !item.isPet && maxDurability > 0;
+
     if (groups.has(key)) {
       const group = groups.get(key)!;
       group.count++;
       group.quantity += itemQuantity;
+      if (hasDurability) {
+        group.totalDurability += durability;
+        group.totalMaxDurability += maxDurability;
+        group.durabilityCount++;
+      }
     } else {
-      groups.set(key, { item, count: 1, quantity: itemQuantity, key });
+      groups.set(key, {
+        item,
+        count: 1,
+        quantity: itemQuantity,
+        key,
+        totalDurability: hasDurability ? durability : 0,
+        totalMaxDurability: hasDurability ? maxDurability : 0,
+        durabilityCount: hasDurability ? 1 : 0,
+      });
     }
   }
 
@@ -372,7 +394,7 @@ export function MarketSearch() {
   const groupedOtherItems = groupItems(otherItems, crystalRate);
 
   const renderGroupedRow = (grouped: GroupedItem) => {
-    const { item, quantity } = grouped;
+    const { item, quantity, durabilityCount, totalDurability, totalMaxDurability } = grouped;
     const itemLevel = item.itemData?.ITEM_LEVEL ?? null;
     // For matching tracked items, include level for non-pets
     const trackingKey = item.isPet ? item.name : `${item.name}${getLevelSuffix(itemLevel)}`;
@@ -384,6 +406,11 @@ export function MarketSearch() {
     );
     const refPrice = tracked?.referencePrice ?? null;
     const isBelowAvg = refPrice && item.price < refPrice * 0.5;
+
+    // Calculate average durability for grouped items
+    const avgDurability = durabilityCount > 0 ? Math.round(totalDurability / durabilityCount) : null;
+    const avgMaxDurability = durabilityCount > 0 ? Math.round(totalMaxDurability / durabilityCount) : null;
+    const isDamaged = avgDurability !== null && avgMaxDurability !== null && avgDurability < avgMaxDurability;
 
     return (
       <TableRow
@@ -426,6 +453,15 @@ export function MarketSearch() {
             <span className="text-muted-foreground text-xs ml-2">
               (ref: {formatPrice(refPrice)})
             </span>
+          )}
+        </TableCell>
+        <TableCell>
+          {avgDurability !== null && avgMaxDurability !== null ? (
+            <span className={isDamaged ? 'text-red-500 font-medium' : 'text-muted-foreground'}>
+              {avgDurability}/{avgMaxDurability}
+            </span>
+          ) : (
+            <span className="text-muted-foreground">-</span>
           )}
         </TableCell>
         <TableCell>
@@ -617,6 +653,7 @@ export function MarketSearch() {
                 <TableRow>
                   <TableHead>Item</TableHead>
                   <TableHead>Price</TableHead>
+                  <TableHead>耐久</TableHead>
                   <TableHead>Server</TableHead>
                   <TableHead>Stall</TableHead>
                   <TableHead>Location</TableHead>
@@ -670,6 +707,7 @@ export function MarketSearch() {
                   <TableRow>
                     <TableHead>Item</TableHead>
                     <TableHead>Price</TableHead>
+                    <TableHead>耐久</TableHead>
                     <TableHead>Server</TableHead>
                     <TableHead>Stall</TableHead>
                     <TableHead>Location</TableHead>
