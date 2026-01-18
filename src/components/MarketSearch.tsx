@@ -441,9 +441,16 @@ export function MarketSearch() {
             );
           })()}
           {item.isPet && (
-            <Badge variant="outline" className="ml-2 text-purple-600">
-              Pet
-            </Badge>
+            <>
+              <Badge variant="outline" className="ml-2 text-purple-600">
+                Pet
+              </Badge>
+              {item.petData?.Lv && (
+                <Badge variant="secondary" className="ml-1">
+                  Lv{item.petData.Lv}
+                </Badge>
+              )}
+            </>
           )}
           {isTracked && (
             <Badge variant="outline" className="ml-2">
