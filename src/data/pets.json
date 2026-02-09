@@ -1,0 +1,7811 @@
+[
+  {
+    "name": "不死露比",
+    "race": "不死系",
+    "elements": {
+      "earth": 50,
+      "water": 0,
+      "fire": 0,
+      "wind": 50
+    },
+    "cardType": "金",
+    "hp": 27,
+    "power": 9,
+    "defense": 21,
+    "speed": 25,
+    "magic": 47,
+    "total": 129,
+    "skillSlots": 8,
+    "washPrice": 2400
+  },
+  {
+    "name": "不死露比(攻)",
+    "race": "不死系",
+    "elements": {
+      "earth": 0,
+      "water": 50,
+      "fire": 50,
+      "wind": 0
+    },
+    "cardType": "金",
+    "hp": 21,
+    "power": 48,
+    "defense": 12,
+    "speed": 38,
+    "magic": 10,
+    "total": 129,
+    "skillSlots": 8,
+    "washPrice": 2400
+  },
+  {
+    "name": "冥界冰龍",
+    "race": "不死系",
+    "elements": {
+      "earth": 25,
+      "water": 25,
+      "fire": 25,
+      "wind": 25
+    },
+    "cardType": "金",
+    "hp": 18,
+    "power": 49,
+    "defense": 16,
+    "speed": 34,
+    "magic": 12,
+    "total": 129,
+    "skillSlots": 8,
+    "washPrice": 2400
+  },
+  {
+    "name": "南瓜魔王(攻)",
+    "race": "不死系",
+    "elements": {
+      "earth": 0,
+      "water": 0,
+      "fire": 100,
+      "wind": 0
+    },
+    "cardType": "金",
+    "hp": 32,
+    "power": 48,
+    "defense": 20,
+    "speed": 20,
+    "magic": 9,
+    "total": 129,
+    "skillSlots": 9,
+    "washPrice": 2400
+  },
+  {
+    "name": "南瓜魔王(魔)",
+    "race": "不死系",
+    "elements": {
+      "earth": 0,
+      "water": 0,
+      "fire": 100,
+      "wind": 0
+    },
+    "cardType": "金",
+    "hp": 32,
+    "power": 9,
+    "defense": 20,
+    "speed": 20,
+    "magic": 48,
+    "total": 129,
+    "skillSlots": 9,
+    "washPrice": 2400
+  },
+  {
+    "name": "大黑龍骨",
+    "race": "不死系",
+    "elements": {
+      "earth": 25,
+      "water": 25,
+      "fire": 25,
+      "wind": 25
+    },
+    "cardType": "金",
+    "hp": 18,
+    "power": 12,
+    "defense": 18,
+    "speed": 34,
+    "magic": 47,
+    "total": 129,
+    "skillSlots": 8,
+    "washPrice": 2400
+  },
+  {
+    "name": "奪魂南瓜魔王(攻)",
+    "race": "不死系",
+    "elements": {
+      "earth": 100,
+      "water": 0,
+      "fire": 0,
+      "wind": 0
+    },
+    "cardType": "金",
+    "hp": 31,
+    "power": 49,
+    "defense": 20,
+    "speed": 20,
+    "magic": 9,
+    "total": 129,
+    "skillSlots": 9,
+    "washPrice": 2400
+  },
+  {
+    "name": "奪魂南瓜魔王(魔)",
+    "race": "不死系",
+    "elements": {
+      "earth": 100,
+      "water": 0,
+      "fire": 0,
+      "wind": 0
+    },
+    "cardType": "金",
+    "hp": 31,
+    "power": 9,
+    "defense": 20,
+    "speed": 20,
+    "magic": 49,
+    "total": 129,
+    "skillSlots": 9,
+    "washPrice": 2400
+  },
+  {
+    "name": "棺姬艾利菲亞",
+    "race": "不死系",
+    "elements": {
+      "earth": 80,
+      "water": 0,
+      "fire": 0,
+      "wind": 20
+    },
+    "cardType": "金",
+    "hp": 38,
+    "power": 49,
+    "defense": 16,
+    "speed": 19,
+    "magic": 7,
+    "total": 129,
+    "skillSlots": 8,
+    "washPrice": 2400
+  },
+  {
+    "name": "煉焰飛龍",
+    "race": "不死系",
+    "elements": {
+      "earth": 50,
+      "water": 0,
+      "fire": 50,
+      "wind": 0
+    },
+    "cardType": "金",
+    "hp": 36,
+    "power": 51,
+    "defense": 15,
+    "speed": 18,
+    "magic": 9,
+    "total": 129,
+    "skillSlots": 8,
+    "washPrice": 2400
+  },
+  {
+    "name": "冥光獨眼魔",
+    "race": "不死系",
+    "elements": {
+      "earth": 0,
+      "water": 0,
+      "fire": 50,
+      "wind": 50
+    },
+    "cardType": "銀",
+    "hp": 30,
+    "power": 10,
+    "defense": 23,
+    "speed": 20,
+    "magic": 44,
+    "total": 127,
+    "skillSlots": 8,
+    "washPrice": 166
+  },
+  {
+    "name": "劍神萊因哈特",
+    "race": "不死系",
+    "elements": {
+      "earth": 0,
+      "water": 0,
+      "fire": 100,
+      "wind": 0
+    },
+    "cardType": "銀",
+    "hp": 22,
+    "power": 46,
+    "defense": 23,
+    "speed": 26,
+    "magic": 10,
+    "total": 127,
+    "skillSlots": 7,
+    "washPrice": 500
+  },
+  {
+    "name": "幽冥獨眼魔",
+    "race": "不死系",
+    "elements": {
+      "earth": 0,
+      "water": 0,
+      "fire": 50,
+      "wind": 50
+    },
+    "cardType": "銀",
+    "hp": 20,
+    "power": 42,
+    "defense": 20,
+    "speed": 30,
+    "magic": 15,
+    "total": 127,
+    "skillSlots": 8,
+    "washPrice": 166
+  },
+  {
+    "name": "異變巫師之鬼",
+    "race": "不死系",
+    "elements": {
+      "earth": 0,
+      "water": 0,
+      "fire": 0,
+      "wind": 100
+    },
+    "cardType": "銀",
+    "hp": 17,
+    "power": 40,
+    "defense": 15,
+    "speed": 41,
+    "magic": 14,
+    "total": 127,
+    "skillSlots": 8,
+    "washPrice": 288
+  },
+  {
+    "name": "異變德魯依之鬼",
+    "race": "不死系",
+    "elements": {
+      "earth": 0,
+      "water": 100,
+      "fire": 0,
+      "wind": 0
+    },
+    "cardType": "銀",
+    "hp": 24,
+    "power": 11,
+    "defense": 24,
+    "speed": 21,
+    "magic": 47,
+    "total": 127,
+    "skillSlots": 8,
+    "washPrice": 288
+  },
+  {
+    "name": "異變紅鬼",
+    "race": "不死系",
+    "elements": {
+      "earth": 0,
+      "water": 0,
+      "fire": 100,
+      "wind": 0
+    },
+    "cardType": "銀",
+    "hp": 20,
+    "power": 46,
+    "defense": 15,
+    "speed": 32,
+    "magic": 14,
+    "total": 127,
+    "skillSlots": 8,
+    "washPrice": 288
+  },
+  {
+    "name": "異變魔法師之鬼",
+    "race": "不死系",
+    "elements": {
+      "earth": 100,
+      "water": 0,
+      "fire": 0,
+      "wind": 0
+    },
+    "cardType": "銀",
+    "hp": 25,
+    "power": 11,
+    "defense": 15,
+    "speed": 29,
+    "magic": 47,
+    "total": 127,
+    "skillSlots": 8,
+    "washPrice": 288
+  },
+  {
+    "name": "木乃伊",
+    "race": "不死系",
+    "elements": {
+      "earth": 0,
+      "water": 0,
+      "fire": 50,
+      "wind": 50
+    },
+    "cardType": "金",
+    "hp": 44,
+    "power": 41,
+    "defense": 17,
+    "speed": 12,
+    "magic": 10,
+    "total": 124,
+    "skillSlots": 8,
+    "washPrice": 1600
+  },
+  {
+    "name": "僵屍格格",
+    "race": "不死系",
+    "elements": {
+      "earth": 100,
+      "water": 0,
+      "fire": 0,
+      "wind": 0
+    },
+    "cardType": "銀",
+    "hp": 26,
+    "power": 9,
+    "defense": 21,
+    "speed": 24,
+    "magic": 42,
+    "total": 122,
+    "skillSlots": 8,
+    "washPrice": 300
+  },
+  {
+    "name": "僵屍貝勒",
+    "race": "不死系",
+    "elements": {
+      "earth": 0,
+      "water": 100,
+      "fire": 0,
+      "wind": 0
+    },
+    "cardType": "銀",
+    "hp": 24,
+    "power": 40,
+    "defense": 20,
+    "speed": 22,
+    "magic": 16,
+    "total": 122,
+    "skillSlots": 8,
+    "washPrice": 300
+  },
+  {
+    "name": "冥界死神",
+    "race": "不死系",
+    "elements": {
+      "earth": 0,
+      "water": 0,
+      "fire": 0,
+      "wind": 100
+    },
+    "cardType": "銀",
+    "hp": 24,
+    "power": 39,
+    "defense": 26,
+    "speed": 20,
+    "magic": 13,
+    "total": 122,
+    "skillSlots": 6,
+    "washPrice": 800
+  },
+  {
+    "name": "小死神 [紅]",
+    "race": "不死系",
+    "elements": {
+      "earth": 0,
+      "water": 0,
+      "fire": 100,
+      "wind": 0
+    },
+    "cardType": "銀",
+    "hp": 21,
+    "power": 42,
+    "defense": 18,
+    "speed": 23,
+    "magic": 18,
+    "total": 122,
+    "skillSlots": 7,
+    "washPrice": 188
+  },
+  {
+    "name": "小死神 [藍]",
+    "race": "不死系",
+    "elements": {
+      "earth": 0,
+      "water": 100,
+      "fire": 0,
+      "wind": 0
+    },
+    "cardType": "銀",
+    "hp": 21,
+    "power": 18,
+    "defense": 18,
+    "speed": 23,
+    "magic": 42,
+    "total": 122,
+    "skillSlots": 7,
+    "washPrice": 188
+  },
+  {
+    "name": "斬首者",
+    "race": "不死系",
+    "elements": {
+      "earth": 0,
+      "water": 0,
+      "fire": 100,
+      "wind": 0
+    },
+    "cardType": "銀",
+    "hp": 18,
+    "power": 33,
+    "defense": 19,
+    "speed": 14,
+    "magic": 38,
+    "total": 122,
+    "skillSlots": 6,
+    "washPrice": 800
+  },
+  {
+    "name": "紅帽幽靈",
+    "race": "不死系",
+    "elements": {
+      "earth": 0,
+      "water": 20,
+      "fire": 80,
+      "wind": 0
+    },
+    "cardType": "銀",
+    "hp": 26,
+    "power": 40,
+    "defense": 20,
+    "speed": 20,
+    "magic": 16,
+    "total": 122,
+    "skillSlots": 8,
+    "washPrice": 188
+  },
+  {
+    "name": "藍帽幽靈",
+    "race": "不死系",
+    "elements": {
+      "earth": 0,
+      "water": 80,
+      "fire": 20,
+      "wind": 0
+    },
+    "cardType": "銀",
+    "hp": 34,
+    "power": 10,
+    "defense": 20,
+    "speed": 18,
+    "magic": 40,
+    "total": 122,
+    "skillSlots": 8,
+    "washPrice": 188
+  },
+  {
+    "name": "血靈",
+    "race": "不死系",
+    "elements": {
+      "earth": 0,
+      "water": 0,
+      "fire": 60,
+      "wind": 40
+    },
+    "cardType": "銀",
+    "hp": 20,
+    "power": 13,
+    "defense": 25,
+    "speed": 24,
+    "magic": 40,
+    "total": 122,
+    "skillSlots": 7,
+    "washPrice": 800
+  },
+  {
+    "name": "暗黑僧侶",
+    "race": "不死系",
+    "elements": {
+      "earth": 0,
+      "water": 100,
+      "fire": 0,
+      "wind": 0
+    },
+    "cardType": "普",
+    "hp": 16,
+    "power": 32,
+    "defense": 23,
+    "speed": 12,
+    "magic": 37,
+    "total": 120,
+    "skillSlots": 6,
+    "washPrice": 200
+  },
+  {
+    "name": "鐮刀魔",
+    "race": "不死系",
+    "elements": {
+      "earth": 100,
+      "water": 0,
+      "fire": 0,
+      "wind": 0
+    },
+    "cardType": "普",
+    "hp": 16,
+    "power": 37,
+    "defense": 34,
+    "speed": 17,
+    "magic": 16,
+    "total": 120,
+    "skillSlots": 6,
+    "washPrice": 200
+  },
+  {
+    "name": "骷髏海盜",
+    "race": "不死系",
+    "elements": {
+      "earth": 50,
+      "water": 50,
+      "fire": 0,
+      "wind": 0
+    },
+    "cardType": "金",
+    "hp": 20,
+    "power": 7,
+    "defense": 45,
+    "speed": 13,
+    "magic": 34,
+    "total": 119,
+    "skillSlots": 10,
+    "washPrice": 2400
+  },
+  {
+    "name": "骸骨魔獅",
+    "race": "不死系",
+    "elements": {
+      "earth": 0,
+      "water": 0,
+      "fire": 50,
+      "wind": 50
+    },
+    "cardType": "金",
+    "hp": 26,
+    "power": 48,
+    "defense": 16,
+    "speed": 22,
+    "magic": 7,
+    "total": 119,
+    "skillSlots": 10,
+    "washPrice": 2400
+  },
+  {
+    "name": "亡靈",
+    "race": "不死系",
+    "elements": {
+      "earth": 0,
+      "water": 0,
+      "fire": 20,
+      "wind": 80
+    },
+    "cardType": "銀",
+    "hp": 17,
+    "power": 20,
+    "defense": 31,
+    "speed": 20,
+    "magic": 29,
+    "total": 117,
+    "skillSlots": 7,
+    "washPrice": 800
+  },
+  {
+    "name": "寒冰骷髏",
+    "race": "不死系",
+    "elements": {
+      "earth": 0,
+      "water": 60,
+      "fire": 40,
+      "wind": 0
+    },
+    "cardType": "銀",
+    "hp": 14,
+    "power": 16,
+    "defense": 32,
+    "speed": 11,
+    "magic": 44,
+    "total": 117,
+    "skillSlots": 7,
+    "washPrice": 800
+  },
+  {
+    "name": "巫師之鬼",
+    "race": "不死系",
+    "elements": {
+      "earth": 0,
+      "water": 0,
+      "fire": 0,
+      "wind": 100
+    },
+    "cardType": "銀",
+    "hp": 15,
+    "power": 32,
+    "defense": 15,
+    "speed": 41,
+    "magic": 14,
+    "total": 117,
+    "skillSlots": 6,
+    "washPrice": 200
+  },
+  {
+    "name": "德魯依之鬼",
+    "race": "不死系",
+    "elements": {
+      "earth": 0,
+      "water": 100,
+      "fire": 0,
+      "wind": 0
+    },
+    "cardType": "銀",
+    "hp": 16,
+    "power": 11,
+    "defense": 22,
+    "speed": 21,
+    "magic": 47,
+    "total": 117,
+    "skillSlots": 6,
+    "washPrice": 200
+  },
+  {
+    "name": "毒龍骨",
+    "race": "不死系",
+    "elements": {
+      "earth": 60,
+      "water": 40,
+      "fire": 0,
+      "wind": 0
+    },
+    "cardType": "銀",
+    "hp": 13,
+    "power": 23,
+    "defense": 15,
+    "speed": 20,
+    "magic": 46,
+    "total": 117,
+    "skillSlots": 6,
+    "washPrice": 800
+  },
+  {
+    "name": "紅鬼",
+    "race": "不死系",
+    "elements": {
+      "earth": 0,
+      "water": 0,
+      "fire": 100,
+      "wind": 0
+    },
+    "cardType": "銀",
+    "hp": 12,
+    "power": 46,
+    "defense": 15,
+    "speed": 30,
+    "magic": 14,
+    "total": 117,
+    "skillSlots": 6,
+    "washPrice": 200
+  },
+  {
+    "name": "邪眼骷髏",
+    "race": "不死系",
+    "elements": {
+      "earth": 60,
+      "water": 40,
+      "fire": 0,
+      "wind": 0
+    },
+    "cardType": "銀",
+    "hp": 17,
+    "power": 17,
+    "defense": 35,
+    "speed": 8,
+    "magic": 40,
+    "total": 117,
+    "skillSlots": 7,
+    "washPrice": 800
+  },
+  {
+    "name": "鬼靈",
+    "race": "不死系",
+    "elements": {
+      "earth": 0,
+      "water": 0,
+      "fire": 80,
+      "wind": 20
+    },
+    "cardType": "銀",
+    "hp": 11,
+    "power": 21,
+    "defense": 27,
+    "speed": 25,
+    "magic": 33,
+    "total": 117,
+    "skillSlots": 7,
+    "washPrice": 800
+  },
+  {
+    "name": "魔法師之鬼",
+    "race": "不死系",
+    "elements": {
+      "earth": 100,
+      "water": 0,
+      "fire": 0,
+      "wind": 0
+    },
+    "cardType": "銀",
+    "hp": 17,
+    "power": 11,
+    "defense": 15,
+    "speed": 27,
+    "magic": 47,
+    "total": 117,
+    "skillSlots": 6,
+    "washPrice": 200
+  },
+  {
+    "name": "龍骨",
+    "race": "不死系",
+    "elements": {
+      "earth": 50,
+      "water": 0,
+      "fire": 0,
+      "wind": 50
+    },
+    "cardType": "銀",
+    "hp": 14,
+    "power": 46,
+    "defense": 14,
+    "speed": 18,
+    "magic": 25,
+    "total": 117,
+    "skillSlots": 6,
+    "washPrice": 800
+  },
+  {
+    "name": "卡卡特",
+    "race": "不死系",
+    "elements": {
+      "earth": 20,
+      "water": 80,
+      "fire": 0,
+      "wind": 0
+    },
+    "cardType": "普",
+    "hp": 26,
+    "power": 40,
+    "defense": 18,
+    "speed": 20,
+    "magic": 11,
+    "total": 115,
+    "skillSlots": 8,
+    "washPrice": 100
+  },
+  {
+    "name": "卡斯克",
+    "race": "不死系",
+    "elements": {
+      "earth": 80,
+      "water": 0,
+      "fire": 0,
+      "wind": 20
+    },
+    "cardType": "普",
+    "hp": 36,
+    "power": 20,
+    "defense": 29,
+    "speed": 22,
+    "magic": 8,
+    "total": 115,
+    "skillSlots": 8,
+    "washPrice": 100
+  },
+  {
+    "name": "卡爾克",
+    "race": "不死系",
+    "elements": {
+      "earth": 0,
+      "water": 0,
+      "fire": 20,
+      "wind": 80
+    },
+    "cardType": "普",
+    "hp": 25,
+    "power": 39,
+    "defense": 17,
+    "speed": 23,
+    "magic": 11,
+    "total": 115,
+    "skillSlots": 8,
+    "washPrice": 100
+  },
+  {
+    "name": "卡爾芬",
+    "race": "不死系",
+    "elements": {
+      "earth": 0,
+      "water": 20,
+      "fire": 80,
+      "wind": 0
+    },
+    "cardType": "普",
+    "hp": 38,
+    "power": 28,
+    "defense": 11,
+    "speed": 26,
+    "magic": 12,
+    "total": 115,
+    "skillSlots": 8,
+    "washPrice": 100
+  },
+  {
+    "name": "幽靈",
+    "race": "不死系",
+    "elements": {
+      "earth": 20,
+      "water": 80,
+      "fire": 0,
+      "wind": 0
+    },
+    "cardType": "普",
+    "hp": 19,
+    "power": 18,
+    "defense": 31,
+    "speed": 20,
+    "magic": 27,
+    "total": 115,
+    "skillSlots": 7,
+    "washPrice": 200
+  },
+  {
+    "name": "死靈",
+    "race": "不死系",
+    "elements": {
+      "earth": 80,
+      "water": 20,
+      "fire": 0,
+      "wind": 0
+    },
+    "cardType": "普",
+    "hp": 16,
+    "power": 20,
+    "defense": 32,
+    "speed": 19,
+    "magic": 28,
+    "total": 115,
+    "skillSlots": 7,
+    "washPrice": 200
+  },
+  {
+    "name": "利牙",
+    "race": "不死系",
+    "elements": {
+      "earth": 0,
+      "water": 0,
+      "fire": 10,
+      "wind": 90
+    },
+    "cardType": "銀",
+    "hp": 30,
+    "power": 39,
+    "defense": 30,
+    "speed": 9,
+    "magic": 4,
+    "total": 112,
+    "skillSlots": 8,
+    "washPrice": 640
+  },
+  {
+    "name": "武裝骷髏",
+    "race": "不死系",
+    "elements": {
+      "earth": 70,
+      "water": 30,
+      "fire": 0,
+      "wind": 0
+    },
+    "cardType": "銀",
+    "hp": 9,
+    "power": 26,
+    "defense": 47,
+    "speed": 8,
+    "magic": 22,
+    "total": 112,
+    "skillSlots": 8,
+    "washPrice": 800
+  },
+  {
+    "name": "血骷髏",
+    "race": "不死系",
+    "elements": {
+      "earth": 0,
+      "water": 0,
+      "fire": 70,
+      "wind": 30
+    },
+    "cardType": "銀",
+    "hp": 13,
+    "power": 24,
+    "defense": 41,
+    "speed": 10,
+    "magic": 24,
+    "total": 112,
+    "skillSlots": 8,
+    "washPrice": 800
+  },
+  {
+    "name": "顎牙",
+    "race": "不死系",
+    "elements": {
+      "earth": 10,
+      "water": 90,
+      "fire": 0,
+      "wind": 0
+    },
+    "cardType": "銀",
+    "hp": 34,
+    "power": 29,
+    "defense": 37,
+    "speed": 7,
+    "magic": 5,
+    "total": 112,
+    "skillSlots": 8,
+    "washPrice": 640
+  },
+  {
+    "name": "地獄骷髏",
+    "race": "不死系",
+    "elements": {
+      "earth": 0,
+      "water": 70,
+      "fire": 30,
+      "wind": 0
+    },
+    "cardType": "普",
+    "hp": 14,
+    "power": 40,
+    "defense": 30,
+    "speed": 11,
+    "magic": 15,
+    "total": 110,
+    "skillSlots": 8,
+    "washPrice": 200
+  },
+  {
+    "name": "巨牙",
+    "race": "不死系",
+    "elements": {
+      "earth": 0,
+      "water": 10,
+      "fire": 90,
+      "wind": 0
+    },
+    "cardType": "普",
+    "hp": 25,
+    "power": 30,
+    "defense": 27,
+    "speed": 17,
+    "magic": 11,
+    "total": 110,
+    "skillSlots": 8,
+    "washPrice": 200
+  },
+  {
+    "name": "牙骨",
+    "race": "不死系",
+    "elements": {
+      "earth": 90,
+      "water": 0,
+      "fire": 0,
+      "wind": 10
+    },
+    "cardType": "普",
+    "hp": 27,
+    "power": 32,
+    "defense": 32,
+    "speed": 12,
+    "magic": 7,
+    "total": 110,
+    "skillSlots": 8,
+    "washPrice": 200
+  },
+  {
+    "name": "骷髏戰士",
+    "race": "不死系",
+    "elements": {
+      "earth": 30,
+      "water": 0,
+      "fire": 0,
+      "wind": 70
+    },
+    "cardType": "普",
+    "hp": 12,
+    "power": 42,
+    "defense": 27,
+    "speed": 12,
+    "magic": 17,
+    "total": 110,
+    "skillSlots": 8,
+    "washPrice": 200
+  },
+  {
+    "name": "喪屍",
+    "race": "不死系",
+    "elements": {
+      "earth": 0,
+      "water": 60,
+      "fire": 40,
+      "wind": 0
+    },
+    "cardType": "銀",
+    "hp": 37,
+    "power": 34,
+    "defense": 7,
+    "speed": 15,
+    "magic": 14,
+    "total": 107,
+    "skillSlots": 9,
+    "washPrice": 800
+  },
+  {
+    "name": "食屍鬼",
+    "race": "不死系",
+    "elements": {
+      "earth": 0,
+      "water": 0,
+      "fire": 60,
+      "wind": 40
+    },
+    "cardType": "銀",
+    "hp": 32,
+    "power": 39,
+    "defense": 17,
+    "speed": 7,
+    "magic": 12,
+    "total": 107,
+    "skillSlots": 9,
+    "washPrice": 800
+  },
+  {
+    "name": "僵屍",
+    "race": "不死系",
+    "elements": {
+      "earth": 40,
+      "water": 0,
+      "fire": 0,
+      "wind": 60
+    },
+    "cardType": "普",
+    "hp": 37,
+    "power": 32,
+    "defense": 12,
+    "speed": 12,
+    "magic": 12,
+    "total": 105,
+    "skillSlots": 9,
+    "washPrice": 200
+  },
+  {
+    "name": "腐屍",
+    "race": "不死系",
+    "elements": {
+      "earth": 60,
+      "water": 40,
+      "fire": 0,
+      "wind": 0
+    },
+    "cardType": "普",
+    "hp": 42,
+    "power": 37,
+    "defense": 12,
+    "speed": 7,
+    "magic": 7,
+    "total": 105,
+    "skillSlots": 9,
+    "washPrice": 200
+  },
+  {
+    "name": "冥光獨眼寶寶",
+    "race": "不死系",
+    "elements": {
+      "earth": 0,
+      "water": 0,
+      "fire": 50,
+      "wind": 50
+    },
+    "cardType": "普",
+    "hp": 20,
+    "power": 20,
+    "defense": 20,
+    "speed": 20,
+    "magic": 20,
+    "total": 100,
+    "skillSlots": 8,
+    "washPrice": 66
+  },
+  {
+    "name": "幽冥獨眼寶寶",
+    "race": "不死系",
+    "elements": {
+      "earth": 0,
+      "water": 0,
+      "fire": 50,
+      "wind": 50
+    },
+    "cardType": "普",
+    "hp": 20,
+    "power": 20,
+    "defense": 20,
+    "speed": 20,
+    "magic": 20,
+    "total": 100,
+    "skillSlots": 8,
+    "washPrice": 66
+  },
+  {
+    "name": "佛利波羅",
+    "race": "人形系",
+    "elements": {
+      "earth": 30,
+      "water": 70,
+      "fire": 0,
+      "wind": 0
+    },
+    "cardType": "金",
+    "hp": 29,
+    "power": 45,
+    "defense": 20,
+    "speed": 23,
+    "magic": 12,
+    "total": 129,
+    "skillSlots": 8,
+    "washPrice": 2400
+  },
+  {
+    "name": "噩夢牛頭怪",
+    "race": "人形系",
+    "elements": {
+      "earth": 0,
+      "water": 20,
+      "fire": 80,
+      "wind": 0
+    },
+    "cardType": "金",
+    "hp": 36,
+    "power": 46,
+    "defense": 24,
+    "speed": 15,
+    "magic": 8,
+    "total": 129,
+    "skillSlots": 8,
+    "washPrice": 2400
+  },
+  {
+    "name": "大地牛頭怪",
+    "race": "人形系",
+    "elements": {
+      "earth": 80,
+      "water": 20,
+      "fire": 0,
+      "wind": 0
+    },
+    "cardType": "金",
+    "hp": 37,
+    "power": 37,
+    "defense": 37,
+    "speed": 10,
+    "magic": 8,
+    "total": 129,
+    "skillSlots": 8,
+    "washPrice": 2400
+  },
+  {
+    "name": "寒冰牛頭怪",
+    "race": "人形系",
+    "elements": {
+      "earth": 0,
+      "water": 60,
+      "fire": 40,
+      "wind": 0
+    },
+    "cardType": "金",
+    "hp": 30,
+    "power": 43,
+    "defense": 31,
+    "speed": 15,
+    "magic": 10,
+    "total": 129,
+    "skillSlots": 8,
+    "washPrice": 2400
+  },
+  {
+    "name": "愛里西雅",
+    "race": "人形系",
+    "elements": {
+      "earth": 0,
+      "water": 10,
+      "fire": 90,
+      "wind": 0
+    },
+    "cardType": "金",
+    "hp": 23,
+    "power": 46,
+    "defense": 18,
+    "speed": 31,
+    "magic": 11,
+    "total": 129,
+    "skillSlots": 8,
+    "washPrice": 2400
+  },
+  {
+    "name": "時雨",
+    "race": "人形系",
+    "elements": {
+      "earth": 25,
+      "water": 25,
+      "fire": 25,
+      "wind": 25
+    },
+    "cardType": "金",
+    "hp": 47,
+    "power": 30,
+    "defense": 12,
+    "speed": 30,
+    "magic": 10,
+    "total": 129,
+    "skillSlots": 8,
+    "washPrice": 2400
+  },
+  {
+    "name": "暗醫阿魯巴斯",
+    "race": "人形系",
+    "elements": {
+      "earth": 0,
+      "water": 50,
+      "fire": 50,
+      "wind": 0
+    },
+    "cardType": "金",
+    "hp": 24,
+    "power": 10,
+    "defense": 22,
+    "speed": 27,
+    "magic": 46,
+    "total": 129,
+    "skillSlots": 8,
+    "washPrice": 2400
+  },
+  {
+    "name": "暗黑歌姬(攻)",
+    "race": "人形系",
+    "elements": {
+      "earth": 30,
+      "water": 30,
+      "fire": 30,
+      "wind": 30
+    },
+    "cardType": "金",
+    "hp": 22,
+    "power": 50,
+    "defense": 20,
+    "speed": 26,
+    "magic": 11,
+    "total": 129,
+    "skillSlots": 8,
+    "washPrice": 2400
+  },
+  {
+    "name": "暗黑歌姬(魔)",
+    "race": "人形系",
+    "elements": {
+      "earth": 30,
+      "water": 30,
+      "fire": 30,
+      "wind": 30
+    },
+    "cardType": "金",
+    "hp": 25,
+    "power": 5,
+    "defense": 26,
+    "speed": 23,
+    "magic": 50,
+    "total": 129,
+    "skillSlots": 8,
+    "washPrice": 2400
+  },
+  {
+    "name": "暗黑烈風牛頭怪",
+    "race": "人形系",
+    "elements": {
+      "earth": 20,
+      "water": 0,
+      "fire": 0,
+      "wind": 80
+    },
+    "cardType": "金",
+    "hp": 23,
+    "power": 45,
+    "defense": 15,
+    "speed": 37,
+    "magic": 9,
+    "total": 129,
+    "skillSlots": 8,
+    "washPrice": 2400
+  },
+  {
+    "name": "歌姬雪蕾潔(攻)",
+    "race": "人形系",
+    "elements": {
+      "earth": 30,
+      "water": 30,
+      "fire": 30,
+      "wind": 30
+    },
+    "cardType": "金",
+    "hp": 20,
+    "power": 50,
+    "defense": 18,
+    "speed": 29,
+    "magic": 12,
+    "total": 129,
+    "skillSlots": 8,
+    "washPrice": 2400
+  },
+  {
+    "name": "歌姬雪蕾潔(魔)",
+    "race": "人形系",
+    "elements": {
+      "earth": 30,
+      "water": 30,
+      "fire": 30,
+      "wind": 30
+    },
+    "cardType": "金",
+    "hp": 25,
+    "power": 5,
+    "defense": 24,
+    "speed": 25,
+    "magic": 50,
+    "total": 129,
+    "skillSlots": 8,
+    "washPrice": 2400
+  },
+  {
+    "name": "殺熊者歐茲那克",
+    "race": "人形系",
+    "elements": {
+      "earth": 80,
+      "water": 20,
+      "fire": 0,
+      "wind": 0
+    },
+    "cardType": "金",
+    "hp": 32,
+    "power": 45,
+    "defense": 24,
+    "speed": 17,
+    "magic": 11,
+    "total": 129,
+    "skillSlots": 8,
+    "washPrice": 2400
+  },
+  {
+    "name": "海賊頭目",
+    "race": "人形系",
+    "elements": {
+      "earth": 70,
+      "water": 0,
+      "fire": 0,
+      "wind": 30
+    },
+    "cardType": "金",
+    "hp": 33,
+    "power": 43,
+    "defense": 28,
+    "speed": 13,
+    "magic": 12,
+    "total": 129,
+    "skillSlots": 7,
+    "washPrice": 1600
+  },
+  {
+    "name": "火焰牛頭怪",
+    "race": "人形系",
+    "elements": {
+      "earth": 0,
+      "water": 0,
+      "fire": 80,
+      "wind": 20
+    },
+    "cardType": "金",
+    "hp": 30,
+    "power": 10,
+    "defense": 35,
+    "speed": 10,
+    "magic": 44,
+    "total": 129,
+    "skillSlots": 8,
+    "washPrice": 2400
+  },
+  {
+    "name": "烈風牛頭怪",
+    "race": "人形系",
+    "elements": {
+      "earth": 20,
+      "water": 0,
+      "fire": 0,
+      "wind": 80
+    },
+    "cardType": "金",
+    "hp": 23,
+    "power": 45,
+    "defense": 15,
+    "speed": 37,
+    "magic": 9,
+    "total": 129,
+    "skillSlots": 8,
+    "washPrice": 2400
+  },
+  {
+    "name": "熱砂的歐茲尼克",
+    "race": "人形系",
+    "elements": {
+      "earth": 0,
+      "water": 0,
+      "fire": 80,
+      "wind": 20
+    },
+    "cardType": "金",
+    "hp": 26,
+    "power": 46,
+    "defense": 20,
+    "speed": 27,
+    "magic": 10,
+    "total": 129,
+    "skillSlots": 8,
+    "washPrice": 2400
+  },
+  {
+    "name": "阿卡斯",
+    "race": "人形系",
+    "elements": {
+      "earth": 0,
+      "water": 0,
+      "fire": 50,
+      "wind": 50
+    },
+    "cardType": "金",
+    "hp": 19,
+    "power": 9,
+    "defense": 19,
+    "speed": 41,
+    "magic": 41,
+    "total": 129,
+    "skillSlots": 8,
+    "washPrice": 2400
+  },
+  {
+    "name": "黑暗鳥人",
+    "race": "人形系",
+    "elements": {
+      "earth": 50,
+      "water": 0,
+      "fire": 0,
+      "wind": 50
+    },
+    "cardType": "金",
+    "hp": 20,
+    "power": 11,
+    "defense": 13,
+    "speed": 47,
+    "magic": 38,
+    "total": 129,
+    "skillSlots": 7,
+    "washPrice": 1600
+  },
+  {
+    "name": "桃夭蛇靈",
+    "race": "人形系",
+    "elements": {
+      "earth": 0,
+      "water": 0,
+      "fire": 100,
+      "wind": 0
+    },
+    "cardType": "銀",
+    "hp": 26,
+    "power": 16,
+    "defense": 12,
+    "speed": 29,
+    "magic": 44,
+    "total": 127,
+    "skillSlots": 7,
+    "washPrice": 500
+  },
+  {
+    "name": "胭脂蛇姬",
+    "race": "人形系",
+    "elements": {
+      "earth": 0,
+      "water": 0,
+      "fire": 100,
+      "wind": 0
+    },
+    "cardType": "銀",
+    "hp": 26,
+    "power": 43,
+    "defense": 12,
+    "speed": 32,
+    "magic": 14,
+    "total": 127,
+    "skillSlots": 7,
+    "washPrice": 500
+  },
+  {
+    "name": "迷你烈風牛頭怪",
+    "race": "人形系",
+    "elements": {
+      "earth": 20,
+      "water": 0,
+      "fire": 0,
+      "wind": 80
+    },
+    "cardType": "銀",
+    "hp": 21,
+    "power": 16,
+    "defense": 18,
+    "speed": 29,
+    "magic": 43,
+    "total": 127,
+    "skillSlots": 8,
+    "washPrice": 800
+  },
+  {
+    "name": "魔術師烏莉兒",
+    "race": "人形系",
+    "elements": {
+      "earth": 0,
+      "water": 0,
+      "fire": 30,
+      "wind": 70
+    },
+    "cardType": "金",
+    "hp": 27,
+    "power": 9,
+    "defense": 18,
+    "speed": 23,
+    "magic": 47,
+    "total": 124,
+    "skillSlots": 8,
+    "washPrice": 2400
+  },
+  {
+    "name": "亞特拉斯巨神",
+    "race": "人形系",
+    "elements": {
+      "earth": 0,
+      "water": 0,
+      "fire": 100,
+      "wind": 0
+    },
+    "cardType": "銀",
+    "hp": 37,
+    "power": 39,
+    "defense": 22,
+    "speed": 14,
+    "magic": 10,
+    "total": 122,
+    "skillSlots": 6,
+    "washPrice": 640
+  },
+  {
+    "name": "冰極鳥人",
+    "race": "人形系",
+    "elements": {
+      "earth": 0,
+      "water": 90,
+      "fire": 0,
+      "wind": 10
+    },
+    "cardType": "銀",
+    "hp": 19,
+    "power": 7,
+    "defense": 15,
+    "speed": 40,
+    "magic": 41,
+    "total": 122,
+    "skillSlots": 8,
+    "washPrice": 800
+  },
+  {
+    "name": "吳剛",
+    "race": "人形系",
+    "elements": {
+      "earth": 50,
+      "water": 50,
+      "fire": 0,
+      "wind": 0
+    },
+    "cardType": "銀",
+    "hp": 26,
+    "power": 40,
+    "defense": 21,
+    "speed": 15,
+    "magic": 20,
+    "total": 122,
+    "skillSlots": 8,
+    "washPrice": 800
+  },
+  {
+    "name": "單眼巨人",
+    "race": "人形系",
+    "elements": {
+      "earth": 0,
+      "water": 100,
+      "fire": 0,
+      "wind": 0
+    },
+    "cardType": "銀",
+    "hp": 42,
+    "power": 34,
+    "defense": 20,
+    "speed": 14,
+    "magic": 12,
+    "total": 122,
+    "skillSlots": 6,
+    "washPrice": 640
+  },
+  {
+    "name": "巴雷莉",
+    "race": "人形系",
+    "elements": {
+      "earth": 20,
+      "water": 80,
+      "fire": 0,
+      "wind": 0
+    },
+    "cardType": "銀",
+    "hp": 37,
+    "power": 34,
+    "defense": 33,
+    "speed": 12,
+    "magic": 6,
+    "total": 122,
+    "skillSlots": 8,
+    "washPrice": 800
+  },
+  {
+    "name": "弗雷德利娜",
+    "race": "人形系",
+    "elements": {
+      "earth": 70,
+      "water": 30,
+      "fire": 0,
+      "wind": 0
+    },
+    "cardType": "銀",
+    "hp": 39,
+    "power": 13,
+    "defense": 13,
+    "speed": 18,
+    "magic": 39,
+    "total": 122,
+    "skillSlots": 8,
+    "washPrice": 800
+  },
+  {
+    "name": "白兔仙子",
+    "race": "人形系",
+    "elements": {
+      "earth": 50,
+      "water": 0,
+      "fire": 0,
+      "wind": 50
+    },
+    "cardType": "銀",
+    "hp": 36,
+    "power": 12,
+    "defense": 22,
+    "speed": 12,
+    "magic": 40,
+    "total": 122,
+    "skillSlots": 8,
+    "washPrice": 188
+  },
+  {
+    "name": "鐵鉤船長",
+    "race": "人形系",
+    "elements": {
+      "earth": 0,
+      "water": 20,
+      "fire": 80,
+      "wind": 0
+    },
+    "cardType": "銀",
+    "hp": 26,
+    "power": 43,
+    "defense": 17,
+    "speed": 24,
+    "magic": 12,
+    "total": 122,
+    "skillSlots": 7,
+    "washPrice": 640
+  },
+  {
+    "name": "巨人",
+    "race": "人形系",
+    "elements": {
+      "earth": 100,
+      "water": 0,
+      "fire": 0,
+      "wind": 0
+    },
+    "cardType": "普",
+    "hp": 38,
+    "power": 35,
+    "defense": 24,
+    "speed": 14,
+    "magic": 9,
+    "total": 120,
+    "skillSlots": 6,
+    "washPrice": 200
+  },
+  {
+    "name": "泰坦巨人",
+    "race": "人形系",
+    "elements": {
+      "earth": 0,
+      "water": 0,
+      "fire": 0,
+      "wind": 100
+    },
+    "cardType": "普",
+    "hp": 39,
+    "power": 30,
+    "defense": 28,
+    "speed": 15,
+    "magic": 8,
+    "total": 120,
+    "skillSlots": 6,
+    "washPrice": 200
+  },
+  {
+    "name": "伍那",
+    "race": "人形系",
+    "elements": {
+      "earth": 70,
+      "water": 0,
+      "fire": 0,
+      "wind": 30
+    },
+    "cardType": "銀",
+    "hp": 18,
+    "power": 9,
+    "defense": 41,
+    "speed": 11,
+    "magic": 38,
+    "total": 117,
+    "skillSlots": 7,
+    "washPrice": 800
+  },
+  {
+    "name": "吉拉",
+    "race": "人形系",
+    "elements": {
+      "earth": 0,
+      "water": 0,
+      "fire": 70,
+      "wind": 30
+    },
+    "cardType": "銀",
+    "hp": 12,
+    "power": 40,
+    "defense": 13,
+    "speed": 46,
+    "magic": 6,
+    "total": 117,
+    "skillSlots": 7,
+    "washPrice": 800
+  },
+  {
+    "name": "復古哥布林",
+    "race": "人形系",
+    "elements": {
+      "earth": 80,
+      "water": 20,
+      "fire": 0,
+      "wind": 0
+    },
+    "cardType": "銀",
+    "hp": 28,
+    "power": 40,
+    "defense": 16,
+    "speed": 22,
+    "magic": 11,
+    "total": 117,
+    "skillSlots": 7,
+    "washPrice": 500
+  },
+  {
+    "name": "海盜",
+    "race": "人形系",
+    "elements": {
+      "earth": 0,
+      "water": 50,
+      "fire": 50,
+      "wind": 0
+    },
+    "cardType": "銀",
+    "hp": 26,
+    "power": 31,
+    "defense": 23,
+    "speed": 28,
+    "magic": 9,
+    "total": 117,
+    "skillSlots": 7,
+    "washPrice": 640
+  },
+  {
+    "name": "破壞狂",
+    "race": "人形系",
+    "elements": {
+      "earth": 50,
+      "water": 50,
+      "fire": 0,
+      "wind": 0
+    },
+    "cardType": "銀",
+    "hp": 29,
+    "power": 26,
+    "defense": 30,
+    "speed": 24,
+    "magic": 8,
+    "total": 117,
+    "skillSlots": 7,
+    "washPrice": 640
+  },
+  {
+    "name": "萊歐尼爾",
+    "race": "人形系",
+    "elements": {
+      "earth": 60,
+      "water": 0,
+      "fire": 0,
+      "wind": 40
+    },
+    "cardType": "銀",
+    "hp": 17,
+    "power": 44,
+    "defense": 21,
+    "speed": 26,
+    "magic": 9,
+    "total": 117,
+    "skillSlots": 7,
+    "washPrice": 800
+  },
+  {
+    "name": "豬鬼",
+    "race": "人形系",
+    "elements": {
+      "earth": 0,
+      "water": 60,
+      "fire": 40,
+      "wind": 0
+    },
+    "cardType": "銀",
+    "hp": 33,
+    "power": 30,
+    "defense": 33,
+    "speed": 11,
+    "magic": 10,
+    "total": 117,
+    "skillSlots": 7,
+    "washPrice": 500
+  },
+  {
+    "name": "鋼鬼",
+    "race": "人形系",
+    "elements": {
+      "earth": 0,
+      "water": 0,
+      "fire": 60,
+      "wind": 40
+    },
+    "cardType": "銀",
+    "hp": 30,
+    "power": 32,
+    "defense": 30,
+    "speed": 16,
+    "magic": 9,
+    "total": 117,
+    "skillSlots": 7,
+    "washPrice": 500
+  },
+  {
+    "name": "半獸人",
+    "race": "人形系",
+    "elements": {
+      "earth": 40,
+      "water": 0,
+      "fire": 0,
+      "wind": 60
+    },
+    "cardType": "普",
+    "hp": 32,
+    "power": 27,
+    "defense": 32,
+    "speed": 12,
+    "magic": 12,
+    "total": 115,
+    "skillSlots": 7,
+    "washPrice": 100
+  },
+  {
+    "name": "大型半獸人",
+    "race": "人形系",
+    "elements": {
+      "earth": 60,
+      "water": 40,
+      "fire": 0,
+      "wind": 0
+    },
+    "cardType": "普",
+    "hp": 34,
+    "power": 25,
+    "defense": 35,
+    "speed": 10,
+    "magic": 11,
+    "total": 115,
+    "skillSlots": 7,
+    "washPrice": 100
+  },
+  {
+    "name": "山賊",
+    "race": "人形系",
+    "elements": {
+      "earth": 50,
+      "water": 0,
+      "fire": 0,
+      "wind": 50
+    },
+    "cardType": "普",
+    "hp": 28,
+    "power": 27,
+    "defense": 24,
+    "speed": 26,
+    "magic": 10,
+    "total": 115,
+    "skillSlots": 7,
+    "washPrice": 100
+  },
+  {
+    "name": "盜賊",
+    "race": "人形系",
+    "elements": {
+      "earth": 0,
+      "water": 0,
+      "fire": 50,
+      "wind": 50
+    },
+    "cardType": "普",
+    "hp": 23,
+    "power": 28,
+    "defense": 21,
+    "speed": 31,
+    "magic": 12,
+    "total": 115,
+    "skillSlots": 7,
+    "washPrice": 100
+  },
+  {
+    "name": "幻歌妖",
+    "race": "人形系",
+    "elements": {
+      "earth": 10,
+      "water": 90,
+      "fire": 0,
+      "wind": 0
+    },
+    "cardType": "銀",
+    "hp": 15,
+    "power": 18,
+    "defense": 15,
+    "speed": 38,
+    "magic": 26,
+    "total": 112,
+    "skillSlots": 8,
+    "washPrice": 500
+  },
+  {
+    "name": "烈風鳥人",
+    "race": "人形系",
+    "elements": {
+      "earth": 0,
+      "water": 0,
+      "fire": 10,
+      "wind": 90
+    },
+    "cardType": "銀",
+    "hp": 13,
+    "power": 20,
+    "defense": 12,
+    "speed": 42,
+    "magic": 25,
+    "total": 112,
+    "skillSlots": 8,
+    "washPrice": 500
+  },
+  {
+    "name": "狠毒鳥人",
+    "race": "人形系",
+    "elements": {
+      "earth": 0,
+      "water": 10,
+      "fire": 90,
+      "wind": 0
+    },
+    "cardType": "普",
+    "hp": 18,
+    "power": 19,
+    "defense": 14,
+    "speed": 34,
+    "magic": 25,
+    "total": 110,
+    "skillSlots": 8,
+    "washPrice": 10
+  },
+  {
+    "name": "鳥人",
+    "race": "人形系",
+    "elements": {
+      "earth": 90,
+      "water": 0,
+      "fire": 0,
+      "wind": 10
+    },
+    "cardType": "普",
+    "hp": 17,
+    "power": 17,
+    "defense": 12,
+    "speed": 37,
+    "magic": 27,
+    "total": 110,
+    "skillSlots": 8,
+    "washPrice": 10
+  },
+  {
+    "name": "火焰哥布林",
+    "race": "人形系",
+    "elements": {
+      "earth": 0,
+      "water": 0,
+      "fire": 70,
+      "wind": 30
+    },
+    "cardType": "銀",
+    "hp": 22,
+    "power": 32,
+    "defense": 23,
+    "speed": 18,
+    "magic": 12,
+    "total": 107,
+    "skillSlots": 9,
+    "washPrice": 500
+  },
+  {
+    "name": "烈風哥布林",
+    "race": "人形系",
+    "elements": {
+      "earth": 30,
+      "water": 0,
+      "fire": 0,
+      "wind": 70
+    },
+    "cardType": "銀",
+    "hp": 30,
+    "power": 28,
+    "defense": 19,
+    "speed": 21,
+    "magic": 9,
+    "total": 107,
+    "skillSlots": 9,
+    "washPrice": 500
+  },
+  {
+    "name": "哥布林",
+    "race": "人形系",
+    "elements": {
+      "earth": 70,
+      "water": 30,
+      "fire": 0,
+      "wind": 0
+    },
+    "cardType": "普",
+    "hp": 27,
+    "power": 27,
+    "defense": 22,
+    "speed": 17,
+    "magic": 12,
+    "total": 105,
+    "skillSlots": 9,
+    "washPrice": 100
+  },
+  {
+    "name": "紅帽哥布林",
+    "race": "人形系",
+    "elements": {
+      "earth": 0,
+      "water": 70,
+      "fire": 30,
+      "wind": 0
+    },
+    "cardType": "普",
+    "hp": 23,
+    "power": 30,
+    "defense": 24,
+    "speed": 19,
+    "magic": 9,
+    "total": 105,
+    "skillSlots": 9,
+    "washPrice": 100
+  },
+  {
+    "name": "櫻花螳螂",
+    "race": "昆蟲系",
+    "elements": {
+      "earth": 0,
+      "water": 0,
+      "fire": 50,
+      "wind": 50
+    },
+    "cardType": "金",
+    "hp": 14,
+    "power": 49,
+    "defense": 23,
+    "speed": 30,
+    "magic": 13,
+    "total": 129,
+    "skillSlots": 7,
+    "washPrice": 2400
+  },
+  {
+    "name": "虎頭蜂",
+    "race": "昆蟲系",
+    "elements": {
+      "earth": 70,
+      "water": 0,
+      "fire": 0,
+      "wind": 30
+    },
+    "cardType": "金",
+    "hp": 16,
+    "power": 44,
+    "defense": 12,
+    "speed": 46,
+    "magic": 11,
+    "total": 129,
+    "skillSlots": 7,
+    "washPrice": 1600
+  },
+  {
+    "name": "幻影殺手蝎",
+    "race": "昆蟲系",
+    "elements": {
+      "earth": 0,
+      "water": 0,
+      "fire": 20,
+      "wind": 80
+    },
+    "cardType": "金",
+    "hp": 21,
+    "power": 10,
+    "defense": 40,
+    "speed": 12,
+    "magic": 41,
+    "total": 124,
+    "skillSlots": 8,
+    "washPrice": 1600
+  },
+  {
+    "name": "地底毒蝎",
+    "race": "昆蟲系",
+    "elements": {
+      "earth": 0,
+      "water": 90,
+      "fire": 10,
+      "wind": 0
+    },
+    "cardType": "銀",
+    "hp": 23,
+    "power": 36,
+    "defense": 36,
+    "speed": 17,
+    "magic": 10,
+    "total": 122,
+    "skillSlots": 6,
+    "washPrice": 500
+  },
+  {
+    "name": "寶石蝎",
+    "race": "昆蟲系",
+    "elements": {
+      "earth": 10,
+      "water": 0,
+      "fire": 0,
+      "wind": 90
+    },
+    "cardType": "銀",
+    "hp": 21,
+    "power": 13,
+    "defense": 30,
+    "speed": 20,
+    "magic": 38,
+    "total": 122,
+    "skillSlots": 6,
+    "washPrice": 500
+  },
+  {
+    "name": "殺人螳螂",
+    "race": "昆蟲系",
+    "elements": {
+      "earth": 0,
+      "water": 40,
+      "fire": 60,
+      "wind": 0
+    },
+    "cardType": "銀",
+    "hp": 12,
+    "power": 47,
+    "defense": 20,
+    "speed": 26,
+    "magic": 17,
+    "total": 122,
+    "skillSlots": 6,
+    "washPrice": 640
+  },
+  {
+    "name": "赤目螳螂",
+    "race": "昆蟲系",
+    "elements": {
+      "earth": 0,
+      "water": 0,
+      "fire": 40,
+      "wind": 60
+    },
+    "cardType": "銀",
+    "hp": 14,
+    "power": 46,
+    "defense": 19,
+    "speed": 29,
+    "magic": 14,
+    "total": 122,
+    "skillSlots": 6,
+    "washPrice": 640
+  },
+  {
+    "name": "水晶蝎",
+    "race": "昆蟲系",
+    "elements": {
+      "earth": 0,
+      "water": 0,
+      "fire": 90,
+      "wind": 10
+    },
+    "cardType": "普",
+    "hp": 19,
+    "power": 14,
+    "defense": 30,
+    "speed": 18,
+    "magic": 39,
+    "total": 120,
+    "skillSlots": 6,
+    "washPrice": 100
+  },
+  {
+    "name": "烈焰龍蝦",
+    "race": "昆蟲系",
+    "elements": {
+      "earth": 0,
+      "water": 0,
+      "fire": 80,
+      "wind": 20
+    },
+    "cardType": "普",
+    "hp": 20,
+    "power": 45,
+    "defense": 20,
+    "speed": 25,
+    "magic": 10,
+    "total": 120,
+    "skillSlots": 8,
+    "washPrice": 100
+  },
+  {
+    "name": "索奇亞沙蝎",
+    "race": "昆蟲系",
+    "elements": {
+      "earth": 90,
+      "water": 0,
+      "fire": 0,
+      "wind": 10
+    },
+    "cardType": "普",
+    "hp": 24,
+    "power": 33,
+    "defense": 39,
+    "speed": 15,
+    "magic": 9,
+    "total": 120,
+    "skillSlots": 6,
+    "washPrice": 100
+  },
+  {
+    "name": "致命螳螂",
+    "race": "昆蟲系",
+    "elements": {
+      "earth": 40,
+      "water": 60,
+      "fire": 0,
+      "wind": 0
+    },
+    "cardType": "普",
+    "hp": 20,
+    "power": 43,
+    "defense": 18,
+    "speed": 27,
+    "magic": 12,
+    "total": 120,
+    "skillSlots": 6,
+    "washPrice": 100
+  },
+  {
+    "name": "螳螂",
+    "race": "昆蟲系",
+    "elements": {
+      "earth": 60,
+      "water": 0,
+      "fire": 0,
+      "wind": 40
+    },
+    "cardType": "普",
+    "hp": 16,
+    "power": 44,
+    "defense": 22,
+    "speed": 27,
+    "magic": 11,
+    "total": 120,
+    "skillSlots": 6,
+    "washPrice": 100
+  },
+  {
+    "name": "暗影螳螂",
+    "race": "昆蟲系",
+    "elements": {
+      "earth": 50,
+      "water": 0,
+      "fire": 0,
+      "wind": 50
+    },
+    "cardType": "金",
+    "hp": 20,
+    "power": 45,
+    "defense": 20,
+    "speed": 22,
+    "magic": 12,
+    "total": 119,
+    "skillSlots": 9,
+    "washPrice": 1600
+  },
+  {
+    "name": "死灰螳螂",
+    "race": "昆蟲系",
+    "elements": {
+      "earth": 0,
+      "water": 50,
+      "fire": 50,
+      "wind": 0
+    },
+    "cardType": "金",
+    "hp": 16,
+    "power": 41,
+    "defense": 16,
+    "speed": 35,
+    "magic": 11,
+    "total": 119,
+    "skillSlots": 9,
+    "washPrice": 1600
+  },
+  {
+    "name": "堀地蟲",
+    "race": "昆蟲系",
+    "elements": {
+      "earth": 0,
+      "water": 80,
+      "fire": 20,
+      "wind": 0
+    },
+    "cardType": "銀",
+    "hp": 22,
+    "power": 35,
+    "defense": 36,
+    "speed": 8,
+    "magic": 16,
+    "total": 117,
+    "skillSlots": 7,
+    "washPrice": 500
+  },
+  {
+    "name": "獨角仙",
+    "race": "昆蟲系",
+    "elements": {
+      "earth": 20,
+      "water": 0,
+      "fire": 0,
+      "wind": 80
+    },
+    "cardType": "銀",
+    "hp": 18,
+    "power": 43,
+    "defense": 34,
+    "speed": 9,
+    "magic": 13,
+    "total": 117,
+    "skillSlots": 7,
+    "washPrice": 500
+  },
+  {
+    "name": "藍蠍",
+    "race": "昆蟲系",
+    "elements": {
+      "earth": 0,
+      "water": 90,
+      "fire": 10,
+      "wind": 0
+    },
+    "cardType": "銀",
+    "hp": 22,
+    "power": 27,
+    "defense": 47,
+    "speed": 13,
+    "magic": 8,
+    "total": 117,
+    "skillSlots": 7,
+    "washPrice": 500
+  },
+  {
+    "name": "黃蠍",
+    "race": "昆蟲系",
+    "elements": {
+      "earth": 10,
+      "water": 0,
+      "fire": 0,
+      "wind": 90
+    },
+    "cardType": "銀",
+    "hp": 22,
+    "power": 30,
+    "defense": 43,
+    "speed": 12,
+    "magic": 10,
+    "total": 117,
+    "skillSlots": 7,
+    "washPrice": 500
+  },
+  {
+    "name": "殺手蠍",
+    "race": "昆蟲系",
+    "elements": {
+      "earth": 90,
+      "water": 10,
+      "fire": 0,
+      "wind": 0
+    },
+    "cardType": "普",
+    "hp": 30,
+    "power": 29,
+    "defense": 38,
+    "speed": 11,
+    "magic": 7,
+    "total": 115,
+    "skillSlots": 7,
+    "washPrice": 50
+  },
+  {
+    "name": "甲蟲",
+    "race": "昆蟲系",
+    "elements": {
+      "earth": 80,
+      "water": 20,
+      "fire": 0,
+      "wind": 0
+    },
+    "cardType": "普",
+    "hp": 17,
+    "power": 37,
+    "defense": 32,
+    "speed": 12,
+    "magic": 17,
+    "total": 115,
+    "skillSlots": 7,
+    "washPrice": 50
+  },
+  {
+    "name": "紅蝎",
+    "race": "昆蟲系",
+    "elements": {
+      "earth": 0,
+      "water": 0,
+      "fire": 90,
+      "wind": 10
+    },
+    "cardType": "普",
+    "hp": 19,
+    "power": 28,
+    "defense": 42,
+    "speed": 19,
+    "magic": 7,
+    "total": 115,
+    "skillSlots": 7,
+    "washPrice": 50
+  },
+  {
+    "name": "鍬型蟲",
+    "race": "昆蟲系",
+    "elements": {
+      "earth": 0,
+      "water": 0,
+      "fire": 80,
+      "wind": 20
+    },
+    "cardType": "普",
+    "hp": 15,
+    "power": 39,
+    "defense": 29,
+    "speed": 14,
+    "magic": 18,
+    "total": 115,
+    "skillSlots": 7,
+    "washPrice": 50
+  },
+  {
+    "name": "死亡蜂",
+    "race": "昆蟲系",
+    "elements": {
+      "earth": 0,
+      "water": 70,
+      "fire": 30,
+      "wind": 0
+    },
+    "cardType": "銀",
+    "hp": 7,
+    "power": 39,
+    "defense": 15,
+    "speed": 43,
+    "magic": 8,
+    "total": 112,
+    "skillSlots": 8,
+    "washPrice": 500
+  },
+  {
+    "name": "殺人蜂",
+    "race": "昆蟲系",
+    "elements": {
+      "earth": 50,
+      "water": 0,
+      "fire": 0,
+      "wind": 50
+    },
+    "cardType": "銀",
+    "hp": 12,
+    "power": 37,
+    "defense": 12,
+    "speed": 39,
+    "magic": 12,
+    "total": 112,
+    "skillSlots": 8,
+    "washPrice": 500
+  },
+  {
+    "name": "異型蜂",
+    "race": "昆蟲系",
+    "elements": {
+      "earth": 0,
+      "water": 0,
+      "fire": 50,
+      "wind": 50
+    },
+    "cardType": "普",
+    "hp": 15,
+    "power": 33,
+    "defense": 13,
+    "speed": 35,
+    "magic": 14,
+    "total": 110,
+    "skillSlots": 8,
+    "washPrice": 50
+  },
+  {
+    "name": "黃蜂",
+    "race": "昆蟲系",
+    "elements": {
+      "earth": 0,
+      "water": 0,
+      "fire": 70,
+      "wind": 30
+    },
+    "cardType": "普",
+    "hp": 10,
+    "power": 38,
+    "defense": 13,
+    "speed": 43,
+    "magic": 6,
+    "total": 110,
+    "skillSlots": 8,
+    "washPrice": 100
+  },
+  {
+    "name": "水蜘蛛",
+    "race": "昆蟲系",
+    "elements": {
+      "earth": 0,
+      "water": 100,
+      "fire": 0,
+      "wind": 0
+    },
+    "cardType": "銀",
+    "hp": 24,
+    "power": 16,
+    "defense": 17,
+    "speed": 20,
+    "magic": 30,
+    "total": 107,
+    "skillSlots": 9,
+    "washPrice": 500
+  },
+  {
+    "name": "風蜘蛛",
+    "race": "昆蟲系",
+    "elements": {
+      "earth": 0,
+      "water": 0,
+      "fire": 0,
+      "wind": 100
+    },
+    "cardType": "銀",
+    "hp": 25,
+    "power": 14,
+    "defense": 15,
+    "speed": 23,
+    "magic": 30,
+    "total": 107,
+    "skillSlots": 9,
+    "washPrice": 500
+  },
+  {
+    "name": "土蜘蛛",
+    "race": "昆蟲系",
+    "elements": {
+      "earth": 100,
+      "water": 0,
+      "fire": 0,
+      "wind": 0
+    },
+    "cardType": "普",
+    "hp": 26,
+    "power": 15,
+    "defense": 18,
+    "speed": 23,
+    "magic": 23,
+    "total": 105,
+    "skillSlots": 9,
+    "washPrice": 10
+  },
+  {
+    "name": "火蜘蛛",
+    "race": "昆蟲系",
+    "elements": {
+      "earth": 0,
+      "water": 0,
+      "fire": 100,
+      "wind": 0
+    },
+    "cardType": "普",
+    "hp": 22,
+    "power": 18,
+    "defense": 16,
+    "speed": 25,
+    "magic": 24,
+    "total": 105,
+    "skillSlots": 9,
+    "washPrice": 10
+  },
+  {
+    "name": "依代",
+    "race": "植物系",
+    "elements": {
+      "earth": 0,
+      "water": 90,
+      "fire": 10,
+      "wind": 0
+    },
+    "cardType": "金",
+    "hp": 53,
+    "power": 5,
+    "defense": 13,
+    "speed": 16,
+    "magic": 42,
+    "total": 129,
+    "skillSlots": 9,
+    "washPrice": 2400
+  },
+  {
+    "name": "冰冷樹精",
+    "race": "植物系",
+    "elements": {
+      "earth": 0,
+      "water": 70,
+      "fire": 30,
+      "wind": 0
+    },
+    "cardType": "金",
+    "hp": 31,
+    "power": 13,
+    "defense": 28,
+    "speed": 17,
+    "magic": 40,
+    "total": 129,
+    "skillSlots": 7,
+    "washPrice": 1600
+  },
+  {
+    "name": "聖誕樹精(攻)",
+    "race": "植物系",
+    "elements": {
+      "earth": 0,
+      "water": 100,
+      "fire": 0,
+      "wind": 0
+    },
+    "cardType": "金",
+    "hp": 45,
+    "power": 41,
+    "defense": 16,
+    "speed": 19,
+    "magic": 8,
+    "total": 129,
+    "skillSlots": 9,
+    "washPrice": 2400
+  },
+  {
+    "name": "聖誕樹精(魔)",
+    "race": "植物系",
+    "elements": {
+      "earth": 0,
+      "water": 100,
+      "fire": 0,
+      "wind": 0
+    },
+    "cardType": "金",
+    "hp": 30,
+    "power": 7,
+    "defense": 28,
+    "speed": 16,
+    "magic": 48,
+    "total": 129,
+    "skillSlots": 9,
+    "washPrice": 2400
+  },
+  {
+    "name": "聖誕黃金樹精(攻)",
+    "race": "植物系",
+    "elements": {
+      "earth": 0,
+      "water": 0,
+      "fire": 50,
+      "wind": 50
+    },
+    "cardType": "金",
+    "hp": 40,
+    "power": 44,
+    "defense": 16,
+    "speed": 21,
+    "magic": 8,
+    "total": 129,
+    "skillSlots": 9,
+    "washPrice": 2400
+  },
+  {
+    "name": "聖誕黃金樹精(魔)",
+    "race": "植物系",
+    "elements": {
+      "earth": 0,
+      "water": 0,
+      "fire": 50,
+      "wind": 50
+    },
+    "cardType": "金",
+    "hp": 32,
+    "power": 5,
+    "defense": 27,
+    "speed": 16,
+    "magic": 49,
+    "total": 129,
+    "skillSlots": 9,
+    "washPrice": 2400
+  },
+  {
+    "name": "火焰舞者",
+    "race": "植物系",
+    "elements": {
+      "earth": 0,
+      "water": 20,
+      "fire": 80,
+      "wind": 0
+    },
+    "cardType": "金",
+    "hp": 27,
+    "power": 41,
+    "defense": 19,
+    "speed": 26,
+    "magic": 11,
+    "total": 124,
+    "skillSlots": 8,
+    "washPrice": 1600
+  },
+  {
+    "name": "玫瑰花妖",
+    "race": "植物系",
+    "elements": {
+      "earth": 0,
+      "water": 0,
+      "fire": 70,
+      "wind": 30
+    },
+    "cardType": "銀",
+    "hp": 42,
+    "power": 31,
+    "defense": 19,
+    "speed": 16,
+    "magic": 14,
+    "total": 122,
+    "skillSlots": 7,
+    "washPrice": 640
+  },
+  {
+    "name": "百合花妖",
+    "race": "植物系",
+    "elements": {
+      "earth": 30,
+      "water": 0,
+      "fire": 0,
+      "wind": 70
+    },
+    "cardType": "銀",
+    "hp": 27,
+    "power": 14,
+    "defense": 20,
+    "speed": 20,
+    "magic": 41,
+    "total": 122,
+    "skillSlots": 7,
+    "washPrice": 640
+  },
+  {
+    "name": "紅色口臭鬼",
+    "race": "植物系",
+    "elements": {
+      "earth": 0,
+      "water": 10,
+      "fire": 90,
+      "wind": 0
+    },
+    "cardType": "銀",
+    "hp": 46,
+    "power": 21,
+    "defense": 14,
+    "speed": 29,
+    "magic": 12,
+    "total": 122,
+    "skillSlots": 6,
+    "washPrice": 500
+  },
+  {
+    "name": "藍色口臭鬼",
+    "race": "植物系",
+    "elements": {
+      "earth": 0,
+      "water": 90,
+      "fire": 10,
+      "wind": 0
+    },
+    "cardType": "銀",
+    "hp": 37,
+    "power": 25,
+    "defense": 15,
+    "speed": 27,
+    "magic": 18,
+    "total": 122,
+    "skillSlots": 6,
+    "washPrice": 500
+  },
+  {
+    "name": "杜鵑花妖",
+    "race": "植物系",
+    "elements": {
+      "earth": 70,
+      "water": 30,
+      "fire": 0,
+      "wind": 0
+    },
+    "cardType": "普",
+    "hp": 37,
+    "power": 27,
+    "defense": 17,
+    "speed": 25,
+    "magic": 14,
+    "total": 120,
+    "skillSlots": 7,
+    "washPrice": 100
+  },
+  {
+    "name": "繡球花妖",
+    "race": "植物系",
+    "elements": {
+      "earth": 0,
+      "water": 70,
+      "fire": 30,
+      "wind": 0
+    },
+    "cardType": "普",
+    "hp": 20,
+    "power": 13,
+    "defense": 25,
+    "speed": 27,
+    "magic": 35,
+    "total": 120,
+    "skillSlots": 7,
+    "washPrice": 100
+  },
+  {
+    "name": "鞭撻草",
+    "race": "植物系",
+    "elements": {
+      "earth": 0,
+      "water": 0,
+      "fire": 80,
+      "wind": 20
+    },
+    "cardType": "金",
+    "hp": 38,
+    "power": 29,
+    "defense": 20,
+    "speed": 21,
+    "magic": 11,
+    "total": 119,
+    "skillSlots": 9,
+    "washPrice": 1600
+  },
+  {
+    "name": "黃金樹精",
+    "race": "植物系",
+    "elements": {
+      "earth": 40,
+      "water": 0,
+      "fire": 0,
+      "wind": 60
+    },
+    "cardType": "金",
+    "hp": 42,
+    "power": 22,
+    "defense": 28,
+    "speed": 17,
+    "magic": 10,
+    "total": 119,
+    "skillSlots": 9,
+    "washPrice": 1600
+  },
+  {
+    "name": "南瓜公主",
+    "race": "植物系",
+    "elements": {
+      "earth": 0,
+      "water": 0,
+      "fire": 20,
+      "wind": 80
+    },
+    "cardType": "銀",
+    "hp": 24,
+    "power": 40,
+    "defense": 19,
+    "speed": 16,
+    "magic": 18,
+    "total": 117,
+    "skillSlots": 8,
+    "washPrice": 188
+  },
+  {
+    "name": "星菇",
+    "race": "植物系",
+    "elements": {
+      "earth": 0,
+      "water": 0,
+      "fire": 40,
+      "wind": 60
+    },
+    "cardType": "銀",
+    "hp": 42,
+    "power": 13,
+    "defense": 10,
+    "speed": 13,
+    "magic": 39,
+    "total": 117,
+    "skillSlots": 7,
+    "washPrice": 800
+  },
+  {
+    "name": "翠綠菇",
+    "race": "植物系",
+    "elements": {
+      "earth": 60,
+      "water": 0,
+      "fire": 0,
+      "wind": 40
+    },
+    "cardType": "銀",
+    "hp": 37,
+    "power": 12,
+    "defense": 12,
+    "speed": 17,
+    "magic": 39,
+    "total": 117,
+    "skillSlots": 7,
+    "washPrice": 800
+  },
+  {
+    "name": "水藍菇",
+    "race": "植物系",
+    "elements": {
+      "earth": 40,
+      "water": 60,
+      "fire": 0,
+      "wind": 0
+    },
+    "cardType": "普",
+    "hp": 38,
+    "power": 13,
+    "defense": 15,
+    "speed": 15,
+    "magic": 34,
+    "total": 115,
+    "skillSlots": 7,
+    "washPrice": 200
+  },
+  {
+    "name": "粉紅菇",
+    "race": "植物系",
+    "elements": {
+      "earth": 0,
+      "water": 40,
+      "fire": 60,
+      "wind": 0
+    },
+    "cardType": "普",
+    "hp": 35,
+    "power": 10,
+    "defense": 15,
+    "speed": 14,
+    "magic": 41,
+    "total": 115,
+    "skillSlots": 7,
+    "washPrice": 200
+  },
+  {
+    "name": "綠色口臭鬼",
+    "race": "植物系",
+    "elements": {
+      "earth": 90,
+      "water": 0,
+      "fire": 0,
+      "wind": 10
+    },
+    "cardType": "普",
+    "hp": 38,
+    "power": 23,
+    "defense": 16,
+    "speed": 23,
+    "magic": 15,
+    "total": 115,
+    "skillSlots": 7,
+    "washPrice": 10
+  },
+  {
+    "name": "黃色口臭鬼",
+    "race": "植物系",
+    "elements": {
+      "earth": 10,
+      "water": 0,
+      "fire": 0,
+      "wind": 90
+    },
+    "cardType": "普",
+    "hp": 37,
+    "power": 27,
+    "defense": 18,
+    "speed": 22,
+    "magic": 11,
+    "total": 115,
+    "skillSlots": 7,
+    "washPrice": 10
+  },
+  {
+    "name": "兔耳仙人掌",
+    "race": "植物系",
+    "elements": {
+      "earth": 0,
+      "water": 0,
+      "fire": 50,
+      "wind": 50
+    },
+    "cardType": "銀",
+    "hp": 28,
+    "power": 37,
+    "defense": 19,
+    "speed": 14,
+    "magic": 14,
+    "total": 112,
+    "skillSlots": 8,
+    "washPrice": 500
+  },
+  {
+    "name": "慘白樹精",
+    "race": "植物系",
+    "elements": {
+      "earth": 0,
+      "water": 0,
+      "fire": 30,
+      "wind": 70
+    },
+    "cardType": "銀",
+    "hp": 31,
+    "power": 16,
+    "defense": 28,
+    "speed": 17,
+    "magic": 20,
+    "total": 112,
+    "skillSlots": 8,
+    "washPrice": 500
+  },
+  {
+    "name": "武術仙人掌",
+    "race": "植物系",
+    "elements": {
+      "earth": 50,
+      "water": 50,
+      "fire": 0,
+      "wind": 0
+    },
+    "cardType": "銀",
+    "hp": 24,
+    "power": 34,
+    "defense": 27,
+    "speed": 17,
+    "magic": 10,
+    "total": 112,
+    "skillSlots": 8,
+    "washPrice": 500
+  },
+  {
+    "name": "死亡樹精",
+    "race": "植物系",
+    "elements": {
+      "earth": 60,
+      "water": 40,
+      "fire": 0,
+      "wind": 0
+    },
+    "cardType": "銀",
+    "hp": 30,
+    "power": 20,
+    "defense": 37,
+    "speed": 9,
+    "magic": 16,
+    "total": 112,
+    "skillSlots": 8,
+    "washPrice": 500
+  },
+  {
+    "name": "兇暴仙人掌",
+    "race": "植物系",
+    "elements": {
+      "earth": 50,
+      "water": 0,
+      "fire": 0,
+      "wind": 50
+    },
+    "cardType": "普",
+    "hp": 27,
+    "power": 29,
+    "defense": 22,
+    "speed": 20,
+    "magic": 12,
+    "total": 110,
+    "skillSlots": 8,
+    "washPrice": 10
+  },
+  {
+    "name": "印地安仙人掌",
+    "race": "植物系",
+    "elements": {
+      "earth": 0,
+      "water": 50,
+      "fire": 50,
+      "wind": 0
+    },
+    "cardType": "普",
+    "hp": 26,
+    "power": 36,
+    "defense": 24,
+    "speed": 15,
+    "magic": 9,
+    "total": 110,
+    "skillSlots": 8,
+    "washPrice": 50
+  },
+  {
+    "name": "樹精",
+    "race": "植物系",
+    "elements": {
+      "earth": 0,
+      "water": 40,
+      "fire": 60,
+      "wind": 0
+    },
+    "cardType": "普",
+    "hp": 31,
+    "power": 22,
+    "defense": 32,
+    "speed": 11,
+    "magic": 14,
+    "total": 110,
+    "skillSlots": 8,
+    "washPrice": 10
+  },
+  {
+    "name": "沼澤樹精",
+    "race": "植物系",
+    "elements": {
+      "earth": 70,
+      "water": 30,
+      "fire": 0,
+      "wind": 0
+    },
+    "cardType": "普",
+    "hp": 33,
+    "power": 17,
+    "defense": 34,
+    "speed": 13,
+    "magic": 13,
+    "total": 110,
+    "skillSlots": 8,
+    "washPrice": 50
+  },
+  {
+    "name": "人魔草",
+    "race": "植物系",
+    "elements": {
+      "earth": 0,
+      "water": 80,
+      "fire": 20,
+      "wind": 0
+    },
+    "cardType": "銀",
+    "hp": 29,
+    "power": 12,
+    "defense": 13,
+    "speed": 13,
+    "magic": 40,
+    "total": 107,
+    "skillSlots": 9,
+    "washPrice": 640
+  },
+  {
+    "name": "蔓陀羅草",
+    "race": "植物系",
+    "elements": {
+      "earth": 50,
+      "water": 0,
+      "fire": 0,
+      "wind": 50
+    },
+    "cardType": "銀",
+    "hp": 25,
+    "power": 13,
+    "defense": 14,
+    "speed": 15,
+    "magic": 40,
+    "total": 107,
+    "skillSlots": 9,
+    "washPrice": 640
+  },
+  {
+    "name": "妖花",
+    "race": "植物系",
+    "elements": {
+      "earth": 0,
+      "water": 0,
+      "fire": 50,
+      "wind": 50
+    },
+    "cardType": "普",
+    "hp": 27,
+    "power": 12,
+    "defense": 12,
+    "speed": 19,
+    "magic": 35,
+    "total": 105,
+    "skillSlots": 9,
+    "washPrice": 100
+  },
+  {
+    "name": "妖草",
+    "race": "植物系",
+    "elements": {
+      "earth": 80,
+      "water": 20,
+      "fire": 0,
+      "wind": 0
+    },
+    "cardType": "普",
+    "hp": 26,
+    "power": 11,
+    "defense": 16,
+    "speed": 16,
+    "magic": 36,
+    "total": 105,
+    "skillSlots": 9,
+    "washPrice": 100
+  },
+  {
+    "name": "兔兔",
+    "race": "特殊系",
+    "elements": {
+      "earth": 0,
+      "water": 0,
+      "fire": 0,
+      "wind": 100
+    },
+    "cardType": "金",
+    "hp": 20,
+    "power": 48,
+    "defense": 15,
+    "speed": 39,
+    "magic": 7,
+    "total": 129,
+    "skillSlots": 8,
+    "washPrice": 2400
+  },
+  {
+    "name": "冰藍史萊姆",
+    "race": "特殊系",
+    "elements": {
+      "earth": 0,
+      "water": 100,
+      "fire": 0,
+      "wind": 0
+    },
+    "cardType": "金",
+    "hp": 45,
+    "power": 36,
+    "defense": 18,
+    "speed": 20,
+    "magic": 10,
+    "total": 129,
+    "skillSlots": 8,
+    "washPrice": 2400
+  },
+  {
+    "name": "劍之精靈亞瑟",
+    "race": "特殊系",
+    "elements": {
+      "earth": 0,
+      "water": 50,
+      "fire": 0,
+      "wind": 50
+    },
+    "cardType": "金",
+    "hp": 22,
+    "power": 47,
+    "defense": 18,
+    "speed": 30,
+    "magic": 12,
+    "total": 129,
+    "skillSlots": 8,
+    "washPrice": 2400
+  },
+  {
+    "name": "吉伊卡哇",
+    "race": "特殊系",
+    "elements": {
+      "earth": 50,
+      "water": 50,
+      "fire": 0,
+      "wind": 0
+    },
+    "cardType": "金",
+    "hp": 48,
+    "power": 34,
+    "defense": 12,
+    "speed": 26,
+    "magic": 9,
+    "total": 129,
+    "skillSlots": 8,
+    "washPrice": 2400
+  },
+  {
+    "name": "多拉姆糖",
+    "race": "特殊系",
+    "elements": {
+      "earth": 20,
+      "water": 0,
+      "fire": 0,
+      "wind": 80
+    },
+    "cardType": "金",
+    "hp": 40,
+    "power": 8,
+    "defense": 13,
+    "speed": 19,
+    "magic": 49,
+    "total": 129,
+    "skillSlots": 9,
+    "washPrice": 2400
+  },
+  {
+    "name": "小八貓",
+    "race": "特殊系",
+    "elements": {
+      "earth": 0,
+      "water": 100,
+      "fire": 0,
+      "wind": 0
+    },
+    "cardType": "金",
+    "hp": 27,
+    "power": 7,
+    "defense": 27,
+    "speed": 20,
+    "magic": 48,
+    "total": 129,
+    "skillSlots": 8,
+    "washPrice": 2400
+  },
+  {
+    "name": "彩虹史萊姆",
+    "race": "特殊系",
+    "elements": {
+      "earth": 0,
+      "water": 0,
+      "fire": 0,
+      "wind": 100
+    },
+    "cardType": "金",
+    "hp": 47,
+    "power": 32,
+    "defense": 20,
+    "speed": 21,
+    "magic": 9,
+    "total": 129,
+    "skillSlots": 8,
+    "washPrice": 2400
+  },
+  {
+    "name": "迷你彩虹史萊姆",
+    "race": "特殊系",
+    "elements": {
+      "earth": 0,
+      "water": 0,
+      "fire": 0,
+      "wind": 100
+    },
+    "cardType": "金",
+    "hp": 45,
+    "power": 32,
+    "defense": 18,
+    "speed": 22,
+    "magic": 12,
+    "total": 129,
+    "skillSlots": 8,
+    "washPrice": 2400
+  },
+  {
+    "name": "地精",
+    "race": "特殊系",
+    "elements": {
+      "earth": 100,
+      "water": 0,
+      "fire": 0,
+      "wind": 0
+    },
+    "cardType": "金",
+    "hp": 23,
+    "power": 10,
+    "defense": 31,
+    "speed": 18,
+    "magic": 42,
+    "total": 124,
+    "skillSlots": 9,
+    "washPrice": 2400
+  },
+  {
+    "name": "幻影",
+    "race": "特殊系",
+    "elements": {
+      "earth": 0,
+      "water": 0,
+      "fire": 100,
+      "wind": 0
+    },
+    "cardType": "金",
+    "hp": 24,
+    "power": 8,
+    "defense": 24,
+    "speed": 22,
+    "magic": 46,
+    "total": 124,
+    "skillSlots": 9,
+    "washPrice": 2400
+  },
+  {
+    "name": "旋律影子",
+    "race": "特殊系",
+    "elements": {
+      "earth": 0,
+      "water": 100,
+      "fire": 0,
+      "wind": 0
+    },
+    "cardType": "金",
+    "hp": 29,
+    "power": 8,
+    "defense": 20,
+    "speed": 24,
+    "magic": 43,
+    "total": 124,
+    "skillSlots": 9,
+    "washPrice": 2400
+  },
+  {
+    "name": "暗影",
+    "race": "特殊系",
+    "elements": {
+      "earth": 0,
+      "water": 0,
+      "fire": 0,
+      "wind": 100
+    },
+    "cardType": "金",
+    "hp": 25,
+    "power": 8,
+    "defense": 15,
+    "speed": 32,
+    "magic": 44,
+    "total": 124,
+    "skillSlots": 9,
+    "washPrice": 2400
+  },
+  {
+    "name": "水精",
+    "race": "特殊系",
+    "elements": {
+      "earth": 0,
+      "water": 100,
+      "fire": 0,
+      "wind": 0
+    },
+    "cardType": "金",
+    "hp": 40,
+    "power": 35,
+    "defense": 20,
+    "speed": 19,
+    "magic": 10,
+    "total": 124,
+    "skillSlots": 9,
+    "washPrice": 2400
+  },
+  {
+    "name": "火精",
+    "race": "特殊系",
+    "elements": {
+      "earth": 0,
+      "water": 0,
+      "fire": 100,
+      "wind": 0
+    },
+    "cardType": "金",
+    "hp": 26,
+    "power": 46,
+    "defense": 17,
+    "speed": 26,
+    "magic": 9,
+    "total": 124,
+    "skillSlots": 9,
+    "washPrice": 2400
+  },
+  {
+    "name": "陰影",
+    "race": "特殊系",
+    "elements": {
+      "earth": 100,
+      "water": 0,
+      "fire": 0,
+      "wind": 0
+    },
+    "cardType": "金",
+    "hp": 26,
+    "power": 8,
+    "defense": 30,
+    "speed": 18,
+    "magic": 42,
+    "total": 124,
+    "skillSlots": 9,
+    "washPrice": 2400
+  },
+  {
+    "name": "風精",
+    "race": "特殊系",
+    "elements": {
+      "earth": 0,
+      "water": 0,
+      "fire": 0,
+      "wind": 100
+    },
+    "cardType": "金",
+    "hp": 23,
+    "power": 9,
+    "defense": 15,
+    "speed": 31,
+    "magic": 46,
+    "total": 124,
+    "skillSlots": 9,
+    "washPrice": 2400
+  },
+  {
+    "name": "熾炎龍舟",
+    "race": "特殊系",
+    "elements": {
+      "earth": 0,
+      "water": 0,
+      "fire": 100,
+      "wind": 0
+    },
+    "cardType": "銀",
+    "hp": 19,
+    "power": 40,
+    "defense": 12,
+    "speed": 43,
+    "magic": 8,
+    "total": 122,
+    "skillSlots": 8,
+    "washPrice": 500
+  },
+  {
+    "name": "翠影龍舟",
+    "race": "特殊系",
+    "elements": {
+      "earth": 100,
+      "water": 0,
+      "fire": 0,
+      "wind": 0
+    },
+    "cardType": "銀",
+    "hp": 36,
+    "power": 6,
+    "defense": 16,
+    "speed": 20,
+    "magic": 44,
+    "total": 122,
+    "skillSlots": 8,
+    "washPrice": 500
+  },
+  {
+    "name": "雪球精靈",
+    "race": "特殊系",
+    "elements": {
+      "earth": 0,
+      "water": 80,
+      "fire": 20,
+      "wind": 0
+    },
+    "cardType": "銀",
+    "hp": 18,
+    "power": 17,
+    "defense": 24,
+    "speed": 23,
+    "magic": 40,
+    "total": 122,
+    "skillSlots": 7,
+    "washPrice": 500
+  },
+  {
+    "name": "丸子炸彈",
+    "race": "特殊系",
+    "elements": {
+      "earth": 50,
+      "water": 0,
+      "fire": 0,
+      "wind": 50
+    },
+    "cardType": "金",
+    "hp": 23,
+    "power": 9,
+    "defense": 19,
+    "speed": 21,
+    "magic": 47,
+    "total": 119,
+    "skillSlots": 10,
+    "washPrice": 2400
+  },
+  {
+    "name": "小多拉姆糖",
+    "race": "特殊系",
+    "elements": {
+      "earth": 20,
+      "water": 0,
+      "fire": 0,
+      "wind": 80
+    },
+    "cardType": "銀",
+    "hp": 34,
+    "power": 10,
+    "defense": 15,
+    "speed": 15,
+    "magic": 43,
+    "total": 117,
+    "skillSlots": 9,
+    "washPrice": 800
+  },
+  {
+    "name": "煙羅",
+    "race": "特殊系",
+    "elements": {
+      "earth": 0,
+      "water": 30,
+      "fire": 70,
+      "wind": 0
+    },
+    "cardType": "銀",
+    "hp": 22,
+    "power": 17,
+    "defense": 12,
+    "speed": 32,
+    "magic": 34,
+    "total": 117,
+    "skillSlots": 7,
+    "washPrice": 500
+  },
+  {
+    "name": "綿球",
+    "race": "特殊系",
+    "elements": {
+      "earth": 0,
+      "water": 0,
+      "fire": 30,
+      "wind": 70
+    },
+    "cardType": "銀",
+    "hp": 24,
+    "power": 12,
+    "defense": 12,
+    "speed": 35,
+    "magic": 34,
+    "total": 117,
+    "skillSlots": 7,
+    "washPrice": 500
+  },
+  {
+    "name": "煙霧",
+    "race": "特殊系",
+    "elements": {
+      "earth": 30,
+      "water": 70,
+      "fire": 0,
+      "wind": 0
+    },
+    "cardType": "普",
+    "hp": 23,
+    "power": 16,
+    "defense": 13,
+    "speed": 30,
+    "magic": 33,
+    "total": 115,
+    "skillSlots": 7,
+    "washPrice": 100
+  },
+  {
+    "name": "白米湯圓兔",
+    "race": "特殊系",
+    "elements": {
+      "earth": 0,
+      "water": 80,
+      "fire": 20,
+      "wind": 0
+    },
+    "cardType": "普",
+    "hp": 15,
+    "power": 34,
+    "defense": 13,
+    "speed": 42,
+    "magic": 11,
+    "total": 115,
+    "skillSlots": 8,
+    "washPrice": 100
+  },
+  {
+    "name": "紅晶粽靈",
+    "race": "特殊系",
+    "elements": {
+      "earth": 0,
+      "water": 0,
+      "fire": 100,
+      "wind": 0
+    },
+    "cardType": "普",
+    "hp": 35,
+    "power": 34,
+    "defense": 20,
+    "speed": 12,
+    "magic": 14,
+    "total": 115,
+    "skillSlots": 8,
+    "washPrice": 100
+  },
+  {
+    "name": "綠煙",
+    "race": "特殊系",
+    "elements": {
+      "earth": 70,
+      "water": 0,
+      "fire": 0,
+      "wind": 30
+    },
+    "cardType": "普",
+    "hp": 20,
+    "power": 15,
+    "defense": 14,
+    "speed": 30,
+    "magic": 36,
+    "total": 115,
+    "skillSlots": 7,
+    "washPrice": 100
+  },
+  {
+    "name": "翠豆粽靈",
+    "race": "特殊系",
+    "elements": {
+      "earth": 100,
+      "water": 0,
+      "fire": 0,
+      "wind": 0
+    },
+    "cardType": "普",
+    "hp": 35,
+    "power": 10,
+    "defense": 15,
+    "speed": 20,
+    "magic": 35,
+    "total": 115,
+    "skillSlots": 8,
+    "washPrice": 100
+  },
+  {
+    "name": "黑米湯圓兔",
+    "race": "特殊系",
+    "elements": {
+      "earth": 20,
+      "water": 0,
+      "fire": 0,
+      "wind": 80
+    },
+    "cardType": "普",
+    "hp": 17,
+    "power": 12,
+    "defense": 16,
+    "speed": 27,
+    "magic": 43,
+    "total": 115,
+    "skillSlots": 8,
+    "washPrice": 100
+  },
+  {
+    "name": "布丁史萊姆",
+    "race": "特殊系",
+    "elements": {
+      "earth": 0,
+      "water": 0,
+      "fire": 10,
+      "wind": 90
+    },
+    "cardType": "銀",
+    "hp": 44,
+    "power": 25,
+    "defense": 12,
+    "speed": 8,
+    "magic": 18,
+    "total": 107,
+    "skillSlots": 9,
+    "washPrice": 640
+  },
+  {
+    "name": "果凍史萊姆",
+    "race": "特殊系",
+    "elements": {
+      "earth": 0,
+      "water": 10,
+      "fire": 90,
+      "wind": 0
+    },
+    "cardType": "銀",
+    "hp": 47,
+    "power": 31,
+    "defense": 6,
+    "speed": 10,
+    "magic": 13,
+    "total": 107,
+    "skillSlots": 9,
+    "washPrice": 640
+  },
+  {
+    "name": "糖果史萊姆",
+    "race": "特殊系",
+    "elements": {
+      "earth": 0,
+      "water": 0,
+      "fire": 10,
+      "wind": 90
+    },
+    "cardType": "銀",
+    "hp": 45,
+    "power": 25,
+    "defense": 9,
+    "speed": 15,
+    "magic": 13,
+    "total": 107,
+    "skillSlots": 9,
+    "washPrice": 500
+  },
+  {
+    "name": "黃金史萊姆",
+    "race": "特殊系",
+    "elements": {
+      "earth": 0,
+      "water": 10,
+      "fire": 90,
+      "wind": 0
+    },
+    "cardType": "銀",
+    "hp": 47,
+    "power": 28,
+    "defense": 8,
+    "speed": 12,
+    "magic": 12,
+    "total": 107,
+    "skillSlots": 9,
+    "washPrice": 500
+  },
+  {
+    "name": "劇毒史萊姆",
+    "race": "特殊系",
+    "elements": {
+      "earth": 10,
+      "water": 90,
+      "fire": 0,
+      "wind": 0
+    },
+    "cardType": "普",
+    "hp": 48,
+    "power": 24,
+    "defense": 7,
+    "speed": 13,
+    "magic": 13,
+    "total": 105,
+    "skillSlots": 9,
+    "washPrice": 100
+  },
+  {
+    "name": "史萊姆",
+    "race": "特殊系",
+    "elements": {
+      "earth": 90,
+      "water": 0,
+      "fire": 0,
+      "wind": 10
+    },
+    "cardType": "普",
+    "hp": 46,
+    "power": 26,
+    "defense": 11,
+    "speed": 6,
+    "magic": 16,
+    "total": 105,
+    "skillSlots": 9,
+    "washPrice": 10
+  },
+  {
+    "name": "液態史萊姆",
+    "race": "特殊系",
+    "elements": {
+      "earth": 10,
+      "water": 90,
+      "fire": 0,
+      "wind": 0
+    },
+    "cardType": "普",
+    "hp": 49,
+    "power": 24,
+    "defense": 15,
+    "speed": 5,
+    "magic": 12,
+    "total": 105,
+    "skillSlots": 9,
+    "washPrice": 50
+  },
+  {
+    "name": "熒光史萊姆",
+    "race": "特殊系",
+    "elements": {
+      "earth": 90,
+      "water": 0,
+      "fire": 0,
+      "wind": 10
+    },
+    "cardType": "普",
+    "hp": 46,
+    "power": 26,
+    "defense": 6,
+    "speed": 13,
+    "magic": 14,
+    "total": 105,
+    "skillSlots": 9,
+    "washPrice": 100
+  },
+  {
+    "name": "大炸彈",
+    "race": "特殊系",
+    "elements": {
+      "earth": 0,
+      "water": 0,
+      "fire": 80,
+      "wind": 20
+    },
+    "cardType": "銀",
+    "hp": 14,
+    "power": 14,
+    "defense": 20,
+    "speed": 14,
+    "magic": 40,
+    "total": 102,
+    "skillSlots": 10,
+    "washPrice": 640
+  },
+  {
+    "name": "寶貝炸彈",
+    "race": "特殊系",
+    "elements": {
+      "earth": 0,
+      "water": 80,
+      "fire": 20,
+      "wind": 0
+    },
+    "cardType": "銀",
+    "hp": 16,
+    "power": 11,
+    "defense": 17,
+    "speed": 16,
+    "magic": 42,
+    "total": 102,
+    "skillSlots": 10,
+    "washPrice": 640
+  },
+  {
+    "name": "漂淨炸彈",
+    "race": "特殊系",
+    "elements": {
+      "earth": 20,
+      "water": 0,
+      "fire": 0,
+      "wind": 80
+    },
+    "cardType": "普",
+    "hp": 16,
+    "power": 14,
+    "defense": 14,
+    "speed": 17,
+    "magic": 39,
+    "total": 100,
+    "skillSlots": 10,
+    "washPrice": 50
+  },
+  {
+    "name": "頑皮炸彈",
+    "race": "特殊系",
+    "elements": {
+      "earth": 80,
+      "water": 20,
+      "fire": 0,
+      "wind": 0
+    },
+    "cardType": "普",
+    "hp": 15,
+    "power": 15,
+    "defense": 15,
+    "speed": 15,
+    "magic": 40,
+    "total": 100,
+    "skillSlots": 10,
+    "washPrice": 50
+  },
+  {
+    "name": "國皇鼠",
+    "race": "野獸系",
+    "elements": {
+      "earth": 0,
+      "water": 0,
+      "fire": 50,
+      "wind": 50
+    },
+    "cardType": "金",
+    "hp": 19,
+    "power": 7,
+    "defense": 21,
+    "speed": 33,
+    "magic": 49,
+    "total": 129,
+    "skillSlots": 8,
+    "washPrice": 2400
+  },
+  {
+    "name": "年獸",
+    "race": "野獸系",
+    "elements": {
+      "earth": 0,
+      "water": 0,
+      "fire": 0,
+      "wind": 100
+    },
+    "cardType": "金",
+    "hp": 32,
+    "power": 52,
+    "defense": 16,
+    "speed": 21,
+    "magic": 8,
+    "total": 129,
+    "skillSlots": 10,
+    "washPrice": 5000
+  },
+  {
+    "name": "幻銀獸王",
+    "race": "野獸系",
+    "elements": {
+      "earth": 50,
+      "water": 50,
+      "fire": 0,
+      "wind": 0
+    },
+    "cardType": "金",
+    "hp": 32,
+    "power": 44,
+    "defense": 12,
+    "speed": 26,
+    "magic": 15,
+    "total": 129,
+    "skillSlots": 8,
+    "washPrice": 2400
+  },
+  {
+    "name": "殘暴呼呼國王",
+    "race": "野獸系",
+    "elements": {
+      "earth": 50,
+      "water": 0,
+      "fire": 50,
+      "wind": 0
+    },
+    "cardType": "金",
+    "hp": 43,
+    "power": 39,
+    "defense": 20,
+    "speed": 17,
+    "magic": 10,
+    "total": 129,
+    "skillSlots": 8,
+    "washPrice": 2400
+  },
+  {
+    "name": "皇冠蘿蔔兔",
+    "race": "野獸系",
+    "elements": {
+      "earth": 70,
+      "water": 0,
+      "fire": 0,
+      "wind": 30
+    },
+    "cardType": "金",
+    "hp": 30,
+    "power": 46,
+    "defense": 20,
+    "speed": 25,
+    "magic": 8,
+    "total": 129,
+    "skillSlots": 8,
+    "washPrice": 2400
+  },
+  {
+    "name": "翱翔年獸",
+    "race": "野獸系",
+    "elements": {
+      "earth": 0,
+      "water": 0,
+      "fire": 0,
+      "wind": 100
+    },
+    "cardType": "金",
+    "hp": 31,
+    "power": 53,
+    "defense": 16,
+    "speed": 22,
+    "magic": 7,
+    "total": 129,
+    "skillSlots": 10,
+    "washPrice": 5000
+  },
+  {
+    "name": "蘿蔔兔",
+    "race": "野獸系",
+    "elements": {
+      "earth": 20,
+      "water": 0,
+      "fire": 0,
+      "wind": 80
+    },
+    "cardType": "金",
+    "hp": 24,
+    "power": 42,
+    "defense": 15,
+    "speed": 38,
+    "magic": 10,
+    "total": 129,
+    "skillSlots": 8,
+    "washPrice": 2400
+  },
+  {
+    "name": "豬豬護士長",
+    "race": "野獸系",
+    "elements": {
+      "earth": 0,
+      "water": 0,
+      "fire": 50,
+      "wind": 50
+    },
+    "cardType": "金",
+    "hp": 45,
+    "power": 7,
+    "defense": 18,
+    "speed": 13,
+    "magic": 46,
+    "total": 129,
+    "skillSlots": 8,
+    "washPrice": 2400
+  },
+  {
+    "name": "赤焰年獸",
+    "race": "野獸系",
+    "elements": {
+      "earth": 0,
+      "water": 0,
+      "fire": 100,
+      "wind": 0
+    },
+    "cardType": "金",
+    "hp": 29,
+    "power": 54,
+    "defense": 17,
+    "speed": 23,
+    "magic": 6,
+    "total": 129,
+    "skillSlots": 10,
+    "washPrice": 5000
+  },
+  {
+    "name": "赤鐵獸王",
+    "race": "野獸系",
+    "elements": {
+      "earth": 0,
+      "water": 0,
+      "fire": 100,
+      "wind": 0
+    },
+    "cardType": "金",
+    "hp": 32,
+    "power": 44,
+    "defense": 12,
+    "speed": 26,
+    "magic": 15,
+    "total": 129,
+    "skillSlots": 8,
+    "washPrice": 2400
+  },
+  {
+    "name": "黑蘿蔔兔",
+    "race": "野獸系",
+    "elements": {
+      "earth": 70,
+      "water": 0,
+      "fire": 0,
+      "wind": 30
+    },
+    "cardType": "金",
+    "hp": 23,
+    "power": 10,
+    "defense": 24,
+    "speed": 30,
+    "magic": 42,
+    "total": 129,
+    "skillSlots": 8,
+    "washPrice": 2400
+  },
+  {
+    "name": "鼠王",
+    "race": "野獸系",
+    "elements": {
+      "earth": 0,
+      "water": 0,
+      "fire": 50,
+      "wind": 50
+    },
+    "cardType": "金",
+    "hp": 19,
+    "power": 9,
+    "defense": 21,
+    "speed": 36,
+    "magic": 44,
+    "total": 129,
+    "skillSlots": 8,
+    "washPrice": 2400
+  },
+  {
+    "name": "貓人",
+    "race": "野獸系",
+    "elements": {
+      "earth": 50,
+      "water": 0,
+      "fire": 0,
+      "wind": 50
+    },
+    "cardType": "金",
+    "hp": 24,
+    "power": 13,
+    "defense": 18,
+    "speed": 30,
+    "magic": 39,
+    "total": 124,
+    "skillSlots": 8,
+    "washPrice": 1600
+  },
+  {
+    "name": "九尾靈狐",
+    "race": "野獸系",
+    "elements": {
+      "earth": 50,
+      "water": 50,
+      "fire": 0,
+      "wind": 0
+    },
+    "cardType": "銀",
+    "hp": 25,
+    "power": 41,
+    "defense": 17,
+    "speed": 30,
+    "magic": 9,
+    "total": 122,
+    "skillSlots": 8,
+    "washPrice": 800
+  },
+  {
+    "name": "哈士奇",
+    "race": "野獸系",
+    "elements": {
+      "earth": 50,
+      "water": 50,
+      "fire": 0,
+      "wind": 0
+    },
+    "cardType": "銀",
+    "hp": 25,
+    "power": 40,
+    "defense": 15,
+    "speed": 26,
+    "magic": 16,
+    "total": 122,
+    "skillSlots": 8,
+    "washPrice": 800
+  },
+  {
+    "name": "柴犬",
+    "race": "野獸系",
+    "elements": {
+      "earth": 0,
+      "water": 50,
+      "fire": 50,
+      "wind": 0
+    },
+    "cardType": "銀",
+    "hp": 20,
+    "power": 40,
+    "defense": 11,
+    "speed": 38,
+    "magic": 18,
+    "total": 122,
+    "skillSlots": 8,
+    "washPrice": 800
+  },
+  {
+    "name": "獨角獸",
+    "race": "野獸系",
+    "elements": {
+      "earth": 40,
+      "water": 60,
+      "fire": 0,
+      "wind": 0
+    },
+    "cardType": "銀",
+    "hp": 17,
+    "power": 13,
+    "defense": 25,
+    "speed": 28,
+    "magic": 39,
+    "total": 122,
+    "skillSlots": 6,
+    "washPrice": 800
+  },
+  {
+    "name": "聖誕小壯",
+    "race": "野獸系",
+    "elements": {
+      "earth": 20,
+      "water": 0,
+      "fire": 0,
+      "wind": 80
+    },
+    "cardType": "銀",
+    "hp": 41,
+    "power": 40,
+    "defense": 11,
+    "speed": 16,
+    "magic": 14,
+    "total": 122,
+    "skillSlots": 7,
+    "washPrice": 800
+  },
+  {
+    "name": "赤熊",
+    "race": "野獸系",
+    "elements": {
+      "earth": 0,
+      "water": 0,
+      "fire": 80,
+      "wind": 20
+    },
+    "cardType": "銀",
+    "hp": 35,
+    "power": 39,
+    "defense": 17,
+    "speed": 18,
+    "magic": 13,
+    "total": 122,
+    "skillSlots": 6,
+    "washPrice": 500
+  },
+  {
+    "name": "赤目黑熊",
+    "race": "野獸系",
+    "elements": {
+      "earth": 0,
+      "water": 0,
+      "fire": 20,
+      "wind": 80
+    },
+    "cardType": "銀",
+    "hp": 33,
+    "power": 35,
+    "defense": 14,
+    "speed": 29,
+    "magic": 11,
+    "total": 122,
+    "skillSlots": 6,
+    "washPrice": 500
+  },
+  {
+    "name": "麒麟",
+    "race": "野獸系",
+    "elements": {
+      "earth": 0,
+      "water": 0,
+      "fire": 40,
+      "wind": 60
+    },
+    "cardType": "銀",
+    "hp": 19,
+    "power": 10,
+    "defense": 27,
+    "speed": 34,
+    "magic": 32,
+    "total": 122,
+    "skillSlots": 6,
+    "washPrice": 800
+  },
+  {
+    "name": "北極熊",
+    "race": "野獸系",
+    "elements": {
+      "earth": 20,
+      "water": 80,
+      "fire": 0,
+      "wind": 0
+    },
+    "cardType": "普",
+    "hp": 36,
+    "power": 33,
+    "defense": 20,
+    "speed": 20,
+    "magic": 11,
+    "total": 120,
+    "skillSlots": 6,
+    "washPrice": 100
+  },
+  {
+    "name": "天馬",
+    "race": "野獸系",
+    "elements": {
+      "earth": 0,
+      "water": 40,
+      "fire": 60,
+      "wind": 0
+    },
+    "cardType": "普",
+    "hp": 22,
+    "power": 32,
+    "defense": 22,
+    "speed": 32,
+    "magic": 12,
+    "total": 120,
+    "skillSlots": 6,
+    "washPrice": 200
+  },
+  {
+    "name": "山飛甲",
+    "race": "野獸系",
+    "elements": {
+      "earth": 60,
+      "water": 0,
+      "fire": 0,
+      "wind": 40
+    },
+    "cardType": "普",
+    "hp": 27,
+    "power": 32,
+    "defense": 21,
+    "speed": 27,
+    "magic": 13,
+    "total": 120,
+    "skillSlots": 6,
+    "washPrice": 200
+  },
+  {
+    "name": "穴熊",
+    "race": "野獸系",
+    "elements": {
+      "earth": 80,
+      "water": 20,
+      "fire": 0,
+      "wind": 0
+    },
+    "cardType": "普",
+    "hp": 34,
+    "power": 34,
+    "defense": 19,
+    "speed": 19,
+    "magic": 14,
+    "total": 120,
+    "skillSlots": 6,
+    "washPrice": 50
+  },
+  {
+    "name": "妖狐",
+    "race": "野獸系",
+    "elements": {
+      "earth": 0,
+      "water": 50,
+      "fire": 50,
+      "wind": 0
+    },
+    "cardType": "金",
+    "hp": 26,
+    "power": 37,
+    "defense": 19,
+    "speed": 26,
+    "magic": 11,
+    "total": 119,
+    "skillSlots": 9,
+    "washPrice": 1600
+  },
+  {
+    "name": "水藍鼠",
+    "race": "野獸系",
+    "elements": {
+      "earth": 50,
+      "water": 50,
+      "fire": 0,
+      "wind": 0
+    },
+    "cardType": "金",
+    "hp": 15,
+    "power": 8,
+    "defense": 33,
+    "speed": 28,
+    "magic": 35,
+    "total": 119,
+    "skillSlots": 10,
+    "washPrice": 2400
+  },
+  {
+    "name": "貓熊",
+    "race": "野獸系",
+    "elements": {
+      "earth": 0,
+      "water": 50,
+      "fire": 50,
+      "wind": 0
+    },
+    "cardType": "金",
+    "hp": 34,
+    "power": 41,
+    "defense": 17,
+    "speed": 20,
+    "magic": 7,
+    "total": 119,
+    "skillSlots": 10,
+    "washPrice": 2400
+  },
+  {
+    "name": "地獄妖犬",
+    "race": "野獸系",
+    "elements": {
+      "earth": 40,
+      "water": 0,
+      "fire": 0,
+      "wind": 60
+    },
+    "cardType": "銀",
+    "hp": 25,
+    "power": 40,
+    "defense": 13,
+    "speed": 21,
+    "magic": 18,
+    "total": 117,
+    "skillSlots": 7,
+    "washPrice": 500
+  },
+  {
+    "name": "地獄獵犬",
+    "race": "野獸系",
+    "elements": {
+      "earth": 0,
+      "water": 0,
+      "fire": 60,
+      "wind": 40
+    },
+    "cardType": "銀",
+    "hp": 26,
+    "power": 35,
+    "defense": 19,
+    "speed": 22,
+    "magic": 15,
+    "total": 117,
+    "skillSlots": 7,
+    "washPrice": 500
+  },
+  {
+    "name": "大地鼠保姆",
+    "race": "野獸系",
+    "elements": {
+      "earth": 100,
+      "water": 0,
+      "fire": 0,
+      "wind": 0
+    },
+    "cardType": "銀",
+    "hp": 36,
+    "power": 38,
+    "defense": 13,
+    "speed": 20,
+    "magic": 10,
+    "total": 117,
+    "skillSlots": 7,
+    "washPrice": 800
+  },
+  {
+    "name": "幼生火焰獨角獸",
+    "race": "野獸系",
+    "elements": {
+      "earth": 0,
+      "water": 0,
+      "fire": 70,
+      "wind": 30
+    },
+    "cardType": "銀",
+    "hp": 35,
+    "power": 35,
+    "defense": 13,
+    "speed": 22,
+    "magic": 12,
+    "total": 117,
+    "skillSlots": 7,
+    "washPrice": 500
+  },
+  {
+    "name": "幼生獨角獸",
+    "race": "野獸系",
+    "elements": {
+      "earth": 30,
+      "water": 70,
+      "fire": 0,
+      "wind": 0
+    },
+    "cardType": "銀",
+    "hp": 18,
+    "power": 36,
+    "defense": 16,
+    "speed": 31,
+    "magic": 16,
+    "total": 117,
+    "skillSlots": 7,
+    "washPrice": 500
+  },
+  {
+    "name": "火焰鼠保母",
+    "race": "野獸系",
+    "elements": {
+      "earth": 0,
+      "water": 0,
+      "fire": 100,
+      "wind": 0
+    },
+    "cardType": "銀",
+    "hp": 28,
+    "power": 39,
+    "defense": 12,
+    "speed": 29,
+    "magic": 9,
+    "total": 117,
+    "skillSlots": 8,
+    "washPrice": 800
+  },
+  {
+    "name": "百步蛇",
+    "race": "野獸系",
+    "elements": {
+      "earth": 0,
+      "water": 0,
+      "fire": 10,
+      "wind": 90
+    },
+    "cardType": "銀",
+    "hp": 22,
+    "power": 37,
+    "defense": 18,
+    "speed": 30,
+    "magic": 10,
+    "total": 117,
+    "skillSlots": 6,
+    "washPrice": 300
+  },
+  {
+    "name": "眼鏡蛇",
+    "race": "野獸系",
+    "elements": {
+      "earth": 0,
+      "water": 10,
+      "fire": 90,
+      "wind": 0
+    },
+    "cardType": "銀",
+    "hp": 16,
+    "power": 37,
+    "defense": 23,
+    "speed": 28,
+    "magic": 13,
+    "total": 117,
+    "skillSlots": 6,
+    "washPrice": 300
+  },
+  {
+    "name": "粉紅鼠",
+    "race": "野獸系",
+    "elements": {
+      "earth": 0,
+      "water": 0,
+      "fire": 70,
+      "wind": 30
+    },
+    "cardType": "銀",
+    "hp": 31,
+    "power": 13,
+    "defense": 15,
+    "speed": 15,
+    "magic": 43,
+    "total": 117,
+    "skillSlots": 7,
+    "washPrice": 800
+  },
+  {
+    "name": "雄獅",
+    "race": "野獸系",
+    "elements": {
+      "earth": 0,
+      "water": 0,
+      "fire": 80,
+      "wind": 20
+    },
+    "cardType": "銀",
+    "hp": 19,
+    "power": 38,
+    "defense": 17,
+    "speed": 30,
+    "magic": 13,
+    "total": 117,
+    "skillSlots": 6,
+    "washPrice": 500
+  },
+  {
+    "name": "雨傘節",
+    "race": "野獸系",
+    "elements": {
+      "earth": 10,
+      "water": 90,
+      "fire": 0,
+      "wind": 0
+    },
+    "cardType": "銀",
+    "hp": 18,
+    "power": 38,
+    "defense": 22,
+    "speed": 24,
+    "magic": 15,
+    "total": 117,
+    "skillSlots": 6,
+    "washPrice": 300
+  },
+  {
+    "name": "雷拉普斯",
+    "race": "野獸系",
+    "elements": {
+      "earth": 0,
+      "water": 0,
+      "fire": 100,
+      "wind": 0
+    },
+    "cardType": "銀",
+    "hp": 26,
+    "power": 41,
+    "defense": 16,
+    "speed": 20,
+    "magic": 14,
+    "total": 117,
+    "skillSlots": 7,
+    "washPrice": 500
+  },
+  {
+    "name": "雷獸",
+    "race": "野獸系",
+    "elements": {
+      "earth": 30,
+      "water": 70,
+      "fire": 0,
+      "wind": 0
+    },
+    "cardType": "銀",
+    "hp": 18,
+    "power": 38,
+    "defense": 14,
+    "speed": 41,
+    "magic": 6,
+    "total": 117,
+    "skillSlots": 7,
+    "washPrice": 640
+  },
+  {
+    "name": "青竹絲",
+    "race": "野獸系",
+    "elements": {
+      "earth": 90,
+      "water": 0,
+      "fire": 0,
+      "wind": 10
+    },
+    "cardType": "銀",
+    "hp": 15,
+    "power": 39,
+    "defense": 19,
+    "speed": 29,
+    "magic": 15,
+    "total": 117,
+    "skillSlots": 6,
+    "washPrice": 300
+  },
+  {
+    "name": "地獄看門犬",
+    "race": "野獸系",
+    "elements": {
+      "earth": 0,
+      "water": 60,
+      "fire": 40,
+      "wind": 0
+    },
+    "cardType": "普",
+    "hp": 26,
+    "power": 36,
+    "defense": 12,
+    "speed": 23,
+    "magic": 18,
+    "total": 115,
+    "skillSlots": 7,
+    "washPrice": 50
+  },
+  {
+    "name": "巨狼",
+    "race": "野獸系",
+    "elements": {
+      "earth": 60,
+      "water": 40,
+      "fire": 0,
+      "wind": 0
+    },
+    "cardType": "普",
+    "hp": 22,
+    "power": 37,
+    "defense": 11,
+    "speed": 25,
+    "magic": 20,
+    "total": 115,
+    "skillSlots": 7,
+    "washPrice": 50
+  },
+  {
+    "name": "惡魔貓",
+    "race": "野獸系",
+    "elements": {
+      "earth": 70,
+      "water": 0,
+      "fire": 0,
+      "wind": 30
+    },
+    "cardType": "銀",
+    "hp": 22,
+    "power": 24,
+    "defense": 25,
+    "speed": 28,
+    "magic": 13,
+    "total": 112,
+    "skillSlots": 8,
+    "washPrice": 500
+  },
+  {
+    "name": "海底龜",
+    "race": "野獸系",
+    "elements": {
+      "earth": 50,
+      "water": 50,
+      "fire": 0,
+      "wind": 0
+    },
+    "cardType": "銀",
+    "hp": 25,
+    "power": 20,
+    "defense": 45,
+    "speed": 4,
+    "magic": 18,
+    "total": 112,
+    "skillSlots": 8,
+    "washPrice": 500
+  },
+  {
+    "name": "硬殼龜",
+    "race": "野獸系",
+    "elements": {
+      "earth": 0,
+      "water": 0,
+      "fire": 50,
+      "wind": 50
+    },
+    "cardType": "銀",
+    "hp": 28,
+    "power": 16,
+    "defense": 47,
+    "speed": 5,
+    "magic": 16,
+    "total": 112,
+    "skillSlots": 8,
+    "washPrice": 500
+  },
+  {
+    "name": "地底龜",
+    "race": "野獸系",
+    "elements": {
+      "earth": 50,
+      "water": 0,
+      "fire": 0,
+      "wind": 50
+    },
+    "cardType": "普",
+    "hp": 22,
+    "power": 22,
+    "defense": 37,
+    "speed": 10,
+    "magic": 19,
+    "total": 110,
+    "skillSlots": 8,
+    "washPrice": 100
+  },
+  {
+    "name": "火焰龜",
+    "race": "野獸系",
+    "elements": {
+      "earth": 0,
+      "water": 50,
+      "fire": 50,
+      "wind": 0
+    },
+    "cardType": "普",
+    "hp": 27,
+    "power": 17,
+    "defense": 42,
+    "speed": 7,
+    "magic": 17,
+    "total": 110,
+    "skillSlots": 8,
+    "washPrice": 100
+  },
+  {
+    "name": "羅剎",
+    "race": "野獸系",
+    "elements": {
+      "earth": 0,
+      "water": 30,
+      "fire": 70,
+      "wind": 0
+    },
+    "cardType": "銀",
+    "hp": 24,
+    "power": 29,
+    "defense": 14,
+    "speed": 22,
+    "magic": 18,
+    "total": 107,
+    "skillSlots": 9,
+    "washPrice": 500
+  },
+  {
+    "name": "貓妖",
+    "race": "野獸系",
+    "elements": {
+      "earth": 0,
+      "water": 70,
+      "fire": 30,
+      "wind": 0
+    },
+    "cardType": "普",
+    "hp": 21,
+    "power": 24,
+    "defense": 17,
+    "speed": 28,
+    "magic": 15,
+    "total": 105,
+    "skillSlots": 9,
+    "washPrice": 50
+  },
+  {
+    "name": "寶石鼠",
+    "race": "野獸系",
+    "elements": {
+      "earth": 0,
+      "water": 0,
+      "fire": 0,
+      "wind": 100
+    },
+    "cardType": "銀",
+    "hp": 7,
+    "power": 7,
+    "defense": 22,
+    "speed": 27,
+    "magic": 39,
+    "total": 102,
+    "skillSlots": 10,
+    "washPrice": 500
+  },
+  {
+    "name": "大地鼠",
+    "race": "野獸系",
+    "elements": {
+      "earth": 100,
+      "water": 0,
+      "fire": 0,
+      "wind": 0
+    },
+    "cardType": "普",
+    "hp": 6,
+    "power": 13,
+    "defense": 20,
+    "speed": 26,
+    "magic": 35,
+    "total": 100,
+    "skillSlots": 10,
+    "washPrice": 50
+  },
+  {
+    "name": "火焰鼠",
+    "race": "野獸系",
+    "elements": {
+      "earth": 0,
+      "water": 0,
+      "fire": 100,
+      "wind": 0
+    },
+    "cardType": "普",
+    "hp": 7,
+    "power": 12,
+    "defense": 15,
+    "speed": 34,
+    "magic": 32,
+    "total": 100,
+    "skillSlots": 10,
+    "washPrice": 50
+  },
+  {
+    "name": "虎人 ",
+    "race": "野獸系",
+    "elements": {
+      "earth": 30,
+      "water": 0,
+      "fire": 0,
+      "wind": 70
+    },
+    "cardType": "普",
+    "hp": 22,
+    "power": 26,
+    "defense": 17,
+    "speed": 19,
+    "magic": 16,
+    "total": 100,
+    "skillSlots": 10,
+    "washPrice": 10
+  },
+  {
+    "name": "兔耳嚇人箱",
+    "race": "金屬系",
+    "elements": {
+      "earth": 0,
+      "water": 20,
+      "fire": 80,
+      "wind": 0
+    },
+    "cardType": "金",
+    "hp": 20,
+    "power": 14,
+    "defense": 34,
+    "speed": 20,
+    "magic": 41,
+    "total": 129,
+    "skillSlots": 7,
+    "washPrice": 1600
+  },
+  {
+    "name": "凱法",
+    "race": "金屬系",
+    "elements": {
+      "earth": 0,
+      "water": 0,
+      "fire": 100,
+      "wind": 0
+    },
+    "cardType": "金",
+    "hp": 28,
+    "power": 50,
+    "defense": 25,
+    "speed": 18,
+    "magic": 8,
+    "total": 129,
+    "skillSlots": 8,
+    "washPrice": 2400
+  },
+  {
+    "name": "帕布提斯馬",
+    "race": "金屬系",
+    "elements": {
+      "earth": 0,
+      "water": 0,
+      "fire": 0,
+      "wind": 100
+    },
+    "cardType": "金",
+    "hp": 20,
+    "power": 49,
+    "defense": 13,
+    "speed": 38,
+    "magic": 9,
+    "total": 129,
+    "skillSlots": 8,
+    "washPrice": 2400
+  },
+  {
+    "name": "斯卡蒂",
+    "race": "金屬系",
+    "elements": {
+      "earth": 0,
+      "water": 100,
+      "fire": 0,
+      "wind": 0
+    },
+    "cardType": "金",
+    "hp": 28,
+    "power": 51,
+    "defense": 20,
+    "speed": 22,
+    "magic": 8,
+    "total": 129,
+    "skillSlots": 8,
+    "washPrice": 2400
+  },
+  {
+    "name": "梅菲斯特",
+    "race": "金屬系",
+    "elements": {
+      "earth": 0,
+      "water": 0,
+      "fire": 100,
+      "wind": 0
+    },
+    "cardType": "金",
+    "hp": 30,
+    "power": 52,
+    "defense": 16,
+    "speed": 23,
+    "magic": 8,
+    "total": 129,
+    "skillSlots": 8,
+    "washPrice": 2400
+  },
+  {
+    "name": "無頭騎士",
+    "race": "金屬系",
+    "elements": {
+      "earth": 70,
+      "water": 0,
+      "fire": 0,
+      "wind": 30
+    },
+    "cardType": "金",
+    "hp": 29,
+    "power": 48,
+    "defense": 19,
+    "speed": 24,
+    "magic": 9,
+    "total": 129,
+    "skillSlots": 8,
+    "washPrice": 2400
+  },
+  {
+    "name": "猶大",
+    "race": "金屬系",
+    "elements": {
+      "earth": 100,
+      "water": 0,
+      "fire": 0,
+      "wind": 0
+    },
+    "cardType": "金",
+    "hp": 33,
+    "power": 50,
+    "defense": 18,
+    "speed": 20,
+    "magic": 8,
+    "total": 129,
+    "skillSlots": 8,
+    "washPrice": 2400
+  },
+  {
+    "name": "純白嚇人箱",
+    "race": "金屬系",
+    "elements": {
+      "earth": 50,
+      "water": 0,
+      "fire": 0,
+      "wind": 50
+    },
+    "cardType": "金",
+    "hp": 26,
+    "power": 9,
+    "defense": 36,
+    "speed": 9,
+    "magic": 49,
+    "total": 129,
+    "skillSlots": 8,
+    "washPrice": 2400
+  },
+  {
+    "name": "鋼羽隼",
+    "race": "金屬系",
+    "elements": {
+      "earth": 20,
+      "water": 0,
+      "fire": 0,
+      "wind": 80
+    },
+    "cardType": "金",
+    "hp": 17,
+    "power": 44,
+    "defense": 15,
+    "speed": 41,
+    "magic": 12,
+    "total": 129,
+    "skillSlots": 8,
+    "washPrice": 2400
+  },
+  {
+    "name": "魔晶(攻)",
+    "race": "金屬系",
+    "elements": {
+      "earth": 0,
+      "water": 0,
+      "fire": 80,
+      "wind": 20
+    },
+    "cardType": "銀",
+    "hp": 26,
+    "power": 41,
+    "defense": 32,
+    "speed": 18,
+    "magic": 10,
+    "total": 127,
+    "skillSlots": 7,
+    "washPrice": 800
+  },
+  {
+    "name": "魔晶(魔)",
+    "race": "金屬系",
+    "elements": {
+      "earth": 0,
+      "water": 0,
+      "fire": 80,
+      "wind": 20
+    },
+    "cardType": "銀",
+    "hp": 21,
+    "power": 13,
+    "defense": 34,
+    "speed": 17,
+    "magic": 42,
+    "total": 127,
+    "skillSlots": 7,
+    "washPrice": 800
+  },
+  {
+    "name": "魔術機己",
+    "race": "金屬系",
+    "elements": {
+      "earth": 20,
+      "water": 0,
+      "fire": 0,
+      "wind": 80
+    },
+    "cardType": "銀",
+    "hp": 15,
+    "power": 7,
+    "defense": 23,
+    "speed": 39,
+    "magic": 43,
+    "total": 127,
+    "skillSlots": 7,
+    "washPrice": 500
+  },
+  {
+    "name": "姹紫甲冑",
+    "race": "金屬系",
+    "elements": {
+      "earth": 0,
+      "water": 20,
+      "fire": 80,
+      "wind": 0
+    },
+    "cardType": "金",
+    "hp": 30,
+    "power": 44,
+    "defense": 24,
+    "speed": 18,
+    "magic": 8,
+    "total": 124,
+    "skillSlots": 8,
+    "washPrice": 1600
+  },
+  {
+    "name": "血雨",
+    "race": "金屬系",
+    "elements": {
+      "earth": 0,
+      "water": 0,
+      "fire": 100,
+      "wind": 0
+    },
+    "cardType": "金",
+    "hp": 23,
+    "power": 10,
+    "defense": 31,
+    "speed": 16,
+    "magic": 44,
+    "total": 124,
+    "skillSlots": 9,
+    "washPrice": 2400
+  },
+  {
+    "name": "乘風",
+    "race": "金屬系",
+    "elements": {
+      "earth": 20,
+      "water": 0,
+      "fire": 0,
+      "wind": 80
+    },
+    "cardType": "銀",
+    "hp": 21,
+    "power": 13,
+    "defense": 30,
+    "speed": 20,
+    "magic": 38,
+    "total": 122,
+    "skillSlots": 7,
+    "washPrice": 800
+  },
+  {
+    "name": "烈風之刃",
+    "race": "金屬系",
+    "elements": {
+      "earth": 10,
+      "water": 0,
+      "fire": 0,
+      "wind": 90
+    },
+    "cardType": "銀",
+    "hp": 13,
+    "power": 17,
+    "defense": 30,
+    "speed": 25,
+    "magic": 37,
+    "total": 122,
+    "skillSlots": 6,
+    "washPrice": 800
+  },
+  {
+    "name": "盾",
+    "race": "金屬系",
+    "elements": {
+      "earth": 60,
+      "water": 0,
+      "fire": 0,
+      "wind": 40
+    },
+    "cardType": "銀",
+    "hp": 15,
+    "power": 15,
+    "defense": 45,
+    "speed": 15,
+    "magic": 32,
+    "total": 122,
+    "skillSlots": 6,
+    "washPrice": 800
+  },
+  {
+    "name": "破魔",
+    "race": "金屬系",
+    "elements": {
+      "earth": 0,
+      "water": 0,
+      "fire": 80,
+      "wind": 20
+    },
+    "cardType": "銀",
+    "hp": 20,
+    "power": 14,
+    "defense": 31,
+    "speed": 18,
+    "magic": 39,
+    "total": 122,
+    "skillSlots": 7,
+    "washPrice": 800
+  },
+  {
+    "name": "神盾",
+    "race": "金屬系",
+    "elements": {
+      "earth": 0,
+      "water": 0,
+      "fire": 40,
+      "wind": 60
+    },
+    "cardType": "銀",
+    "hp": 16,
+    "power": 9,
+    "defense": 52,
+    "speed": 8,
+    "magic": 37,
+    "total": 122,
+    "skillSlots": 6,
+    "washPrice": 800
+  },
+  {
+    "name": "紫薇",
+    "race": "金屬系",
+    "elements": {
+      "earth": 80,
+      "water": 20,
+      "fire": 0,
+      "wind": 0
+    },
+    "cardType": "銀",
+    "hp": 24,
+    "power": 34,
+    "defense": 39,
+    "speed": 16,
+    "magic": 9,
+    "total": 122,
+    "skillSlots": 7,
+    "washPrice": 800
+  },
+  {
+    "name": "薩普地雷",
+    "race": "金屬系",
+    "elements": {
+      "earth": 0,
+      "water": 40,
+      "fire": 60,
+      "wind": 0
+    },
+    "cardType": "銀",
+    "hp": 15,
+    "power": 32,
+    "defense": 40,
+    "speed": 8,
+    "magic": 27,
+    "total": 122,
+    "skillSlots": 7,
+    "washPrice": 500
+  },
+  {
+    "name": "血腥之刃",
+    "race": "金屬系",
+    "elements": {
+      "earth": 90,
+      "water": 10,
+      "fire": 0,
+      "wind": 0
+    },
+    "cardType": "銀",
+    "hp": 16,
+    "power": 34,
+    "defense": 39,
+    "speed": 24,
+    "magic": 9,
+    "total": 122,
+    "skillSlots": 6,
+    "washPrice": 800
+  },
+  {
+    "name": "魔術機甲",
+    "race": "金屬系",
+    "elements": {
+      "earth": 100,
+      "water": 0,
+      "fire": 0,
+      "wind": 0
+    },
+    "cardType": "銀",
+    "hp": 44,
+    "power": 15,
+    "defense": 33,
+    "speed": 19,
+    "magic": 11,
+    "total": 122,
+    "skillSlots": 7,
+    "washPrice": 500
+  },
+  {
+    "name": "龍吟",
+    "race": "金屬系",
+    "elements": {
+      "earth": 0,
+      "water": 80,
+      "fire": 20,
+      "wind": 0
+    },
+    "cardType": "銀",
+    "hp": 23,
+    "power": 36,
+    "defense": 36,
+    "speed": 17,
+    "magic": 10,
+    "total": 122,
+    "skillSlots": 7,
+    "washPrice": 800
+  },
+  {
+    "name": "強盾",
+    "race": "金屬系",
+    "elements": {
+      "earth": 0,
+      "water": 40,
+      "fire": 60,
+      "wind": 0
+    },
+    "cardType": "普",
+    "hp": 19,
+    "power": 11,
+    "defense": 49,
+    "speed": 13,
+    "magic": 28,
+    "total": 120,
+    "skillSlots": 6,
+    "washPrice": 200
+  },
+  {
+    "name": "殺龍之刃",
+    "race": "金屬系",
+    "elements": {
+      "earth": 0,
+      "water": 90,
+      "fire": 10,
+      "wind": 0
+    },
+    "cardType": "普",
+    "hp": 17,
+    "power": 36,
+    "defense": 36,
+    "speed": 21,
+    "magic": 10,
+    "total": 120,
+    "skillSlots": 6,
+    "washPrice": 200
+  },
+  {
+    "name": "潛盾",
+    "race": "金屬系",
+    "elements": {
+      "earth": 40,
+      "water": 60,
+      "fire": 0,
+      "wind": 0
+    },
+    "cardType": "普",
+    "hp": 17,
+    "power": 12,
+    "defense": 47,
+    "speed": 12,
+    "magic": 32,
+    "total": 120,
+    "skillSlots": 6,
+    "washPrice": 200
+  },
+  {
+    "name": "火焰之刃",
+    "race": "金屬系",
+    "elements": {
+      "earth": 0,
+      "water": 0,
+      "fire": 90,
+      "wind": 10
+    },
+    "cardType": "普",
+    "hp": 12,
+    "power": 20,
+    "defense": 31,
+    "speed": 18,
+    "magic": 39,
+    "total": 120,
+    "skillSlots": 6,
+    "washPrice": 200
+  },
+  {
+    "name": "金怪",
+    "race": "金屬系",
+    "elements": {
+      "earth": 0,
+      "water": 0,
+      "fire": 0,
+      "wind": 100
+    },
+    "cardType": "銀",
+    "hp": 14,
+    "power": 41,
+    "defense": 40,
+    "speed": 12,
+    "magic": 10,
+    "total": 117,
+    "skillSlots": 7,
+    "washPrice": 640
+  },
+  {
+    "name": "銀怪",
+    "race": "金屬系",
+    "elements": {
+      "earth": 0,
+      "water": 0,
+      "fire": 100,
+      "wind": 0
+    },
+    "cardType": "銀",
+    "hp": 12,
+    "power": 42,
+    "defense": 48,
+    "speed": 8,
+    "magic": 7,
+    "total": 117,
+    "skillSlots": 7,
+    "washPrice": 640
+  },
+  {
+    "name": "冰怪",
+    "race": "金屬系",
+    "elements": {
+      "earth": 0,
+      "water": 100,
+      "fire": 0,
+      "wind": 0
+    },
+    "cardType": "普",
+    "hp": 20,
+    "power": 30,
+    "defense": 46,
+    "speed": 7,
+    "magic": 12,
+    "total": 115,
+    "skillSlots": 7,
+    "washPrice": 100
+  },
+  {
+    "name": "石怪",
+    "race": "金屬系",
+    "elements": {
+      "earth": 100,
+      "water": 0,
+      "fire": 0,
+      "wind": 0
+    },
+    "cardType": "普",
+    "hp": 15,
+    "power": 38,
+    "defense": 43,
+    "speed": 6,
+    "magic": 13,
+    "total": 115,
+    "skillSlots": 7,
+    "washPrice": 100
+  },
+  {
+    "name": "巖怪",
+    "race": "金屬系",
+    "elements": {
+      "earth": 70,
+      "water": 30,
+      "fire": 0,
+      "wind": 0
+    },
+    "cardType": "銀",
+    "hp": 29,
+    "power": 22,
+    "defense": 42,
+    "speed": 5,
+    "magic": 14,
+    "total": 112,
+    "skillSlots": 8,
+    "washPrice": 500
+  },
+  {
+    "name": "熔巖",
+    "race": "金屬系",
+    "elements": {
+      "earth": 0,
+      "water": 0,
+      "fire": 70,
+      "wind": 30
+    },
+    "cardType": "銀",
+    "hp": 32,
+    "power": 22,
+    "defense": 39,
+    "speed": 7,
+    "magic": 12,
+    "total": 112,
+    "skillSlots": 8,
+    "washPrice": 500
+  },
+  {
+    "name": "紅魔嚇人箱",
+    "race": "金屬系",
+    "elements": {
+      "earth": 0,
+      "water": 50,
+      "fire": 50,
+      "wind": 0
+    },
+    "cardType": "銀",
+    "hp": 14,
+    "power": 16,
+    "defense": 27,
+    "speed": 23,
+    "magic": 32,
+    "total": 112,
+    "skillSlots": 8,
+    "washPrice": 500
+  },
+  {
+    "name": "影巖",
+    "race": "金屬系",
+    "elements": {
+      "earth": 30,
+      "water": 0,
+      "fire": 0,
+      "wind": 70
+    },
+    "cardType": "普",
+    "hp": 31,
+    "power": 19,
+    "defense": 32,
+    "speed": 12,
+    "magic": 16,
+    "total": 110,
+    "skillSlots": 8,
+    "washPrice": 100
+  },
+  {
+    "name": "月球水兔",
+    "race": "金屬系",
+    "elements": {
+      "earth": 0,
+      "water": 100,
+      "fire": 0,
+      "wind": 0
+    },
+    "cardType": "普",
+    "hp": 25,
+    "power": 36,
+    "defense": 16,
+    "speed": 23,
+    "magic": 10,
+    "total": 110,
+    "skillSlots": 8,
+    "washPrice": 100
+  },
+  {
+    "name": "月球風兔",
+    "race": "金屬系",
+    "elements": {
+      "earth": 0,
+      "water": 0,
+      "fire": 0,
+      "wind": 100
+    },
+    "cardType": "普",
+    "hp": 19,
+    "power": 10,
+    "defense": 16,
+    "speed": 24,
+    "magic": 41,
+    "total": 110,
+    "skillSlots": 8,
+    "washPrice": 100
+  },
+  {
+    "name": "爆巖",
+    "race": "金屬系",
+    "elements": {
+      "earth": 0,
+      "water": 70,
+      "fire": 30,
+      "wind": 0
+    },
+    "cardType": "普",
+    "hp": 30,
+    "power": 20,
+    "defense": 42,
+    "speed": 6,
+    "magic": 12,
+    "total": 110,
+    "skillSlots": 8,
+    "washPrice": 100
+  },
+  {
+    "name": "綠蛙嚇人箱",
+    "race": "金屬系",
+    "elements": {
+      "earth": 80,
+      "water": 0,
+      "fire": 0,
+      "wind": 20
+    },
+    "cardType": "普",
+    "hp": 13,
+    "power": 35,
+    "defense": 29,
+    "speed": 10,
+    "magic": 23,
+    "total": 110,
+    "skillSlots": 8,
+    "washPrice": 50
+  },
+  {
+    "name": "藍魔嚇人箱",
+    "race": "金屬系",
+    "elements": {
+      "earth": 20,
+      "water": 80,
+      "fire": 0,
+      "wind": 0
+    },
+    "cardType": "普",
+    "hp": 15,
+    "power": 37,
+    "defense": 28,
+    "speed": 8,
+    "magic": 22,
+    "total": 110,
+    "skillSlots": 8,
+    "washPrice": 50
+  },
+  {
+    "name": "嚇人箱",
+    "race": "金屬系",
+    "elements": {
+      "earth": 0,
+      "water": 0,
+      "fire": 20,
+      "wind": 80
+    },
+    "cardType": "銀",
+    "hp": 11,
+    "power": 21,
+    "defense": 31,
+    "speed": 11,
+    "magic": 33,
+    "total": 107,
+    "skillSlots": 9,
+    "washPrice": 500
+  },
+  {
+    "name": "鐵剪螃蟹",
+    "race": "金屬系",
+    "elements": {
+      "earth": 80,
+      "water": 0,
+      "fire": 0,
+      "wind": 20
+    },
+    "cardType": "銀",
+    "hp": 14,
+    "power": 36,
+    "defense": 37,
+    "speed": 12,
+    "magic": 8,
+    "total": 107,
+    "skillSlots": 9,
+    "washPrice": 500
+  },
+  {
+    "name": "黃金螃蟹",
+    "race": "金屬系",
+    "elements": {
+      "earth": 20,
+      "water": 0,
+      "fire": 0,
+      "wind": 80
+    },
+    "cardType": "銀",
+    "hp": 22,
+    "power": 32,
+    "defense": 34,
+    "speed": 7,
+    "magic": 12,
+    "total": 107,
+    "skillSlots": 9,
+    "washPrice": 500
+  },
+  {
+    "name": "惡魔螃蟹",
+    "race": "金屬系",
+    "elements": {
+      "earth": 0,
+      "water": 20,
+      "fire": 80,
+      "wind": 0
+    },
+    "cardType": "普",
+    "hp": 16,
+    "power": 32,
+    "defense": 35,
+    "speed": 11,
+    "magic": 11,
+    "total": 105,
+    "skillSlots": 9,
+    "washPrice": 100
+  },
+  {
+    "name": "水晶螃蟹",
+    "race": "金屬系",
+    "elements": {
+      "earth": 0,
+      "water": 80,
+      "fire": 20,
+      "wind": 0
+    },
+    "cardType": "普",
+    "hp": 18,
+    "power": 31,
+    "defense": 36,
+    "speed": 10,
+    "magic": 10,
+    "total": 105,
+    "skillSlots": 9,
+    "washPrice": 100
+  },
+  {
+    "name": "兔耳蝙蝠",
+    "race": "飛行系",
+    "elements": {
+      "earth": 0,
+      "water": 50,
+      "fire": 50,
+      "wind": 0
+    },
+    "cardType": "金",
+    "hp": 30,
+    "power": 31,
+    "defense": 21,
+    "speed": 34,
+    "magic": 13,
+    "total": 129,
+    "skillSlots": 7,
+    "washPrice": 1600
+  },
+  {
+    "name": "冰羽公主",
+    "race": "飛行系",
+    "elements": {
+      "earth": 0,
+      "water": 100,
+      "fire": 0,
+      "wind": 0
+    },
+    "cardType": "金",
+    "hp": 28,
+    "power": 8,
+    "defense": 24,
+    "speed": 21,
+    "magic": 48,
+    "total": 129,
+    "skillSlots": 8,
+    "washPrice": 1800
+  },
+  {
+    "name": "勇者里雍(攻)",
+    "race": "飛行系",
+    "elements": {
+      "earth": 0,
+      "water": 0,
+      "fire": 0,
+      "wind": 100
+    },
+    "cardType": "金",
+    "hp": 20,
+    "power": 49,
+    "defense": 20,
+    "speed": 30,
+    "magic": 10,
+    "total": 129,
+    "skillSlots": 8,
+    "washPrice": 2400
+  },
+  {
+    "name": "勇者里雍(魔)",
+    "race": "飛行系",
+    "elements": {
+      "earth": 0,
+      "water": 0,
+      "fire": 0,
+      "wind": 100
+    },
+    "cardType": "金",
+    "hp": 20,
+    "power": 10,
+    "defense": 20,
+    "speed": 30,
+    "magic": 49,
+    "total": 129,
+    "skillSlots": 8,
+    "washPrice": 2400
+  },
+  {
+    "name": "帕魯凱斯",
+    "race": "飛行系",
+    "elements": {
+      "earth": 0,
+      "water": 100,
+      "fire": 0,
+      "wind": 0
+    },
+    "cardType": "金",
+    "hp": 31,
+    "power": 50,
+    "defense": 20,
+    "speed": 19,
+    "magic": 9,
+    "total": 129,
+    "skillSlots": 8,
+    "washPrice": 2400
+  },
+  {
+    "name": "惡魔統領",
+    "race": "飛行系",
+    "elements": {
+      "earth": 0,
+      "water": 0,
+      "fire": 100,
+      "wind": 0
+    },
+    "cardType": "金",
+    "hp": 34,
+    "power": 47,
+    "defense": 25,
+    "speed": 15,
+    "magic": 8,
+    "total": 129,
+    "skillSlots": 8,
+    "washPrice": 2400
+  },
+  {
+    "name": "深淵里雍(攻)",
+    "race": "飛行系",
+    "elements": {
+      "earth": 0,
+      "water": 50,
+      "fire": 50,
+      "wind": 0
+    },
+    "cardType": "金",
+    "hp": 43,
+    "power": 42,
+    "defense": 12,
+    "speed": 20,
+    "magic": 12,
+    "total": 129,
+    "skillSlots": 8,
+    "washPrice": 2400
+  },
+  {
+    "name": "深淵里雍(魔)",
+    "race": "飛行系",
+    "elements": {
+      "earth": 0,
+      "water": 50,
+      "fire": 50,
+      "wind": 0
+    },
+    "cardType": "金",
+    "hp": 43,
+    "power": 12,
+    "defense": 12,
+    "speed": 20,
+    "magic": 42,
+    "total": 129,
+    "skillSlots": 8,
+    "washPrice": 2400
+  },
+  {
+    "name": "草莓天使熊",
+    "race": "飛行系",
+    "elements": {
+      "earth": 0,
+      "water": 0,
+      "fire": 50,
+      "wind": 50
+    },
+    "cardType": "銀",
+    "hp": 30,
+    "power": 39,
+    "defense": 12,
+    "speed": 33,
+    "magic": 13,
+    "total": 127,
+    "skillSlots": 6,
+    "washPrice": 388
+  },
+  {
+    "name": "藍莓天使熊",
+    "race": "飛行系",
+    "elements": {
+      "earth": 0,
+      "water": 50,
+      "fire": 50,
+      "wind": 0
+    },
+    "cardType": "銀",
+    "hp": 32,
+    "power": 38,
+    "defense": 13,
+    "speed": 32,
+    "magic": 12,
+    "total": 127,
+    "skillSlots": 6,
+    "washPrice": 388
+  },
+  {
+    "name": "大公雞",
+    "race": "飛行系",
+    "elements": {
+      "earth": 0,
+      "water": 0,
+      "fire": 0,
+      "wind": 100
+    },
+    "cardType": "金",
+    "hp": 20,
+    "power": 16,
+    "defense": 15,
+    "speed": 31,
+    "magic": 42,
+    "total": 124,
+    "skillSlots": 8,
+    "washPrice": 1200
+  },
+  {
+    "name": "天使蝙蝠",
+    "race": "飛行系",
+    "elements": {
+      "earth": 20,
+      "water": 0,
+      "fire": 0,
+      "wind": 80
+    },
+    "cardType": "金",
+    "hp": 24,
+    "power": 11,
+    "defense": 13,
+    "speed": 38,
+    "magic": 38,
+    "total": 124,
+    "skillSlots": 8,
+    "washPrice": 1600
+  },
+  {
+    "name": "奇美拉",
+    "race": "飛行系",
+    "elements": {
+      "earth": 70,
+      "water": 30,
+      "fire": 0,
+      "wind": 0
+    },
+    "cardType": "金",
+    "hp": 29,
+    "power": 9,
+    "defense": 23,
+    "speed": 15,
+    "magic": 48,
+    "total": 124,
+    "skillSlots": 9,
+    "washPrice": 1600
+  },
+  {
+    "name": "惡魔蝙蝠",
+    "race": "飛行系",
+    "elements": {
+      "earth": 0,
+      "water": 80,
+      "fire": 20,
+      "wind": 0
+    },
+    "cardType": "金",
+    "hp": 26,
+    "power": 38,
+    "defense": 16,
+    "speed": 33,
+    "magic": 11,
+    "total": 124,
+    "skillSlots": 8,
+    "washPrice": 1600
+  },
+  {
+    "name": "依格羅斯",
+    "race": "飛行系",
+    "elements": {
+      "earth": 0,
+      "water": 0,
+      "fire": 40,
+      "wind": 60
+    },
+    "cardType": "銀",
+    "hp": 17,
+    "power": 33,
+    "defense": 15,
+    "speed": 47,
+    "magic": 10,
+    "total": 122,
+    "skillSlots": 6,
+    "washPrice": 800
+  },
+  {
+    "name": "墮天使",
+    "race": "飛行系",
+    "elements": {
+      "earth": 10,
+      "water": 90,
+      "fire": 0,
+      "wind": 0
+    },
+    "cardType": "銀",
+    "hp": 11,
+    "power": 30,
+    "defense": 28,
+    "speed": 27,
+    "magic": 26,
+    "total": 122,
+    "skillSlots": 6,
+    "washPrice": 500
+  },
+  {
+    "name": "布雷歐",
+    "race": "飛行系",
+    "elements": {
+      "earth": 0,
+      "water": 40,
+      "fire": 60,
+      "wind": 0
+    },
+    "cardType": "銀",
+    "hp": 19,
+    "power": 39,
+    "defense": 14,
+    "speed": 42,
+    "magic": 8,
+    "total": 122,
+    "skillSlots": 6,
+    "washPrice": 800
+  },
+  {
+    "name": "石像怪",
+    "race": "飛行系",
+    "elements": {
+      "earth": 90,
+      "water": 0,
+      "fire": 0,
+      "wind": 10
+    },
+    "cardType": "銀",
+    "hp": 14,
+    "power": 32,
+    "defense": 32,
+    "speed": 22,
+    "magic": 22,
+    "total": 122,
+    "skillSlots": 6,
+    "washPrice": 500
+  },
+  {
+    "name": "迷你蝙蝠Max",
+    "race": "飛行系",
+    "elements": {
+      "earth": 0,
+      "water": 0,
+      "fire": 70,
+      "wind": 30
+    },
+    "cardType": "銀",
+    "hp": 21,
+    "power": 40,
+    "defense": 17,
+    "speed": 31,
+    "magic": 13,
+    "total": 122,
+    "skillSlots": 7,
+    "washPrice": 640
+  },
+  {
+    "name": "惡魔",
+    "race": "飛行系",
+    "elements": {
+      "earth": 0,
+      "water": 0,
+      "fire": 10,
+      "wind": 90
+    },
+    "cardType": "普",
+    "hp": 10,
+    "power": 27,
+    "defense": 26,
+    "speed": 26,
+    "magic": 31,
+    "total": 120,
+    "skillSlots": 6,
+    "washPrice": 100
+  },
+  {
+    "name": "獅鷲獸",
+    "race": "飛行系",
+    "elements": {
+      "earth": 60,
+      "water": 0,
+      "fire": 0,
+      "wind": 40
+    },
+    "cardType": "普",
+    "hp": 21,
+    "power": 31,
+    "defense": 16,
+    "speed": 41,
+    "magic": 11,
+    "total": 120,
+    "skillSlots": 6,
+    "washPrice": 200
+  },
+  {
+    "name": "血魔",
+    "race": "飛行系",
+    "elements": {
+      "earth": 0,
+      "water": 10,
+      "fire": 90,
+      "wind": 0
+    },
+    "cardType": "普",
+    "hp": 13,
+    "power": 31,
+    "defense": 26,
+    "speed": 25,
+    "magic": 25,
+    "total": 120,
+    "skillSlots": 6,
+    "washPrice": 100
+  },
+  {
+    "name": "變種獅鷲獸",
+    "race": "飛行系",
+    "elements": {
+      "earth": 40,
+      "water": 60,
+      "fire": 0,
+      "wind": 0
+    },
+    "cardType": "普",
+    "hp": 25,
+    "power": 28,
+    "defense": 15,
+    "speed": 43,
+    "magic": 9,
+    "total": 120,
+    "skillSlots": 6,
+    "washPrice": 200
+  },
+  {
+    "name": "丘比特",
+    "race": "飛行系",
+    "elements": {
+      "earth": 0,
+      "water": 0,
+      "fire": 50,
+      "wind": 50
+    },
+    "cardType": "金",
+    "hp": 16,
+    "power": 7,
+    "defense": 16,
+    "speed": 40,
+    "magic": 40,
+    "total": 119,
+    "skillSlots": 10,
+    "washPrice": 2400
+  },
+  {
+    "name": "小石像怪",
+    "race": "飛行系",
+    "elements": {
+      "earth": 50,
+      "water": 50,
+      "fire": 0,
+      "wind": 0
+    },
+    "cardType": "金",
+    "hp": 16,
+    "power": 11,
+    "defense": 23,
+    "speed": 32,
+    "magic": 37,
+    "total": 119,
+    "skillSlots": 9,
+    "washPrice": 1600
+  },
+  {
+    "name": "圍巾兔",
+    "race": "飛行系",
+    "elements": {
+      "earth": 0,
+      "water": 0,
+      "fire": 70,
+      "wind": 30
+    },
+    "cardType": "銀",
+    "hp": 16,
+    "power": 39,
+    "defense": 12,
+    "speed": 38,
+    "magic": 12,
+    "total": 117,
+    "skillSlots": 7,
+    "washPrice": 800
+  },
+  {
+    "name": "月牙仙兔",
+    "race": "飛行系",
+    "elements": {
+      "earth": 100,
+      "water": 0,
+      "fire": 0,
+      "wind": 0
+    },
+    "cardType": "銀",
+    "hp": 28,
+    "power": 39,
+    "defense": 12,
+    "speed": 29,
+    "magic": 9,
+    "total": 117,
+    "skillSlots": 8,
+    "washPrice": 500
+  },
+  {
+    "name": "海蝙蝠",
+    "race": "飛行系",
+    "elements": {
+      "earth": 30,
+      "water": 70,
+      "fire": 0,
+      "wind": 0
+    },
+    "cardType": "銀",
+    "hp": 18,
+    "power": 31,
+    "defense": 27,
+    "speed": 30,
+    "magic": 11,
+    "total": 117,
+    "skillSlots": 7,
+    "washPrice": 500
+  },
+  {
+    "name": "胖蝙蝠",
+    "race": "飛行系",
+    "elements": {
+      "earth": 0,
+      "water": 0,
+      "fire": 70,
+      "wind": 30
+    },
+    "cardType": "銀",
+    "hp": 25,
+    "power": 26,
+    "defense": 20,
+    "speed": 26,
+    "magic": 20,
+    "total": 117,
+    "skillSlots": 7,
+    "washPrice": 500
+  },
+  {
+    "name": "丘陵鯊",
+    "race": "飛行系",
+    "elements": {
+      "earth": 50,
+      "water": 50,
+      "fire": 0,
+      "wind": 0
+    },
+    "cardType": "普",
+    "hp": 28,
+    "power": 36,
+    "defense": 8,
+    "speed": 33,
+    "magic": 10,
+    "total": 115,
+    "skillSlots": 7,
+    "washPrice": 10
+  },
+  {
+    "name": "大蝙蝠",
+    "race": "飛行系",
+    "elements": {
+      "earth": 70,
+      "water": 30,
+      "fire": 0,
+      "wind": 0
+    },
+    "cardType": "普",
+    "hp": 23,
+    "power": 28,
+    "defense": 23,
+    "speed": 28,
+    "magic": 13,
+    "total": 115,
+    "skillSlots": 7,
+    "washPrice": 50
+  },
+  {
+    "name": "岩石鯊",
+    "race": "飛行系",
+    "elements": {
+      "earth": 0,
+      "water": 100,
+      "fire": 0,
+      "wind": 0
+    },
+    "cardType": "普",
+    "hp": 36,
+    "power": 38,
+    "defense": 10,
+    "speed": 11,
+    "magic": 20,
+    "total": 115,
+    "skillSlots": 7,
+    "washPrice": 10
+  },
+  {
+    "name": "巨蝙蝠",
+    "race": "飛行系",
+    "elements": {
+      "earth": 0,
+      "water": 0,
+      "fire": 30,
+      "wind": 70
+    },
+    "cardType": "普",
+    "hp": 27,
+    "power": 30,
+    "defense": 22,
+    "speed": 24,
+    "magic": 12,
+    "total": 115,
+    "skillSlots": 7,
+    "washPrice": 50
+  },
+  {
+    "name": "沙地鯊",
+    "race": "飛行系",
+    "elements": {
+      "earth": 0,
+      "water": 70,
+      "fire": 30,
+      "wind": 0
+    },
+    "cardType": "普",
+    "hp": 27,
+    "power": 35,
+    "defense": 16,
+    "speed": 29,
+    "magic": 8,
+    "total": 115,
+    "skillSlots": 7,
+    "washPrice": 10
+  },
+  {
+    "name": "陸行鯊",
+    "race": "飛行系",
+    "elements": {
+      "earth": 30,
+      "water": 70,
+      "fire": 0,
+      "wind": 0
+    },
+    "cardType": "普",
+    "hp": 39,
+    "power": 16,
+    "defense": 39,
+    "speed": 12,
+    "magic": 9,
+    "total": 115,
+    "skillSlots": 7,
+    "washPrice": 10
+  },
+  {
+    "name": "托羅帝鳥",
+    "race": "飛行系",
+    "elements": {
+      "earth": 80,
+      "water": 0,
+      "fire": 0,
+      "wind": 20
+    },
+    "cardType": "銀",
+    "hp": 32,
+    "power": 22,
+    "defense": 13,
+    "speed": 35,
+    "magic": 10,
+    "total": 112,
+    "skillSlots": 8,
+    "washPrice": 500
+  },
+  {
+    "name": "狂奔鳥",
+    "race": "飛行系",
+    "elements": {
+      "earth": 0,
+      "water": 0,
+      "fire": 20,
+      "wind": 80
+    },
+    "cardType": "銀",
+    "hp": 27,
+    "power": 24,
+    "defense": 18,
+    "speed": 36,
+    "magic": 7,
+    "total": 112,
+    "skillSlots": 8,
+    "washPrice": 500
+  },
+  {
+    "name": "使魔",
+    "race": "飛行系",
+    "elements": {
+      "earth": 0,
+      "water": 0,
+      "fire": 70,
+      "wind": 30
+    },
+    "cardType": "普",
+    "hp": 21,
+    "power": 20,
+    "defense": 15,
+    "speed": 27,
+    "magic": 27,
+    "total": 110,
+    "skillSlots": 9,
+    "washPrice": 10
+  },
+  {
+    "name": "巖地跑者",
+    "race": "飛行系",
+    "elements": {
+      "earth": 20,
+      "water": 80,
+      "fire": 0,
+      "wind": 0
+    },
+    "cardType": "普",
+    "hp": 27,
+    "power": 22,
+    "defense": 17,
+    "speed": 32,
+    "magic": 12,
+    "total": 110,
+    "skillSlots": 8,
+    "washPrice": 50
+  },
+  {
+    "name": "火焰啄木鳥",
+    "race": "飛行系",
+    "elements": {
+      "earth": 0,
+      "water": 20,
+      "fire": 80,
+      "wind": 0
+    },
+    "cardType": "普",
+    "hp": 22,
+    "power": 27,
+    "defense": 19,
+    "speed": 29,
+    "magic": 13,
+    "total": 110,
+    "skillSlots": 8,
+    "washPrice": 50
+  },
+  {
+    "name": "水藍鳥魔",
+    "race": "飛行系",
+    "elements": {
+      "earth": 30,
+      "water": 70,
+      "fire": 0,
+      "wind": 0
+    },
+    "cardType": "銀",
+    "hp": 22,
+    "power": 23,
+    "defense": 10,
+    "speed": 25,
+    "magic": 27,
+    "total": 107,
+    "skillSlots": 9,
+    "washPrice": 500
+  },
+  {
+    "name": "迷你石像怪",
+    "race": "飛行系",
+    "elements": {
+      "earth": 0,
+      "water": 0,
+      "fire": 30,
+      "wind": 70
+    },
+    "cardType": "銀",
+    "hp": 23,
+    "power": 19,
+    "defense": 10,
+    "speed": 24,
+    "magic": 31,
+    "total": 107,
+    "skillSlots": 9,
+    "washPrice": 500
+  },
+  {
+    "name": "小惡魔",
+    "race": "飛行系",
+    "elements": {
+      "earth": 70,
+      "water": 0,
+      "fire": 0,
+      "wind": 30
+    },
+    "cardType": "普",
+    "hp": 21,
+    "power": 20,
+    "defense": 9,
+    "speed": 25,
+    "magic": 30,
+    "total": 105,
+    "skillSlots": 9,
+    "washPrice": 10
+  },
+  {
+    "name": "小蝙蝠",
+    "race": "飛行系",
+    "elements": {
+      "earth": 60,
+      "water": 40,
+      "fire": 0,
+      "wind": 0
+    },
+    "cardType": "普",
+    "hp": 11,
+    "power": 26,
+    "defense": 16,
+    "speed": 31,
+    "magic": 21,
+    "total": 105,
+    "skillSlots": 10,
+    "washPrice": 10
+  },
+  {
+    "name": "掃把蝙蝠",
+    "race": "飛行系",
+    "elements": {
+      "earth": 0,
+      "water": 60,
+      "fire": 40,
+      "wind": 0
+    },
+    "cardType": "銀",
+    "hp": 13,
+    "power": 30,
+    "defense": 12,
+    "speed": 29,
+    "magic": 18,
+    "total": 102,
+    "skillSlots": 10,
+    "washPrice": 500
+  },
+  {
+    "name": "水果蝙蝠",
+    "race": "飛行系",
+    "elements": {
+      "earth": 40,
+      "water": 0,
+      "fire": 0,
+      "wind": 60
+    },
+    "cardType": "銀",
+    "hp": 17,
+    "power": 27,
+    "defense": 15,
+    "speed": 26,
+    "magic": 17,
+    "total": 102,
+    "skillSlots": 10,
+    "washPrice": 500
+  },
+  {
+    "name": "迷你蝙蝠",
+    "race": "飛行系",
+    "elements": {
+      "earth": 0,
+      "water": 0,
+      "fire": 60,
+      "wind": 40
+    },
+    "cardType": "普",
+    "hp": 11,
+    "power": 26,
+    "defense": 20,
+    "speed": 27,
+    "magic": 16,
+    "total": 100,
+    "skillSlots": 10,
+    "washPrice": 10
+  },
+  {
+    "name": "堤風",
+    "race": "龍系",
+    "elements": {
+      "earth": 40,
+      "water": 0,
+      "fire": 0,
+      "wind": 60
+    },
+    "cardType": "金",
+    "hp": 36,
+    "power": 40,
+    "defense": 34,
+    "speed": 12,
+    "magic": 7,
+    "total": 129,
+    "skillSlots": 8,
+    "washPrice": 2400
+  },
+  {
+    "name": "彩翼飛龍",
+    "race": "龍系",
+    "elements": {
+      "earth": 50,
+      "water": 0,
+      "fire": 0,
+      "wind": 50
+    },
+    "cardType": "金",
+    "hp": 28,
+    "power": 12,
+    "defense": 22,
+    "speed": 21,
+    "magic": 46,
+    "total": 129,
+    "skillSlots": 7,
+    "washPrice": 1600
+  },
+  {
+    "name": "滅龍勇士西恩",
+    "race": "龍系",
+    "elements": {
+      "earth": 0,
+      "water": 0,
+      "fire": 60,
+      "wind": 60
+    },
+    "cardType": "金",
+    "hp": 32,
+    "power": 49,
+    "defense": 15,
+    "speed": 22,
+    "magic": 11,
+    "total": 129,
+    "skillSlots": 8,
+    "washPrice": 2400
+  },
+  {
+    "name": "瓦傑特",
+    "race": "龍系",
+    "elements": {
+      "earth": 0,
+      "water": 0,
+      "fire": 60,
+      "wind": 40
+    },
+    "cardType": "金",
+    "hp": 19,
+    "power": 11,
+    "defense": 20,
+    "speed": 32,
+    "magic": 47,
+    "total": 129,
+    "skillSlots": 8,
+    "washPrice": 2400
+  },
+  {
+    "name": "白龍",
+    "race": "龍系",
+    "elements": {
+      "earth": 30,
+      "water": 30,
+      "fire": 30,
+      "wind": 30
+    },
+    "cardType": "金",
+    "hp": 27,
+    "power": 44,
+    "defense": 22,
+    "speed": 24,
+    "magic": 12,
+    "total": 129,
+    "skillSlots": 8,
+    "washPrice": 2400
+  },
+  {
+    "name": "神龍",
+    "race": "龍系",
+    "elements": {
+      "earth": 30,
+      "water": 30,
+      "fire": 30,
+      "wind": 30
+    },
+    "cardType": "金",
+    "hp": 47,
+    "power": 37,
+    "defense": 15,
+    "speed": 20,
+    "magic": 10,
+    "total": 129,
+    "skillSlots": 10,
+    "washPrice": 2400
+  },
+  {
+    "name": "聖紋白龍",
+    "race": "龍系",
+    "elements": {
+      "earth": 30,
+      "water": 30,
+      "fire": 30,
+      "wind": 30
+    },
+    "cardType": "金",
+    "hp": 27,
+    "power": 12,
+    "defense": 22,
+    "speed": 24,
+    "magic": 44,
+    "total": 129,
+    "skillSlots": 8,
+    "washPrice": 2400
+  },
+  {
+    "name": "訊龍",
+    "race": "龍系",
+    "elements": {
+      "earth": 0,
+      "water": 50,
+      "fire": 0,
+      "wind": 50
+    },
+    "cardType": "金",
+    "hp": 16,
+    "power": 43,
+    "defense": 11,
+    "speed": 50,
+    "magic": 9,
+    "total": 129,
+    "skillSlots": 8,
+    "washPrice": 2400
+  },
+  {
+    "name": "辰龍(攻)",
+    "race": "龍系",
+    "elements": {
+      "earth": 100,
+      "water": 0,
+      "fire": 0,
+      "wind": 0
+    },
+    "cardType": "金",
+    "hp": 46,
+    "power": 43,
+    "defense": 16,
+    "speed": 17,
+    "magic": 7,
+    "total": 129,
+    "skillSlots": 9,
+    "washPrice": 2400
+  },
+  {
+    "name": "辰龍(魔)",
+    "race": "龍系",
+    "elements": {
+      "earth": 100,
+      "water": 0,
+      "fire": 0,
+      "wind": 0
+    },
+    "cardType": "金",
+    "hp": 29,
+    "power": 7,
+    "defense": 24,
+    "speed": 20,
+    "magic": 49,
+    "total": 129,
+    "skillSlots": 9,
+    "washPrice": 2400
+  },
+  {
+    "name": "雄火龍",
+    "race": "龍系",
+    "elements": {
+      "earth": 0,
+      "water": 0,
+      "fire": 100,
+      "wind": 0
+    },
+    "cardType": "金",
+    "hp": 25,
+    "power": 45,
+    "defense": 24,
+    "speed": 25,
+    "magic": 10,
+    "total": 129,
+    "skillSlots": 8,
+    "washPrice": 2400
+  },
+  {
+    "name": "黃金幼龍",
+    "race": "龍系",
+    "elements": {
+      "earth": 0,
+      "water": 0,
+      "fire": 0,
+      "wind": 100
+    },
+    "cardType": "金",
+    "hp": 26,
+    "power": 13,
+    "defense": 21,
+    "speed": 22,
+    "magic": 47,
+    "total": 129,
+    "skillSlots": 8,
+    "washPrice": 2400
+  },
+  {
+    "name": "黑龍",
+    "race": "龍系",
+    "elements": {
+      "earth": 30,
+      "water": 30,
+      "fire": 30,
+      "wind": 30
+    },
+    "cardType": "金",
+    "hp": 24,
+    "power": 44,
+    "defense": 22,
+    "speed": 27,
+    "magic": 12,
+    "total": 129,
+    "skillSlots": 8,
+    "washPrice": 2400
+  },
+  {
+    "name": "西留耶爾",
+    "race": "龍系",
+    "elements": {
+      "earth": 60,
+      "water": 0,
+      "fire": 0,
+      "wind": 40
+    },
+    "cardType": "銀",
+    "hp": 34,
+    "power": 34,
+    "defense": 34,
+    "speed": 13,
+    "magic": 12,
+    "total": 127,
+    "skillSlots": 7,
+    "washPrice": 500
+  },
+  {
+    "name": "暗影翼龍",
+    "race": "龍系",
+    "elements": {
+      "earth": 50,
+      "water": 0,
+      "fire": 0,
+      "wind": 50
+    },
+    "cardType": "金",
+    "hp": 25,
+    "power": 11,
+    "defense": 26,
+    "speed": 23,
+    "magic": 39,
+    "total": 124,
+    "skillSlots": 8,
+    "washPrice": 1600
+  },
+  {
+    "name": "暗影龍蜥",
+    "race": "龍系",
+    "elements": {
+      "earth": 20,
+      "water": 80,
+      "fire": 0,
+      "wind": 0
+    },
+    "cardType": "金",
+    "hp": 32,
+    "power": 40,
+    "defense": 26,
+    "speed": 16,
+    "magic": 10,
+    "total": 124,
+    "skillSlots": 8,
+    "washPrice": 1600
+  },
+  {
+    "name": "達哈卡",
+    "race": "龍系",
+    "elements": {
+      "earth": 60,
+      "water": 40,
+      "fire": 0,
+      "wind": 0
+    },
+    "cardType": "金",
+    "hp": 42,
+    "power": 42,
+    "defense": 26,
+    "speed": 7,
+    "magic": 7,
+    "total": 124,
+    "skillSlots": 7,
+    "washPrice": 2400
+  },
+  {
+    "name": "大地之龍",
+    "race": "龍系",
+    "elements": {
+      "earth": 70,
+      "water": 30,
+      "fire": 0,
+      "wind": 0
+    },
+    "cardType": "銀",
+    "hp": 32,
+    "power": 24,
+    "defense": 30,
+    "speed": 19,
+    "magic": 17,
+    "total": 122,
+    "skillSlots": 7,
+    "washPrice": 300
+  },
+  {
+    "name": "大地翼龍",
+    "race": "龍系",
+    "elements": {
+      "earth": 100,
+      "water": 0,
+      "fire": 0,
+      "wind": 0
+    },
+    "cardType": "銀",
+    "hp": 31,
+    "power": 28,
+    "defense": 32,
+    "speed": 20,
+    "magic": 11,
+    "total": 122,
+    "skillSlots": 6,
+    "washPrice": 640
+  },
+  {
+    "name": "寒冰之龍",
+    "race": "龍系",
+    "elements": {
+      "earth": 0,
+      "water": 70,
+      "fire": 30,
+      "wind": 0
+    },
+    "cardType": "銀",
+    "hp": 21,
+    "power": 19,
+    "defense": 20,
+    "speed": 25,
+    "magic": 37,
+    "total": 122,
+    "skillSlots": 7,
+    "washPrice": 300
+  },
+  {
+    "name": "火龍蜥",
+    "race": "龍系",
+    "elements": {
+      "earth": 0,
+      "water": 0,
+      "fire": 80,
+      "wind": 20
+    },
+    "cardType": "銀",
+    "hp": 33,
+    "power": 39,
+    "defense": 34,
+    "speed": 11,
+    "magic": 5,
+    "total": 122,
+    "skillSlots": 7,
+    "washPrice": 640
+  },
+  {
+    "name": "烈焰之龍",
+    "race": "龍系",
+    "elements": {
+      "earth": 0,
+      "water": 0,
+      "fire": 70,
+      "wind": 30
+    },
+    "cardType": "銀",
+    "hp": 20,
+    "power": 37,
+    "defense": 28,
+    "speed": 20,
+    "magic": 17,
+    "total": 122,
+    "skillSlots": 7,
+    "washPrice": 300
+  },
+  {
+    "name": "烈風翼龍",
+    "race": "龍系",
+    "elements": {
+      "earth": 0,
+      "water": 0,
+      "fire": 0,
+      "wind": 100
+    },
+    "cardType": "銀",
+    "hp": 34,
+    "power": 30,
+    "defense": 23,
+    "speed": 20,
+    "magic": 15,
+    "total": 122,
+    "skillSlots": 6,
+    "washPrice": 640
+  },
+  {
+    "name": "疾風之龍",
+    "race": "龍系",
+    "elements": {
+      "earth": 30,
+      "water": 0,
+      "fire": 0,
+      "wind": 70
+    },
+    "cardType": "銀",
+    "hp": 21,
+    "power": 26,
+    "defense": 21,
+    "speed": 38,
+    "magic": 16,
+    "total": 122,
+    "skillSlots": 7,
+    "washPrice": 300
+  },
+  {
+    "name": "蜥蜴勇士",
+    "race": "龍系",
+    "elements": {
+      "earth": 0,
+      "water": 70,
+      "fire": 30,
+      "wind": 0
+    },
+    "cardType": "銀",
+    "hp": 33,
+    "power": 33,
+    "defense": 12,
+    "speed": 33,
+    "magic": 11,
+    "total": 122,
+    "skillSlots": 7,
+    "washPrice": 640
+  },
+  {
+    "name": "風龍蜥",
+    "race": "龍系",
+    "elements": {
+      "earth": 20,
+      "water": 0,
+      "fire": 0,
+      "wind": 80
+    },
+    "cardType": "銀",
+    "hp": 32,
+    "power": 37,
+    "defense": 34,
+    "speed": 14,
+    "magic": 5,
+    "total": 122,
+    "skillSlots": 7,
+    "washPrice": 640
+  },
+  {
+    "name": "地龍蜥",
+    "race": "龍系",
+    "elements": {
+      "earth": 80,
+      "water": 20,
+      "fire": 0,
+      "wind": 0
+    },
+    "cardType": "普",
+    "hp": 35,
+    "power": 35,
+    "defense": 31,
+    "speed": 10,
+    "magic": 9,
+    "total": 120,
+    "skillSlots": 7,
+    "washPrice": 100
+  },
+  {
+    "name": "寒冰翼龍",
+    "race": "龍系",
+    "elements": {
+      "earth": 0,
+      "water": 100,
+      "fire": 0,
+      "wind": 0
+    },
+    "cardType": "普",
+    "hp": 30,
+    "power": 30,
+    "defense": 31,
+    "speed": 17,
+    "magic": 12,
+    "total": 120,
+    "skillSlots": 6,
+    "washPrice": 100
+  },
+  {
+    "name": "水龍蜥",
+    "race": "龍系",
+    "elements": {
+      "earth": 0,
+      "water": 80,
+      "fire": 20,
+      "wind": 0
+    },
+    "cardType": "普",
+    "hp": 35,
+    "power": 37,
+    "defense": 33,
+    "speed": 10,
+    "magic": 5,
+    "total": 120,
+    "skillSlots": 7,
+    "washPrice": 100
+  },
+  {
+    "name": "火焰翼龍",
+    "race": "龍系",
+    "elements": {
+      "earth": 0,
+      "water": 0,
+      "fire": 100,
+      "wind": 0
+    },
+    "cardType": "普",
+    "hp": 33,
+    "power": 33,
+    "defense": 25,
+    "speed": 16,
+    "magic": 13,
+    "total": 120,
+    "skillSlots": 6,
+    "washPrice": 100
+  },
+  {
+    "name": "火頸龍",
+    "race": "龍系",
+    "elements": {
+      "earth": 0,
+      "water": 30,
+      "fire": 70,
+      "wind": 0
+    },
+    "cardType": "普",
+    "hp": 25,
+    "power": 10,
+    "defense": 20,
+    "speed": 25,
+    "magic": 40,
+    "total": 120,
+    "skillSlots": 8,
+    "washPrice": 100
+  },
+  {
+    "name": "翼龍",
+    "race": "龍系",
+    "elements": {
+      "earth": 0,
+      "water": 50,
+      "fire": 50,
+      "wind": 0
+    },
+    "cardType": "金",
+    "hp": 37,
+    "power": 29,
+    "defense": 29,
+    "speed": 17,
+    "magic": 7,
+    "total": 119,
+    "skillSlots": 10,
+    "washPrice": 2400
+  },
+  {
+    "name": "小白龍",
+    "race": "龍系",
+    "elements": {
+      "earth": 25,
+      "water": 25,
+      "fire": 25,
+      "wind": 25
+    },
+    "cardType": "銀",
+    "hp": 28,
+    "power": 12,
+    "defense": 18,
+    "speed": 20,
+    "magic": 39,
+    "total": 117,
+    "skillSlots": 7,
+    "washPrice": 800
+  },
+  {
+    "name": "迷你龍",
+    "race": "龍系",
+    "elements": {
+      "earth": 50,
+      "water": 50,
+      "fire": 0,
+      "wind": 0
+    },
+    "cardType": "銀",
+    "hp": 12,
+    "power": 35,
+    "defense": 23,
+    "speed": 26,
+    "magic": 21,
+    "total": 117,
+    "skillSlots": 7,
+    "washPrice": 500
+  },
+  {
+    "name": "雛龍",
+    "race": "龍系",
+    "elements": {
+      "earth": 0,
+      "water": 50,
+      "fire": 50,
+      "wind": 0
+    },
+    "cardType": "銀",
+    "hp": 14,
+    "power": 32,
+    "defense": 22,
+    "speed": 27,
+    "magic": 22,
+    "total": 117,
+    "skillSlots": 7,
+    "washPrice": 500
+  },
+  {
+    "name": "口袋龍",
+    "race": "龍系",
+    "elements": {
+      "earth": 50,
+      "water": 0,
+      "fire": 0,
+      "wind": 50
+    },
+    "cardType": "普",
+    "hp": 15,
+    "power": 34,
+    "defense": 21,
+    "speed": 25,
+    "magic": 20,
+    "total": 115,
+    "skillSlots": 7,
+    "washPrice": 100
+  },
+  {
+    "name": "穴龍",
+    "race": "龍系",
+    "elements": {
+      "earth": 0,
+      "water": 0,
+      "fire": 50,
+      "wind": 50
+    },
+    "cardType": "普",
+    "hp": 11,
+    "power": 31,
+    "defense": 20,
+    "speed": 28,
+    "magic": 25,
+    "total": 115,
+    "skillSlots": 7,
+    "washPrice": 100
+  },
+  {
+    "name": "獵豹蜥蜴",
+    "race": "龍系",
+    "elements": {
+      "earth": 0,
+      "water": 0,
+      "fire": 30,
+      "wind": 70
+    },
+    "cardType": "銀",
+    "hp": 23,
+    "power": 38,
+    "defense": 28,
+    "speed": 10,
+    "magic": 13,
+    "total": 112,
+    "skillSlots": 8,
+    "washPrice": 500
+  },
+  {
+    "name": "蜥蜴鬥士",
+    "race": "龍系",
+    "elements": {
+      "earth": 30,
+      "water": 70,
+      "fire": 0,
+      "wind": 0
+    },
+    "cardType": "銀",
+    "hp": 18,
+    "power": 39,
+    "defense": 37,
+    "speed": 8,
+    "magic": 10,
+    "total": 112,
+    "skillSlots": 8,
+    "washPrice": 500
+  },
+  {
+    "name": "蜥蜴戰士",
+    "race": "龍系",
+    "elements": {
+      "earth": 70,
+      "water": 0,
+      "fire": 0,
+      "wind": 30
+    },
+    "cardType": "普",
+    "hp": 22,
+    "power": 32,
+    "defense": 32,
+    "speed": 12,
+    "magic": 12,
+    "total": 110,
+    "skillSlots": 8,
+    "washPrice": 50
+  },
+  {
+    "name": "蜥蜴武士",
+    "race": "龍系",
+    "elements": {
+      "earth": 0,
+      "water": 30,
+      "fire": 70,
+      "wind": 0
+    },
+    "cardType": "普",
+    "hp": 20,
+    "power": 31,
+    "defense": 30,
+    "speed": 15,
+    "magic": 14,
+    "total": 110,
+    "skillSlots": 8,
+    "washPrice": 50
+  },
+  {
+    "name": "毒蜥蜴",
+    "race": "龍系",
+    "elements": {
+      "earth": 0,
+      "water": 0,
+      "fire": 0,
+      "wind": 100
+    },
+    "cardType": "普",
+    "hp": 35,
+    "power": 27,
+    "defense": 10,
+    "speed": 13,
+    "magic": 15,
+    "total": 100,
+    "skillSlots": 8,
+    "washPrice": 20
+  },
+  {
+    "name": "聖誕麋鹿雪橇",
+    "race": "特殊系",
+    "elements": {
+      "earth": 0,
+      "water": 0,
+      "fire": 0,
+      "wind": 0
+    },
+    "cardType": "銀",
+    "hp": 30,
+    "power": 40,
+    "defense": 16,
+    "speed": 30,
+    "magic": 11,
+    "total": 127,
+    "skillSlots": 8,
+    "washPrice": 800
+  },
+  {
+    "name": "億萬兩招財貓(攻)",
+    "race": "野獸系",
+    "elements": {
+      "earth": 0,
+      "water": 0,
+      "fire": 0,
+      "wind": 0
+    },
+    "cardType": "金",
+    "hp": 38,
+    "power": 48,
+    "defense": 12,
+    "speed": 25,
+    "magic": 6,
+    "total": 129,
+    "skillSlots": 8,
+    "washPrice": 800
+  }
+]

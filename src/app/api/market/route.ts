@@ -20,7 +20,7 @@ export async function GET(request: NextRequest) {
           'Accept': 'application/json',
           'User-Agent': 'Mozilla/5.0 (compatible; MarketTracker/1.0)',
         },
-        next: { revalidate: 60 }, // Cache for 60 seconds
+        cache: 'no-store', // Always fetch fresh data
       }
     );
 

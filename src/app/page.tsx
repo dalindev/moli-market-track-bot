@@ -6,6 +6,7 @@ import { TrackedItems } from '@/components/TrackedItems';
 import { PriceHistory } from '@/components/PriceHistory';
 import { MigrationPrompt } from '@/components/MigrationPrompt';
 import { AuthGate } from '@/components/AuthGate';
+import Link from 'next/link';
 
 export default function Home() {
   return (
@@ -19,6 +20,9 @@ export default function Home() {
           <p className="text-zinc-600 dark:text-zinc-400 mt-2">
             Search and track prices from market stalls (支持简体/繁體搜索)
           </p>
+          <Link href="/pet-calculator" className="inline-block mt-2 text-sm text-blue-600 dark:text-blue-400 hover:underline">
+            寵物檔位計算模擬器 →
+          </Link>
         </header>
 
         {/* Migration prompt for users with existing localStorage data */}

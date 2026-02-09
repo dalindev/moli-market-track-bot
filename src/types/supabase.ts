@@ -311,6 +311,51 @@ export interface Database {
           }
         ];
       };
+      pet_calc_profiles: {
+        Row: {
+          id: string;
+          name: string;
+          saved_at: string;
+          profile_data: Record<string, unknown>;
+          pet_name: string | null;
+          level: number;
+          card_rank: number;
+          mod_grade: number;
+          rate: number;
+          rand_sum: number | null;
+          is_reversed: boolean;
+          created_at: string;
+        };
+        Insert: {
+          id?: string;
+          name: string;
+          saved_at?: string;
+          profile_data: Record<string, unknown>;
+          pet_name?: string | null;
+          level?: number;
+          card_rank?: number;
+          mod_grade?: number;
+          rate?: number;
+          rand_sum?: number | null;
+          is_reversed?: boolean;
+          created_at?: string;
+        };
+        Update: {
+          id?: string;
+          name?: string;
+          saved_at?: string;
+          profile_data?: Record<string, unknown>;
+          pet_name?: string | null;
+          level?: number;
+          card_rank?: number;
+          mod_grade?: number;
+          rate?: number;
+          rand_sum?: number | null;
+          is_reversed?: boolean;
+          created_at?: string;
+        };
+        Relationships: [];
+      };
       scan_logs: {
         Row: {
           id: string;
