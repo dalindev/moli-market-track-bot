@@ -32,6 +32,7 @@ import { AutocompleteInput } from '@/components/ui/autocomplete-input';
 import { useMarket, FlattenedItem } from '@/hooks/useMarket';
 import { useSupabaseItems } from '@/hooks/useSupabaseItems';
 import { useExchangeRate } from '@/hooks/useExchangeRate';
+import { createClient } from '@/lib/supabase/client';
 import { normalizeSearchInput } from '@/lib/chinese-converter';
 import { getLevelSuffix, hasDisplayLevel, getLevelColors, LEVEL_NAMES, isGaiZaoTuLevel } from '@/lib/item-level';
 import { toast } from 'sonner';
@@ -160,44 +161,68 @@ export function MarketSearch() {
   const { currentRate, DEFAULT_GOLD_PER_CRYSTAL } = useExchangeRate();
   const crystalRate = currentRate?.goldPerCrystal ?? DEFAULT_GOLD_PER_CRYSTAL;
 
-  // Saved searches (stored in localStorage)
+  // Saved searches (Supabase-backed, localStorage fallback)
   interface SavedSearch {
     term: string;
     exact: boolean;
   }
   const [savedSearches, setSavedSearches] = useState<SavedSearch[]>([]);
   const [saveAsExact, setSaveAsExact] = useState(true); // Default to exact match
+  const supabaseSearch = createClient();
 
-  // Load saved searches from localStorage on mount
+  // Load saved searches from Supabase on mount, fallback to localStorage
   useEffect(() => {
-    const saved = localStorage.getItem('market-saved-searches-v2');
-    if (saved) {
+    const loadSearches = async () => {
       try {
-        setSavedSearches(JSON.parse(saved));
+        const { data, error: fetchError } = await supabaseSearch
+          .from('saved_searches')
+          .select('term, exact, sort_order')
+          .order('sort_order', { ascending: true });
+
+        if (!fetchError && data && data.length > 0) {
+          setSavedSearches(data.map(d => ({ term: d.term, exact: d.exact })));
+          return;
+        }
       } catch {
-        // Invalid JSON, ignore
+        // Supabase unavailable, fall through to localStorage
       }
-    } else {
-      // Migrate old format (string[]) to new format
-      const oldSaved = localStorage.getItem('market-saved-searches');
-      if (oldSaved) {
+
+      // Fallback: load from localStorage and migrate to Supabase
+      const saved = localStorage.getItem('market-saved-searches-v2');
+      if (saved) {
         try {
-          const oldTerms = JSON.parse(oldSaved) as string[];
-          const migrated = oldTerms.map(term => ({ term, exact: false }));
-          setSavedSearches(migrated);
-          localStorage.setItem('market-saved-searches-v2', JSON.stringify(migrated));
-          localStorage.removeItem('market-saved-searches');
+          const parsed = JSON.parse(saved) as SavedSearch[];
+          setSavedSearches(parsed);
+          // Migrate to Supabase in background
+          for (let i = 0; i < parsed.length; i++) {
+            await supabaseSearch.from('saved_searches').upsert(
+              { term: parsed[i].term, exact: parsed[i].exact, sort_order: i },
+              { onConflict: 'term' }
+            );
+          }
         } catch {
           // Invalid JSON, ignore
         }
       }
-    }
+    };
+    loadSearches();
   }, []);
 
-  // Save to localStorage whenever savedSearches changes
+  // Sync to Supabase
+  const syncToSupabase = async (searches: SavedSearch[]) => {
+    // Delete all and re-insert to maintain order
+    await supabaseSearch.from('saved_searches').delete().gte('sort_order', 0);
+    if (searches.length > 0) {
+      await supabaseSearch.from('saved_searches').insert(
+        searches.map((s, i) => ({ term: s.term, exact: s.exact, sort_order: i }))
+      );
+    }
+  };
+
   const updateSavedSearches = (searches: SavedSearch[]) => {
     setSavedSearches(searches);
     localStorage.setItem('market-saved-searches-v2', JSON.stringify(searches));
+    syncToSupabase(searches);
   };
 
   const addSavedSearch = () => {

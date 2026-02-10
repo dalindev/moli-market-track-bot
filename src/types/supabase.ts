@@ -389,6 +389,30 @@ export interface Database {
         };
         Relationships: [];
       };
+      saved_searches: {
+        Row: {
+          id: string;
+          term: string;
+          exact: boolean;
+          sort_order: number;
+          created_at: string;
+        };
+        Insert: {
+          id?: string;
+          term: string;
+          exact?: boolean;
+          sort_order?: number;
+          created_at?: string;
+        };
+        Update: {
+          id?: string;
+          term?: string;
+          exact?: boolean;
+          sort_order?: number;
+          created_at?: string;
+        };
+        Relationships: [];
+      };
     };
     Views: {
       [_ in never]: never;

@@ -4,8 +4,8 @@ import { useState, useEffect, useCallback } from 'react';
 import { createClient } from '@/lib/supabase/client';
 import type { Item, TrackedItem, PriceSnapshotInsert } from '@/types/supabase';
 
-// Default exchange rate: 1 魔晶 = 333 金幣
-const DEFAULT_CRYSTAL_RATE = 333;
+// Default exchange rate fallback (matches DB default)
+const DEFAULT_CRYSTAL_RATE = 263;
 
 export interface RecentListing {
   price: number;
@@ -49,14 +49,16 @@ export interface AlertCheckResult {
   averagePrice: number;
   percentBelow: number;
   threshold: number;
+  currencyMismatch?: boolean;
 }
 
-export function useSupabaseItems() {
+export function useSupabaseItems(exchangeRate?: number) {
   const [trackedItems, setTrackedItems] = useState<TrackedItemDisplay[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
   const supabase = createClient();
+  const crystalToGoldRate = exchangeRate ?? DEFAULT_CRYSTAL_RATE;
 
   // Fetch all tracked items with their statistics
   const fetchTrackedItems = useCallback(async () => {
@@ -119,7 +121,7 @@ export function useSupabaseItems() {
         const itemSnapshots = snapshotsMap.get(item?.id) || [];
         const recentListings: RecentListing[] = itemSnapshots
           .map(s => {
-            const priceInGold = s.pricetype === 1 ? s.price * DEFAULT_CRYSTAL_RATE : s.price;
+            const priceInGold = s.pricetype === 1 ? s.price * crystalToGoldRate : s.price;
             return {
               price: s.price,
               pricetype: s.pricetype,
@@ -170,7 +172,7 @@ export function useSupabaseItems() {
     } finally {
       setLoading(false);
     }
-  }, [supabase]);
+  }, [supabase, crystalToGoldRate]);
 
   // Load tracked items on mount
   useEffect(() => {
@@ -449,6 +451,53 @@ export function useSupabaseItems() {
     }
   }, [supabase]);
 
+  // Save transaction history snapshots (deduplication by transaction_id)
+  const saveTransactionSnapshots = useCallback(async (
+    itemUuid: string,
+    transactions: Array<{
+      transactionId: number;
+      price: number;
+      pricetype: number;
+      quantity: number;
+      buyerName: string;
+      recordedAt: string;
+    }>
+  ): Promise<{ success: boolean; inserted: number }> => {
+    try {
+      let inserted = 0;
+
+      for (const txn of transactions) {
+        const { data: result, error: upsertError } = await supabase.rpc('upsert_transaction', {
+          p_item_id: itemUuid,
+          p_transaction_id: txn.transactionId,
+          p_price: txn.price,
+          p_pricetype: txn.pricetype,
+          p_stall_name: txn.buyerName || 'Unknown',
+          p_stall_cdkey: '',
+          p_quantity: txn.quantity,
+          p_recorded_at: txn.recordedAt,
+        });
+
+        if (!upsertError && result === 'inserted') {
+          inserted++;
+        } else if (upsertError) {
+          console.error('Error upserting transaction:', upsertError.message);
+        }
+      }
+
+      // Recalculate statistics with new transaction data
+      const { error: statsError } = await supabase.rpc('update_price_statistics', { p_item_id: itemUuid });
+      if (statsError) {
+        console.error('Error updating statistics:', statsError.message);
+      }
+
+      return { success: true, inserted };
+    } catch (err) {
+      console.error('Error saving transaction snapshots:', err);
+      return { success: false, inserted: 0 };
+    }
+  }, [supabase]);
+
   // Check if price triggers an alert
   const checkAlert = useCallback((
     trackedItem: TrackedItemDisplay,
@@ -462,19 +511,31 @@ export function useSupabaseItems() {
 
     // Normalize to gold
     const goldPrice = currentPriceType === 1
-      ? currentPrice * DEFAULT_CRYSTAL_RATE
+      ? currentPrice * crystalToGoldRate
       : currentPrice;
 
     const percentBelow = ((trackedItem.referencePrice - goldPrice) / trackedItem.referencePrice) * 100;
 
+    // Detect currency mismatch: item listed in gold but price matches typical crystal range
+    // e.g., 5000 crystal item listed for 5000 gold (should be ~1,315,000 gold)
+    let currencyMismatch = false;
+    if (currentPriceType === 0 && trackedItem.referencePrice > 0) {
+      const expectedCrystalPrice = trackedItem.referencePrice / crystalToGoldRate;
+      // If the gold price is close to what the crystal price would be, flag it
+      if (currentPrice <= expectedCrystalPrice * 1.5 && currentPrice >= expectedCrystalPrice * 0.3) {
+        currencyMismatch = true;
+      }
+    }
+
     return {
-      triggered: percentBelow >= trackedItem.alertThreshold,
+      triggered: percentBelow >= trackedItem.alertThreshold || currencyMismatch,
       currentPrice: goldPrice,
       averagePrice: trackedItem.referencePrice,
       percentBelow: Math.round(percentBelow),
       threshold: trackedItem.alertThreshold,
+      currencyMismatch,
     };
-  }, []);
+  }, [crystalToGoldRate]);
 
   // Get item by name
   const getItemByName = useCallback(async (name: string): Promise<Item | null> => {
@@ -530,6 +591,7 @@ export function useSupabaseItems() {
     removeTrackedItem,
     updateTrackedItem,
     savePriceSnapshots,
+    saveTransactionSnapshots,
     checkAlert,
     getItemByName,
     searchItems,

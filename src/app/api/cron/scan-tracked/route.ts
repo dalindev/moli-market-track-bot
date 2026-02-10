@@ -43,7 +43,8 @@ export async function GET(request: NextRequest) {
         items (
           id,
           name,
-          item_type
+          item_type,
+          item_level
         )
       `)
       .eq('is_active', true);
@@ -55,12 +56,12 @@ export async function GET(request: NextRequest) {
 
     // Process each tracked item
     for (const tracked of trackedItems || []) {
-      const item = tracked.items as { id: string; name: string; item_type: string };
+      const item = tracked.items as { id: string; name: string; item_type: string; item_level: number | null };
       if (!item) continue;
 
       try {
-        // Fetch market data for this item
-        const prices = await fetchMarketPrices(item.name, item.item_type);
+        // Fetch market data for this item (exact match)
+        const prices = await fetchMarketPrices(item.name, item.item_type, item.item_level);
 
         if (prices.length > 0) {
           // Save to price_snapshots
@@ -153,7 +154,7 @@ interface MarketPrice {
   coords: string;
 }
 
-async function fetchMarketPrices(itemName: string, itemType: string): Promise<MarketPrice[]> {
+async function fetchMarketPrices(itemName: string, itemType: string, itemLevel: number | null = null): Promise<MarketPrice[]> {
   const prices: MarketPrice[] = [];
   const type = itemType === 'pet' ? '寵物攤位' : '道具攤位';
 
@@ -165,7 +166,7 @@ async function fetchMarketPrices(itemName: string, itemType: string): Promise<Ma
         search: itemName,
         type,
         server: 'all',
-        exact: '0',
+        exact: '1',
       });
 
       const response = await fetch(
@@ -192,9 +193,11 @@ async function fetchMarketPrices(itemName: string, itemType: string): Promise<Ma
           const stall = stallMap.get(cdkey) as { server: number; name: string; coords: string } | undefined;
           if (!stall) continue;
 
-          for (const item of items as { price: number; pricetype: number; ITEM_TRUENAME: string }[]) {
-            // Only include items that match the name
-            if (item.ITEM_TRUENAME.includes(itemName)) {
+          for (const item of items as { price: number; pricetype: number; ITEM_TRUENAME: string; ITEM_LEVEL: number }[]) {
+            // Exact name match + level filter
+            const nameMatches = item.ITEM_TRUENAME === itemName;
+            const levelMatches = itemLevel === null || item.ITEM_LEVEL === itemLevel;
+            if (nameMatches && levelMatches) {
               prices.push({
                 price: item.price,
                 pricetype: item.pricetype,
@@ -215,8 +218,8 @@ async function fetchMarketPrices(itemName: string, itemType: string): Promise<Ma
           if (!stall) continue;
 
           for (const pet of pets as { price: number; pricetype: number; Name: string }[]) {
-            // Only include pets that match the name
-            if (pet.Name.includes(itemName)) {
+            // Exact name match for pets
+            if (pet.Name === itemName) {
               prices.push({
                 price: pet.price,
                 pricetype: pet.pricetype,

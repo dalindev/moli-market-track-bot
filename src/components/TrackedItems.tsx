@@ -138,6 +138,9 @@ function ListingCard({ listing, rank, exchangeRate }: { listing: RecentListing; 
 }
 
 export function TrackedItems() {
+  const { search } = useMarket();
+  const { currentRate, DEFAULT_GOLD_PER_CRYSTAL } = useExchangeRate();
+  const exchangeRate = currentRate?.goldPerCrystal ?? DEFAULT_GOLD_PER_CRYSTAL;
   const {
     trackedItems,
     loading,
@@ -145,13 +148,11 @@ export function TrackedItems() {
     removeTrackedItem,
     updateTrackedItem,
     savePriceSnapshots,
+    saveTransactionSnapshots,
     checkAlert,
     fetchTrackedItems,
     updateLastChecked,
-  } = useSupabaseItems();
-  const { search } = useMarket();
-  const { currentRate, DEFAULT_GOLD_PER_CRYSTAL } = useExchangeRate();
-  const exchangeRate = currentRate?.goldPerCrystal ?? DEFAULT_GOLD_PER_CRYSTAL;
+  } = useSupabaseItems(exchangeRate);
 
   const [refreshingId, setRefreshingId] = useState<string | null>(null);
   const [refreshingAll, setRefreshingAll] = useState(false);
@@ -183,6 +184,79 @@ export function TrackedItems() {
       case '普通': return 5;
       default: return null;
     }
+  };
+
+  // Fetch transaction history for an item (exact name match)
+  const fetchTransactionHistory = async (
+    itemName: string
+  ): Promise<Array<{
+    transactionId: number;
+    price: number;
+    pricetype: number;
+    quantity: number;
+    buyerName: string;
+    recordedAt: string;
+  }>> => {
+    const MAX_TXN_PAGES = 3;
+    const DELAY_MS = 500;
+    const results: Array<{
+      transactionId: number;
+      price: number;
+      pricetype: number;
+      quantity: number;
+      buyerName: string;
+      recordedAt: string;
+    }> = [];
+
+    for (let page = 1; page <= MAX_TXN_PAGES; page++) {
+      try {
+        const params = new URLSearchParams({
+          search: itemName,
+          type: 'all',
+          page: String(page),
+        });
+        const response = await fetch(`/api/marketrecord?${params.toString()}`);
+        if (!response.ok) break;
+
+        const data = await response.json();
+
+        for (const log of data.logs || []) {
+          // Parse buff format: "購買1個：ItemName" or "購買1隻：PetName"
+          const buff: string = log.buff || '';
+          const colonIndex = buff.indexOf('：');
+          const parsedName = colonIndex !== -1 ? buff.substring(colonIndex + 1).trim() : buff;
+
+          // Exact match only
+          if (parsedName !== itemName) continue;
+
+          const quantityMatch = buff.match(/購買(\d+)/);
+          const quantity = quantityMatch ? parseInt(quantityMatch[1], 10) : 1;
+          const unitPrice = quantity > 0 ? Math.round(log.price / quantity) : log.price;
+
+          results.push({
+            transactionId: log.id,
+            price: unitPrice,
+            pricetype: log.pricetype,
+            quantity,
+            buyerName: log.buyname || 'Unknown',
+            recordedAt: new Date(log.time * 1000).toISOString(),
+          });
+        }
+
+        // Check if more pages
+        const totalPages = Math.ceil(data.totalFiltered / data.perPage);
+        if (page >= totalPages) break;
+
+        if (page < MAX_TXN_PAGES) {
+          await new Promise(resolve => setTimeout(resolve, DELAY_MS));
+        }
+      } catch (err) {
+        console.error(`Error fetching transactions page ${page}:`, err);
+        break;
+      }
+    }
+
+    return results;
   };
 
   const refreshPrices = async (tracked: TrackedItemDisplay): Promise<boolean> => {
@@ -301,8 +375,8 @@ export function TrackedItems() {
         processPage(pageResult);
       }
 
+      // Save market listings to Supabase - clear old ones first to remove sold items
       if (allItems.length > 0) {
-        // Save to Supabase - clear old market listings first to remove sold items
         const result = await savePriceSnapshots(
           tracked.itemName,
           allItems.map(item => ({
@@ -313,41 +387,61 @@ export function TrackedItems() {
         );
 
         if (!result.success) {
-          toast.error('Failed to save price data');
-          return false;
+          toast.error('Failed to save market data');
         }
+      }
 
-        // Find lowest price for alert check
-        const lowestItem = allItems.reduce((min, item) =>
-          item.price < min.price ? item : min
-        );
+      // Also fetch transaction history for better reference price calculation
+      const transactions = await fetchTransactionHistory(baseName);
+      let txnInserted = 0;
+      if (transactions.length > 0 && tracked.itemUuid) {
+        const txnResult = await saveTransactionSnapshots(tracked.itemUuid, transactions);
+        txnInserted = txnResult.inserted;
+      }
+
+      // Check alerts against current market listings
+      if (allItems.length > 0) {
+        // Find lowest gold-equivalent price for alert check
+        const lowestItem = allItems.reduce((min, item) => {
+          const minGold = min.pricetype === 1 ? min.price * exchangeRate : min.price;
+          const itemGold = item.pricetype === 1 ? item.price * exchangeRate : item.price;
+          return itemGold < minGold ? item : min;
+        });
 
         const alertResult = checkAlert(tracked, lowestItem.price, lowestItem.pricetype);
 
-        if (alertResult?.triggered) {
+        if (alertResult?.currencyMismatch) {
+          const expectedCrystal = tracked.referencePrice ? Math.round(tracked.referencePrice / exchangeRate) : '?';
+          toast.error(
+            `CURRENCY MISMATCH: ${tracked.itemName} listed for ${formatPrice(lowestItem.price)} gold!\n` +
+            `Expected ~${formatPrice(Number(expectedCrystal))} crystal = ${formatPrice(tracked.referencePrice ?? 0)} gold\n` +
+            `Location: S${lowestItem.server} ${lowestItem.coords}`,
+            { duration: 15000 }
+          );
+        } else if (alertResult?.triggered) {
           toast.warning(
-            `ALERT: ${tracked.itemName} is ${alertResult.percentBelow}% below average!\n` +
-            `Current: ${formatPrice(alertResult.currentPrice)} | Avg: ${formatPrice(alertResult.averagePrice)}\n` +
+            `ALERT: ${tracked.itemName} is ${alertResult.percentBelow}% below reference!\n` +
+            `Current: ${formatPrice(alertResult.currentPrice)} | Ref: ${formatPrice(alertResult.averagePrice)}\n` +
             `Location: S${lowestItem.server} ${lowestItem.coords}`,
             { duration: 10000 }
           );
         } else {
-          // Show insert/update counts
-          const msg = result.inserted > 0 && result.updated > 0
-            ? `${tracked.itemName}: ${result.inserted} new, ${result.updated} updated`
-            : result.inserted > 0
-            ? `${tracked.itemName}: ${result.inserted} new listings found`
-            : `${tracked.itemName}: ${result.updated} listings refreshed`;
-          toast.success(msg);
+          // Show summary
+          const parts: string[] = [];
+          if (allItems.length > 0) parts.push(`${allItems.length} listings`);
+          if (txnInserted > 0) parts.push(`${txnInserted} new transactions`);
+          if (transactions.length > 0 && txnInserted === 0) parts.push(`${transactions.length} transactions (all known)`);
+          toast.success(`${tracked.itemName}: ${parts.join(', ')}`);
         }
-
-        // Update last checked
-        await updateLastChecked(tracked.id);
-        return true;
+      } else if (transactions.length > 0) {
+        toast.success(`${tracked.itemName}: no listings, ${txnInserted > 0 ? `${txnInserted} new transactions` : `${transactions.length} transactions (all known)`}`);
       } else {
-        toast.info(`No listings found for ${tracked.itemName}`);
-        return true; // Still considered success, just no listings
+        toast.info(`No listings or transactions found for ${tracked.itemName}`);
       }
+
+      // Update last checked
+      await updateLastChecked(tracked.id);
+      return true;
     } catch (err) {
       const errorMessage = err instanceof Error ? err.message : 'Unknown error';
       toast.error(`Error refreshing prices: ${errorMessage}`);
@@ -551,7 +645,7 @@ export function TrackedItems() {
                       </Badge>
                       {alertPrice && (
                         <span className="text-xs text-muted-foreground ml-2">
-                          (&lt; {formatPrice(alertPrice)})
+                          (&lt; 🪙{formatPrice(alertPrice)} / 💎{formatPrice(Math.round(alertPrice / exchangeRate))})
                         </span>
                       )}
                     </TableCell>
@@ -578,9 +672,10 @@ export function TrackedItems() {
                               <div className="absolute inset-0 bg-gradient-to-r from-green-400 via-yellow-400 to-red-400 opacity-30" />
                             </div>
                           )}
-                          {/* Price values: Min / Median / Max */}
+                          {/* Price values in gold: Min / Median / Max */}
                           <div className="flex items-center gap-1 text-sm">
-                            <span className="text-green-600 font-medium" title="7-day minimum">
+                            <span className="text-base">🪙</span>
+                            <span className="text-green-600 font-medium" title="7-day minimum (gold)">
                               {formatPrice(item.minPrice7d)}
                             </span>
                             <span className="text-muted-foreground">/</span>
@@ -593,14 +688,29 @@ export function TrackedItems() {
                               {item.priceOverride && <span className="text-xs">*</span>}
                             </span>
                             <span className="text-muted-foreground">/</span>
-                            <span className="text-red-600 font-medium" title="7-day maximum">
+                            <span className="text-red-600 font-medium" title="7-day maximum (gold)">
                               {formatPrice(item.maxPrice7d)}
+                            </span>
+                          </div>
+                          {/* Crystal equivalent row */}
+                          <div className="flex items-center gap-1 text-xs text-muted-foreground">
+                            <span className="text-base">💎</span>
+                            <span className="text-green-600/70">
+                              {formatPrice(item.minPrice7d ? Math.round(item.minPrice7d / exchangeRate) : null)}
+                            </span>
+                            <span>/</span>
+                            <span className={item.priceOverride ? 'text-blue-600/70 font-medium' : 'text-amber-600/70 font-medium'}>
+                              {formatPrice(item.medianPriceGold ? Math.round(item.medianPriceGold / exchangeRate) : null)}
+                            </span>
+                            <span>/</span>
+                            <span className="text-red-600/70">
+                              {formatPrice(item.maxPrice7d ? Math.round(item.maxPrice7d / exchangeRate) : null)}
                             </span>
                           </div>
                           {/* Override indicator if different from median */}
                           {item.priceOverride && item.priceOverride !== item.medianPriceGold && (
                             <div className="text-xs text-blue-600">
-                              Alert ref: {formatPrice(item.priceOverride)}*
+                              Alert ref: {formatPrice(item.priceOverride)}* (💎 {formatPrice(Math.round(item.priceOverride / exchangeRate))})
                             </div>
                           )}
                         </div>

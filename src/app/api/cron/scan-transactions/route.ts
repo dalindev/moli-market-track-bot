@@ -137,35 +137,14 @@ export async function GET(request: NextRequest) {
             exchangeRateUpdates++;
           }
 
-          // Check if this item is being tracked
+          // Check if this item is being tracked (exact match only)
           const itemId = trackedNames.get(parsed.name);
-          if (!itemId) {
-            // Also check for partial matches
-            let matchedItemId: string | null = null;
-            for (const [trackedName, id] of trackedNames) {
-              if (parsed.name.includes(trackedName) || trackedName.includes(parsed.name)) {
-                matchedItemId = id;
-                break;
-              }
-            }
-            if (!matchedItemId) continue;
-          }
-
-          const finalItemId = itemId || (() => {
-            for (const [trackedName, id] of trackedNames) {
-              if (parsed.name.includes(trackedName) || trackedName.includes(parsed.name)) {
-                return id;
-              }
-            }
-            return null;
-          })();
-
-          if (!finalItemId) continue;
+          if (!itemId) continue;
 
           // Use upsert_transaction RPC for deduplication
           // This checks transaction_id to avoid duplicates
           const { data: result, error: upsertError } = await supabase.rpc('upsert_transaction', {
-            p_item_id: finalItemId,
+            p_item_id: itemId,
             p_transaction_id: log.id,
             p_price: parsed.unitPrice,
             p_pricetype: log.pricetype,
