@@ -11,26 +11,31 @@ export interface ValuableCandidate {
   pricetype: number;
   median: number;
   sampleSize: number;
+  type: 'item' | 'pet';  // NEW
 }
 
 export function groupValuableCandidates(logs: PriceHistoryLogExtended[]): ValuableCandidate[] {
-  const groups = new Map<string, number[]>();
+  const groups = new Map<string, { prices: number[]; type: 'item' | 'pet' }>();
   for (const log of logs) {
     if (!log.item_name || log.unit_price <= 0) continue;
-    const key = `${log.item_name}::${log.pricetype}`;
-    const arr = groups.get(key) ?? [];
-    arr.push(log.unit_price);
-    groups.set(key, arr);
+    const type: 'item' | 'pet' = log.buff?.includes('隻') ? 'pet' : 'item';
+    const key = `${log.item_name}::${log.pricetype}::${type}`;
+    const existing = groups.get(key);
+    if (existing) {
+      existing.prices.push(log.unit_price);
+    } else {
+      groups.set(key, { prices: [log.unit_price], type });
+    }
   }
 
   const candidates: ValuableCandidate[] = [];
-  for (const [key, prices] of groups) {
+  for (const [key, { prices, type }] of groups) {
     const [name, ptStr] = key.split('::');
     const pricetype = Number(ptStr);
     const median = computeMedian(prices);
     const threshold = pricetype === 0 ? VALUABLE_GOLD_THRESHOLD : VALUABLE_CRYSTAL_THRESHOLD;
     if (median >= threshold) {
-      candidates.push({ name, pricetype, median, sampleSize: prices.length });
+      candidates.push({ name, pricetype, median, sampleSize: prices.length, type });
     }
   }
   return candidates;
@@ -77,7 +82,7 @@ export async function runDiscovery(deps: DiscoveryDeps): Promise<ScanRunOutcome>
 
       const { error } = await deps.supabase.from('items').insert({
         name: c.name,
-        item_type: 'item',
+        item_type: c.type,  // was hardcoded 'item'
         is_auto_discovered: true,
       });
       if (error) {

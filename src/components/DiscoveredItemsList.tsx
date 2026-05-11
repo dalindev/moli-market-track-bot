@@ -9,6 +9,7 @@ const CRYSTAL = '💎';
 interface ItemRow {
   id: string;
   name: string;
+  item_type: string;  // 'item' or 'pet'
   item_level: number | null;
   median_gold_value: number | null;
   median_crystal_value: number | null;
@@ -63,7 +64,7 @@ export function DiscoveredItemsList() {
     const supabase = createClient();
     supabase
       .from('items')
-      .select('id, name, item_level, median_gold_value, median_crystal_value, min_sold_gold, min_sold_crystal, max_sold_gold, max_sold_crystal, sample_count_gold, sample_count_crystal, image_path, last_history_refresh, fair_value_gold, fair_value_source, fair_value_exchange_rate')
+      .select('id, name, item_type, item_level, median_gold_value, median_crystal_value, min_sold_gold, min_sold_crystal, max_sold_gold, max_sold_crystal, sample_count_gold, sample_count_crystal, image_path, last_history_refresh, fair_value_gold, fair_value_source, fair_value_exchange_rate')
       .eq('is_auto_discovered', true)
       .limit(200)
       .then(({ data, error }) => {
@@ -119,7 +120,14 @@ export function DiscoveredItemsList() {
                     : <div className="w-8 h-8 bg-zinc-100 dark:bg-zinc-800 rounded" />}
                 </td>
                 <td className="py-2 px-2">
-                  <div className="font-medium text-zinc-900 dark:text-zinc-100">{it.name}</div>
+                  <div className="font-medium text-zinc-900 dark:text-zinc-100 flex items-center gap-1.5">
+                    {it.name}
+                    {it.item_type === 'pet' && (
+                      <span className="text-xs px-1.5 py-0.5 rounded bg-pink-100 text-pink-700 dark:bg-pink-950 dark:text-pink-300">
+                        pet
+                      </span>
+                    )}
+                  </div>
                   {it.item_level != null && it.item_level > 0
                     ? <div className="text-xs text-zinc-500">Lv{it.item_level}</div>
                     : null}
