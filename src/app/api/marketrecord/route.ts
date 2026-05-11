@@ -8,6 +8,9 @@ export async function GET(request: NextRequest) {
     page: searchParams.get('page') || '1',
     search: searchParams.get('search') || '',
     type: searchParams.get('type') || 'all',
+    range: searchParams.get('range') || '30d',
+    currency: searchParams.get('currency') || 'all',
+    sort: searchParams.get('sort') || 'time_desc',
   });
 
   try {
@@ -16,9 +19,9 @@ export async function GET(request: NextRequest) {
       {
         headers: {
           'Accept': 'application/json',
-          'User-Agent': 'Mozilla/5.0 (compatible; MarketTracker/1.0)',
+          'User-Agent': 'Mozilla/5.0 (compatible; StarCGMarketTracker/1.0)',
         },
-        next: { revalidate: 300 }, // Cache for 5 minutes (history data doesn't change)
+        next: { revalidate: 60 }, // 1 min cache (down from 5 min — we need fresher data for the scanner)
       }
     );
 
