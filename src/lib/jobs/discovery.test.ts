@@ -28,6 +28,7 @@ describe('groupValuableCandidates', () => {
     expect(result[0].name).toBe('偷襲密卷');
     expect(result[0].pricetype).toBe(0);
     expect(result[0].median).toBe(45_000);
+    expect(result[0].type).toBe('item');
   });
 
   it('includes items with median >= crystal threshold (250)', () => {
@@ -71,5 +72,26 @@ describe('groupValuableCandidates', () => {
     ];
     const result = groupValuableCandidates(logs);
     expect(result[0].sampleSize).toBe(2);
+  });
+
+  it('classifies pets via buff containing 隻', () => {
+    const logs = [
+      makeLog({ item_name: '藍閃蝶', pricetype: 1, unit_price: 300, buff: '購買1隻：藍閃蝶' }),
+      makeLog({ item_name: '藍閃蝶', pricetype: 1, unit_price: 320, buff: '購買1隻：藍閃蝶' }),
+      makeLog({ item_name: '藍閃蝶', pricetype: 1, unit_price: 340, buff: '購買1隻：藍閃蝶' }),
+    ];
+    const result = groupValuableCandidates(logs);
+    expect(result).toHaveLength(1);
+    expect(result[0].name).toBe('藍閃蝶');
+    expect(result[0].type).toBe('pet');
+  });
+
+  it('classifies items via buff containing 個 (default)', () => {
+    const logs = [
+      makeLog({ item_name: '偷襲密卷', pricetype: 0, unit_price: 45000, buff: '購買1個：偷襲密卷' }),
+    ];
+    const result = groupValuableCandidates(logs);
+    expect(result).toHaveLength(1);
+    expect(result[0].type).toBe('item');
   });
 });
