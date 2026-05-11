@@ -45,7 +45,7 @@ export interface ScanJobConfig {
 export const DEFAULT_SCAN_CONFIG: ScanJobConfig = {
   discoveryPages: 10,
   marketSweepStartPage: 1,
-  statsRefreshScope: 'next_n',
+  statsRefreshScope: 'all',
   statsRefreshNextN: 10,
 };
 

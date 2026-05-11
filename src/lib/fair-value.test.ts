@@ -4,10 +4,17 @@ import { computeFairValue } from './fair-value';
 const RATE = 260;
 
 describe('computeFairValue', () => {
-  it('returns insufficient when neither currency has enough samples', () => {
-    const r = computeFairValue({ medianGold: 100, medianCrystal: 100, sampleCountGold: 1, sampleCountCrystal: 1, exchangeRate: RATE });
+  it('returns insufficient when neither currency has any samples', () => {
+    const r = computeFairValue({ medianGold: null, medianCrystal: null, sampleCountGold: 0, sampleCountCrystal: 0, exchangeRate: RATE });
     expect(r.source).toBe('insufficient');
     expect(r.value).toBeNull();
+  });
+
+  it('accepts single-sample data (rare pets often have only 1 historical sale)', () => {
+    // 猶大 case: 1 crystal sale at 263200
+    const r = computeFairValue({ medianGold: null, medianCrystal: 263200, sampleCountGold: 0, sampleCountCrystal: 1, exchangeRate: RATE });
+    expect(r.source).toBe('crystal_only');
+    expect(r.value).toBe(68_432_000); // 263200 * 260
   });
 
   it('uses gold when only gold has data', () => {
