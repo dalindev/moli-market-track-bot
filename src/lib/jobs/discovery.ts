@@ -54,7 +54,7 @@ export async function runDiscovery(deps: DiscoveryDeps): Promise<ScanRunOutcome>
         return { status: 'aborted', itemsScanned, pricesRecorded, errorMessage: null };
       }
       const res = await fetchMarketRecord(
-        { page, range: '7d', sort: 'time_desc', currency: 'all', type: 'all' },
+        { page, range: '30d', sort: 'price_desc', currency: 'all', type: 'all' },
         { signal: deps.signal }
       );
       allLogs.push(...res.logs);
