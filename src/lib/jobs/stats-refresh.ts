@@ -84,7 +84,7 @@ export async function runStatsRefresh(deps: StatsRefreshDeps): Promise<ScanRunOu
       .order('computed_at', { ascending: false })
       .limit(1)
       .maybeSingle();
-    const exchangeRate = rateRow?.gold_per_crystal ?? 260; // fallback to ~observed rate
+    const exchangeRate = rateRow?.gold_per_crystal ?? 250; // fallback to ~observed rate
 
     const total = items?.length ?? 0;
     if (total === 0) {
