@@ -61,6 +61,10 @@ export function filterRelevantListings(
   return rows;
 }
 
+export function dedupeByListingKey(rows: MarketListingRow[]): MarketListingRow[] {
+  return Array.from(new Map(rows.map((r) => [r.listing_key, r])).values());
+}
+
 export interface MarketSweepDeps {
   supabase: SupabaseClient;
   signal: AbortSignal;
@@ -109,8 +113,21 @@ export async function runMarketSweep(deps: MarketSweepDeps): Promise<ScanRunOutc
       deps.onProgress({ currentPage: page, totalPages });
     }
 
+    // 3b) Deduplicate by listing_key. A single stall can list N stacks of the same item
+    // at the same price (e.g., 20 stacks of 穴熊升星金卡 at 58888 each). The unique
+    // index on listing_key (WHERE source='market') would reject the whole batch otherwise.
+    const dedupedRows = dedupeByListingKey(allRows);
+    const duplicatesRemoved = allRows.length - dedupedRows.length;
+    if (duplicatesRemoved > 0) {
+      deps.onProgress({
+        currentPage: totalPages,
+        totalPages,
+        note: `Removed ${duplicatesRemoved} duplicate stack listings`,
+      });
+    }
+
     // 4) Clear prior market snapshots for touched items (fresh view)
-    const touchedItemIds = Array.from(new Set(allRows.map((r) => r.item_id)));
+    const touchedItemIds = Array.from(new Set(dedupedRows.map((r) => r.item_id)));
     if (touchedItemIds.length > 0) {
       const { error: delErr } = await deps.supabase
         .from('price_snapshots')
@@ -122,8 +139,8 @@ export async function runMarketSweep(deps: MarketSweepDeps): Promise<ScanRunOutc
 
     // 5) Batch insert
     const BATCH_SIZE = 500;
-    for (let i = 0; i < allRows.length; i += BATCH_SIZE) {
-      const slice = allRows.slice(i, i + BATCH_SIZE);
+    for (let i = 0; i < dedupedRows.length; i += BATCH_SIZE) {
+      const slice = dedupedRows.slice(i, i + BATCH_SIZE);
       const { error } = await deps.supabase.from('price_snapshots').insert(slice);
       if (error) {
         console.error('[market-sweep] batch insert failed:', error.message);

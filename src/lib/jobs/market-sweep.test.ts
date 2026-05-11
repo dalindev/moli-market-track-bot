@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { filterRelevantListings } from './market-sweep';
+import { filterRelevantListings, dedupeByListingKey } from './market-sweep';
 import type { MarketResponse } from '@/types/market';
 
 function makeResponse(itemsByCd: MarketResponse['itemsByCd']): MarketResponse {
@@ -61,5 +61,22 @@ describe('filterRelevantListings', () => {
     const result = filterRelevantListings(res, known);
     expect(result).toHaveLength(1);
     expect(result[0].item_id).toBe('gold-uuid');
+  });
+});
+
+describe('dedupeByListingKey', () => {
+  it('returns empty for empty input', () => {
+    expect(dedupeByListingKey([])).toEqual([]);
+  });
+
+  it('keeps only first occurrence of each listing_key', () => {
+    const rows = [
+      { item_id: 'a', price: 100, pricetype: 0, server: 1, stall_name: 's', stall_cdkey: 'c1', coords: 'x', quantity: 1, source: 'market' as const, listing_key: 'k1' },
+      { item_id: 'a', price: 100, pricetype: 0, server: 1, stall_name: 's', stall_cdkey: 'c1', coords: 'x', quantity: 1, source: 'market' as const, listing_key: 'k1' },
+      { item_id: 'b', price: 200, pricetype: 0, server: 1, stall_name: 's', stall_cdkey: 'c2', coords: 'x', quantity: 1, source: 'market' as const, listing_key: 'k2' },
+    ];
+    const result = dedupeByListingKey(rows);
+    expect(result).toHaveLength(2);
+    expect(result.map((r) => r.listing_key).sort()).toEqual(['k1', 'k2']);
   });
 });
