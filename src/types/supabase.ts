@@ -34,6 +34,10 @@ export interface Database {
           last_history_refresh: string | null;
           trend6m_cache: Json | null;
           trend6m_cached_at: string | null;
+          fair_value_gold: number | null;
+          fair_value_source: string | null;
+          fair_value_exchange_rate: number | null;
+          fair_value_computed_at: string | null;
         };
         Insert: {
           id?: string;
@@ -58,6 +62,10 @@ export interface Database {
           last_history_refresh?: string | null;
           trend6m_cache?: Json | null;
           trend6m_cached_at?: string | null;
+          fair_value_gold?: number | null;
+          fair_value_source?: string | null;
+          fair_value_exchange_rate?: number | null;
+          fair_value_computed_at?: string | null;
         };
         Update: {
           id?: string;
@@ -82,6 +90,10 @@ export interface Database {
           last_history_refresh?: string | null;
           trend6m_cache?: Json | null;
           trend6m_cached_at?: string | null;
+          fair_value_gold?: number | null;
+          fair_value_source?: string | null;
+          fair_value_exchange_rate?: number | null;
+          fair_value_computed_at?: string | null;
         };
         Relationships: [];
       };
