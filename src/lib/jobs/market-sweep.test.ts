@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { filterRelevantListings, dedupeByListingKey } from './market-sweep';
+import { filterRelevantListings, dedupeByListingKey, collectImageHints } from './market-sweep';
 import type { MarketResponse } from '@/types/market';
 
 function makeResponse(itemsByCd: MarketResponse['itemsByCd']): MarketResponse {
@@ -61,6 +61,44 @@ describe('filterRelevantListings', () => {
     const result = filterRelevantListings(res, known);
     expect(result).toHaveLength(1);
     expect(result[0].item_id).toBe('gold-uuid');
+  });
+});
+
+describe('collectImageHints', () => {
+  it('records first sighting of each item id with a non-zero base image number', () => {
+    const known = new Map([['偷襲密卷::0', 'uuid-1']]);
+    const out = new Map<string, number>();
+    const res = makeResponse({
+      AAA_1: [{
+        cdkey: 'AAA_1', price: 100, pricetype: 0, ITEM_ID: 1,
+        ITEM_TRUENAME: '偷襲密卷', ITEM_FIRSTNAME: '',
+        ITEM_MODIFYATTACK: 0, ITEM_MODIFYDEFENCE: 0, ITEM_MODIFYAGILITY: 0, ITEM_MODIFYMAGIC: 0,
+        ITEM_MAXDURABILITY: 0, ITEM_DURABILITY: 0, ITEM_LEVEL: 0,
+        ITEM_BASEIMAGENUMBER: 26805,
+        ITEM_ABLEUSEFIELD: 0, ITEM_ABLEUSEBATTLE: 0, ITEM_CANSELL: 0,
+        ITEM_REMAIN: 1, ITEM_MAXREMAIN: 1,
+      }],
+    });
+    collectImageHints(res, known, out);
+    expect(out.get('uuid-1')).toBe(26805);
+  });
+
+  it('ignores items not in the known map', () => {
+    const known = new Map<string, string>(); // empty
+    const out = new Map<string, number>();
+    const res = makeResponse({
+      AAA_1: [{
+        cdkey: 'AAA_1', price: 100, pricetype: 0, ITEM_ID: 1,
+        ITEM_TRUENAME: 'unknown', ITEM_FIRSTNAME: '',
+        ITEM_MODIFYATTACK: 0, ITEM_MODIFYDEFENCE: 0, ITEM_MODIFYAGILITY: 0, ITEM_MODIFYMAGIC: 0,
+        ITEM_MAXDURABILITY: 0, ITEM_DURABILITY: 0, ITEM_LEVEL: 0,
+        ITEM_BASEIMAGENUMBER: 12345,
+        ITEM_ABLEUSEFIELD: 0, ITEM_ABLEUSEBATTLE: 0, ITEM_CANSELL: 0,
+        ITEM_REMAIN: 1, ITEM_MAXREMAIN: 1,
+      }],
+    });
+    collectImageHints(res, known, out);
+    expect(out.size).toBe(0);
   });
 });
 

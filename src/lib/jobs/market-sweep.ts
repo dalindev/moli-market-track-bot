@@ -65,6 +65,26 @@ export function dedupeByListingKey(rows: MarketListingRow[]): MarketListingRow[]
   return Array.from(new Map(rows.map((r) => [r.listing_key, r])).values());
 }
 
+/** Updates `out` with (item_id → base_image_number) hints from a market response.
+ * Only records first sighting per item — subsequent stalls with the same item are ignored. */
+export function collectImageHints(
+  response: MarketResponse,
+  knownItems: Map<string, string>,
+  out: Map<string, number>
+): void {
+  for (const items of Object.values(response.itemsByCd ?? {})) {
+    for (const it of items as MarketItem[]) {
+      const key = isGaiZaoTuLevel(it.ITEM_LEVEL)
+        ? `${it.ITEM_TRUENAME}::${it.ITEM_LEVEL}`
+        : `${it.ITEM_TRUENAME}::0`;
+      const itemId = knownItems.get(key);
+      if (itemId && it.ITEM_BASEIMAGENUMBER && !out.has(itemId)) {
+        out.set(itemId, it.ITEM_BASEIMAGENUMBER);
+      }
+    }
+  }
+}
+
 export interface MarketSweepDeps {
   supabase: SupabaseClient;
   signal: AbortSignal;
@@ -93,6 +113,8 @@ export async function runMarketSweep(deps: MarketSweepDeps): Promise<ScanRunOutc
       return { status: 'completed', itemsScanned: 0, pricesRecorded: 0, errorMessage: null };
     }
 
+    const imageHints = new Map<string, number>(); // item_id -> base_image_number
+
     // 2) Fetch page 1 to learn totalPages
     const first = await fetchMarketPage({ page: 1 }, { signal: deps.signal });
     const totalPages = Math.ceil(first.totalFiltered / first.perPage);
@@ -100,6 +122,7 @@ export async function runMarketSweep(deps: MarketSweepDeps): Promise<ScanRunOutc
 
     const allRows: MarketListingRow[] = [];
     allRows.push(...filterRelevantListings(first, known));
+    collectImageHints(first, known, imageHints);
     itemsScanned += Object.values(first.itemsByCd ?? {}).reduce((acc, arr) => acc + arr.length, 0);
 
     // 3) Remaining pages
@@ -109,6 +132,7 @@ export async function runMarketSweep(deps: MarketSweepDeps): Promise<ScanRunOutc
       }
       const res = await fetchMarketPage({ page }, { signal: deps.signal });
       allRows.push(...filterRelevantListings(res, known));
+      collectImageHints(res, known, imageHints);
       itemsScanned += Object.values(res.itemsByCd ?? {}).reduce((acc, arr) => acc + arr.length, 0);
       deps.onProgress({ currentPage: page, totalPages });
     }
@@ -149,28 +173,19 @@ export async function runMarketSweep(deps: MarketSweepDeps): Promise<ScanRunOutc
       pricesRecorded += slice.length;
     }
 
-    // 6) Fetch icons for newly known items lacking image_path.
-    // We only walk the page-1 (`first`) response since one sighting per item is enough.
-    const imageMap = new Map<string, number>(); // item_id -> base_image_number
-    for (const items of Object.values(first.itemsByCd ?? {})) {
-      for (const it of items as MarketItem[]) {
-        const key = isGaiZaoTuLevel(it.ITEM_LEVEL) ? `${it.ITEM_TRUENAME}::${it.ITEM_LEVEL}` : `${it.ITEM_TRUENAME}::0`;
-        const itemId = known.get(key);
-        if (itemId && it.ITEM_BASEIMAGENUMBER && !imageMap.has(itemId)) {
-          imageMap.set(itemId, it.ITEM_BASEIMAGENUMBER);
-        }
-      }
-    }
-    if (imageMap.size > 0) {
+    // 6) Fetch icons for items lacking image_path. imageHints was populated across all pages.
+    if (imageHints.size > 0) {
       const { data: imagelessItems } = await deps.supabase
         .from('items')
         .select('id')
-        .in('id', Array.from(imageMap.keys()))
+        .in('id', Array.from(imageHints.keys()))
         .is('image_path', null);
       for (const row of imagelessItems ?? []) {
         if (deps.signal.aborted) break;
-        const num = imageMap.get(row.id);
+        const num = imageHints.get(row.id);
         if (!num) continue;
+        // Be polite to the image server — small jitter between fetches
+        await new Promise((resolve) => setTimeout(resolve, 200 + Math.random() * 300));
         try {
           const res = await fetch('/api/save-item-image', {
             method: 'POST',
