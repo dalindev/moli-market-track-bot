@@ -6,6 +6,7 @@ import { TrackedItems } from '@/components/TrackedItems';
 import { PriceHistory } from '@/components/PriceHistory';
 import { MigrationPrompt } from '@/components/MigrationPrompt';
 import { AuthGate } from '@/components/AuthGate';
+import { Scanner } from '@/components/Scanner';
 import Link from 'next/link';
 
 export default function Home() {
@@ -20,11 +21,8 @@ export default function Home() {
           <p className="text-zinc-600 dark:text-zinc-400 mt-2">
             Search and track prices from market stalls (支持简体/繁體搜索)
           </p>
-          <Link href="/pet-calculator" className="inline-block mt-2 mr-4 text-sm text-blue-600 dark:text-blue-400 hover:underline">
+          <Link href="/pet-calculator" className="inline-block mt-2 text-sm text-blue-600 dark:text-blue-400 hover:underline">
             寵物檔位計算模擬器 →
-          </Link>
-          <Link href="/scanner" className="inline-block mt-2 text-sm text-blue-600 dark:text-blue-400 hover:underline">
-            Deal Spotter Scanner →
           </Link>
         </header>
 
@@ -38,6 +36,7 @@ export default function Home() {
             <TabsTrigger value="search">Search Market</TabsTrigger>
             <TabsTrigger value="history">Price History</TabsTrigger>
             <TabsTrigger value="tracked">Tracked Items</TabsTrigger>
+            <TabsTrigger value="scanner">Deal Spotter</TabsTrigger>
           </TabsList>
 
           <TabsContent value="search">
@@ -50,6 +49,10 @@ export default function Home() {
 
           <TabsContent value="tracked">
             <TrackedItems />
+          </TabsContent>
+
+          <TabsContent value="scanner">
+            <Scanner />
           </TabsContent>
         </Tabs>
       </div>
