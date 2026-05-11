@@ -132,6 +132,44 @@ export async function runMarketSweep(deps: MarketSweepDeps): Promise<ScanRunOutc
       pricesRecorded += slice.length;
     }
 
+    // 6) Fetch icons for newly known items lacking image_path.
+    // We only walk the page-1 (`first`) response since one sighting per item is enough.
+    const imageMap = new Map<string, number>(); // item_id -> base_image_number
+    for (const items of Object.values(first.itemsByCd ?? {})) {
+      for (const it of items as MarketItem[]) {
+        const key = isGaiZaoTuLevel(it.ITEM_LEVEL) ? `${it.ITEM_TRUENAME}::${it.ITEM_LEVEL}` : `${it.ITEM_TRUENAME}::0`;
+        const itemId = known.get(key);
+        if (itemId && it.ITEM_BASEIMAGENUMBER && !imageMap.has(itemId)) {
+          imageMap.set(itemId, it.ITEM_BASEIMAGENUMBER);
+        }
+      }
+    }
+    if (imageMap.size > 0) {
+      const { data: imagelessItems } = await deps.supabase
+        .from('items')
+        .select('id')
+        .in('id', Array.from(imageMap.keys()))
+        .is('image_path', null);
+      for (const row of imagelessItems ?? []) {
+        if (deps.signal.aborted) break;
+        const num = imageMap.get(row.id);
+        if (!num) continue;
+        try {
+          const res = await fetch('/api/save-item-image', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ base_image_number: num }),
+          });
+          const data = (await res.json()) as { ok?: boolean; image_path?: string };
+          if (data.ok && data.image_path) {
+            await deps.supabase.from('items').update({ image_path: data.image_path }).eq('id', row.id);
+          }
+        } catch (e) {
+          console.error('[market-sweep] image fetch failed:', e);
+        }
+      }
+    }
+
     deps.onProgress({
       currentPage: totalPages,
       totalPages,

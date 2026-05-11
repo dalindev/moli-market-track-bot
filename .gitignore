@@ -42,3 +42,6 @@ next-env.d.ts
 
 # supabase
 supabase/.temp/
+
+# Item icons cached locally — track .gitkeep and gifs (small files, ship with repo)
+# No exclusion needed; default is to track everything in public/.
