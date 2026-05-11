@@ -2,12 +2,14 @@
 
 import { useScanner } from '@/hooks/useScanner';
 import { ScannerJobCard } from '@/components/ScannerJobCard';
+import { DiscoveredItemsList } from '@/components/DiscoveredItemsList';
+import { Card } from '@/components/ui/card';
 
 export function Scanner() {
   const { jobStates, start, stop, KINDS } = useScanner();
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-6">
       <div>
         <h2 className="text-2xl font-bold text-zinc-900 dark:text-zinc-100">Scanner</h2>
         <p className="text-zinc-600 dark:text-zinc-400 mt-1">
@@ -26,6 +28,11 @@ export function Scanner() {
           />
         ))}
       </div>
+
+      <Card className="p-4">
+        <h3 className="font-semibold mb-3 text-zinc-900 dark:text-zinc-100">Discovered items (top 50 by gold value)</h3>
+        <DiscoveredItemsList />
+      </Card>
     </div>
   );
 }

@@ -20,6 +20,20 @@ export interface Database {
           base_image_number: number | null;
           created_at: string;
           updated_at: string;
+          // Deal-spotter additions (migration 20260510000001)
+          is_auto_discovered: boolean;
+          median_gold_value: number | null;
+          median_crystal_value: number | null;
+          min_sold_gold: number | null;
+          min_sold_crystal: number | null;
+          max_sold_gold: number | null;
+          max_sold_crystal: number | null;
+          sample_count_gold: number | null;
+          sample_count_crystal: number | null;
+          image_path: string | null;
+          last_history_refresh: string | null;
+          trend6m_cache: Json | null;
+          trend6m_cached_at: string | null;
         };
         Insert: {
           id?: string;
@@ -31,6 +45,19 @@ export interface Database {
           base_image_number?: number | null;
           created_at?: string;
           updated_at?: string;
+          is_auto_discovered?: boolean;
+          median_gold_value?: number | null;
+          median_crystal_value?: number | null;
+          min_sold_gold?: number | null;
+          min_sold_crystal?: number | null;
+          max_sold_gold?: number | null;
+          max_sold_crystal?: number | null;
+          sample_count_gold?: number | null;
+          sample_count_crystal?: number | null;
+          image_path?: string | null;
+          last_history_refresh?: string | null;
+          trend6m_cache?: Json | null;
+          trend6m_cached_at?: string | null;
         };
         Update: {
           id?: string;
@@ -42,6 +69,19 @@ export interface Database {
           base_image_number?: number | null;
           created_at?: string;
           updated_at?: string;
+          is_auto_discovered?: boolean;
+          median_gold_value?: number | null;
+          median_crystal_value?: number | null;
+          min_sold_gold?: number | null;
+          min_sold_crystal?: number | null;
+          max_sold_gold?: number | null;
+          max_sold_crystal?: number | null;
+          sample_count_gold?: number | null;
+          sample_count_crystal?: number | null;
+          image_path?: string | null;
+          last_history_refresh?: string | null;
+          trend6m_cache?: Json | null;
+          trend6m_cached_at?: string | null;
         };
         Relationships: [];
       };
