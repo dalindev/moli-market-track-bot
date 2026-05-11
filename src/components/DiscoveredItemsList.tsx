@@ -136,6 +136,13 @@ export function DiscoveredItemsList() {
                   <div className="font-semibold text-zinc-900 dark:text-zinc-100">
                     {fmtNum(it.fair_value_gold)} {GOLD}
                   </div>
+                  {it.fair_value_gold != null && it.fair_value_exchange_rate
+                    ? (
+                      <div className="text-sm text-zinc-600 dark:text-zinc-400">
+                        {fmtNum(Math.round(it.fair_value_gold / it.fair_value_exchange_rate))} {CRYSTAL}
+                      </div>
+                    )
+                    : null}
                   {it.fair_value_exchange_rate
                     ? <div className="text-xs text-zinc-500">@ {it.fair_value_exchange_rate}/c</div>
                     : null}
