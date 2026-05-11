@@ -12,7 +12,7 @@ export interface FairValueInput {
   medianCrystal: number | null;
   sampleCountGold: number;
   sampleCountCrystal: number;
-  exchangeRate: number; // gold per crystal, e.g., 260
+  exchangeRate: number; // gold per crystal, e.g., 250
 }
 
 export interface FairValueResult {
