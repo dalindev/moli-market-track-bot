@@ -15,12 +15,15 @@ Example: `https://member.starcg.net/metamo/item/21500.gif`
 ## Pets
 
 ```
-https://member.starcg.net/metamo/png/{BaseImgnum}.png
+https://guide.starcg.net/pet/{BaseImgnum}.gif
 ```
 
-Example: `https://member.starcg.net/metamo/png/30075.png` (referer was `market.php?type=pet`)
-- Path: `/metamo/png/`
-- Extension: `.png`
+Example: `https://guide.starcg.net/pet/101025.gif`
+- Domain: `guide.starcg.net` (different from item icons)
+- Path: `/pet/`
+- Extension: `.gif`
+
+(An earlier candidate `https://member.starcg.net/metamo/png/{N}.png` showed up in the Network tab on `market.php?type=pet` — but that was something else, not the actual pet portrait. The `guide.starcg.net/pet/` URL is the canonical one.)
 
 ## Plan scope
 
