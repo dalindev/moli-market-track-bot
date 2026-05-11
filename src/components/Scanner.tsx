@@ -1,0 +1,31 @@
+'use client';
+
+import { useScanner } from '@/hooks/useScanner';
+import { ScannerJobCard } from '@/components/ScannerJobCard';
+
+export function Scanner() {
+  const { jobStates, start, stop, KINDS } = useScanner();
+
+  return (
+    <div className="space-y-4">
+      <div>
+        <h2 className="text-2xl font-bold text-zinc-900 dark:text-zinc-100">Scanner</h2>
+        <p className="text-zinc-600 dark:text-zinc-400 mt-1">
+          Run scans to populate the deal-spotter database. Each scan is rate-limited (1.5–3s per request).
+        </p>
+      </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        {KINDS.map((kind) => (
+          <ScannerJobCard
+            key={kind}
+            kind={kind}
+            state={jobStates[kind]}
+            onStart={() => start(kind)}
+            onStop={() => stop(kind)}
+          />
+        ))}
+      </div>
+    </div>
+  );
+}
