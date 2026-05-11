@@ -3,6 +3,7 @@ import type { MarketRecordResponseV2 } from '@/types/market';
 import type { ScanRunOutcome } from '@/types/scanner';
 import { fetchMarketRecord } from '../api-clients/marketrecord';
 import { computeMedian } from '../threshold';
+import { computeFairValue } from '../fair-value';
 
 export interface CurrencyStats {
   median: number;
@@ -77,6 +78,14 @@ export async function runStatsRefresh(deps: StatsRefreshDeps): Promise<ScanRunOu
     const { data: items, error } = await query;
     if (error) throw new Error(error.message);
 
+    const { data: rateRow } = await deps.supabase
+      .from('derived_exchange_rate')
+      .select('gold_per_crystal')
+      .order('computed_at', { ascending: false })
+      .limit(1)
+      .maybeSingle();
+    const exchangeRate = rateRow?.gold_per_crystal ?? 260; // fallback to ~observed rate
+
     const total = items?.length ?? 0;
     if (total === 0) {
       deps.onProgress({ currentPage: 0, totalPages: 0, note: 'No items to refresh.' });
@@ -126,6 +135,18 @@ export async function runStatsRefresh(deps: StatsRefreshDeps): Promise<ScanRunOu
         update.max_sold_crystal = crystalStats.max;
         update.sample_count_crystal = crystalStats.count;
       }
+
+      const fair = computeFairValue({
+        medianGold: goldStats?.median ?? null,
+        medianCrystal: crystalStats?.median ?? null,
+        sampleCountGold: goldStats?.count ?? 0,
+        sampleCountCrystal: crystalStats?.count ?? 0,
+        exchangeRate,
+      });
+      update.fair_value_gold = fair.value;
+      update.fair_value_source = fair.source;
+      update.fair_value_exchange_rate = exchangeRate;
+      update.fair_value_computed_at = new Date().toISOString();
 
       const { error: updErr } = await deps.supabase
         .from('items')
