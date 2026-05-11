@@ -123,3 +123,65 @@ export interface PriceHistorySearchParams {
   type: 'all' | 'item' | 'pet';
   page: number;
 }
+
+// New fields returned by the live marketrecord.php endpoint
+// (extends PriceHistoryLogRaw — keep backward compat)
+export interface PriceHistoryLogExtended extends PriceHistoryLogRaw {
+  ts: number;              // same as time, in seconds
+  qty: number;             // pre-parsed quantity (replaces buff regex)
+  item_name: string;       // pre-parsed item name (replaces buff substring)
+  gross_price: number;     // total transaction price (price * qty + fees)
+  unit_price: number;      // per-unit price (replaces price/qty math)
+  unit_gross_price: number;
+  currency_label: string;  // '金幣' or '魔晶'
+}
+
+// Server-computed stats block (new in 2026-05 endpoint)
+export interface MarketRecordStats {
+  count: number;
+  min: number;
+  max: number;
+  avg: number;
+  median: number;
+  trend: number[];           // recent unit prices
+  is_unit_price: boolean;
+  pricetype_mixed: boolean;
+  pricetype_single: number | null;  // 0, 1, or null if mixed
+}
+
+// 6-month daily aggregates with IQR-based outlier counts
+export interface Trend6mDay {
+  day: string;        // 'YYYY-MM-DD'
+  avg: number;        // IQR-filtered average
+  min: number;        // IQR-filtered minimum
+  max: number;        // IQR-filtered maximum
+  raw_min: number;    // un-filtered minimum (LOW outliers = past misprices)
+  raw_max: number;    // un-filtered maximum
+  cnt: number;        // total transaction count this day
+  hi_out: number;     // count of HIGH outliers
+  lo_out: number;     // count of LOW outliers (misprices)
+}
+
+export interface Trend6m {
+  days: Trend6mDay[];
+  pricetype_single: number | null;
+  start_day: string;
+  end_day: string;
+  chart_mode: string;   // 'daily_median_iqr'
+}
+
+// Extended response — superset of PriceHistoryResponseRaw
+export interface MarketRecordResponseV2 {
+  page: number;
+  perPage: number;
+  totalFiltered: number;
+  totalFilteredRaw: number;
+  resultsTruncated: boolean;
+  range: string;
+  sort: string;
+  currency: string;
+  type: string;
+  logs: PriceHistoryLogExtended[];
+  stats: MarketRecordStats;
+  trend6m: Trend6m;
+}

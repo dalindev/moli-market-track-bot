@@ -6,6 +6,7 @@ import { TrackedItems } from '@/components/TrackedItems';
 import { PriceHistory } from '@/components/PriceHistory';
 import { MigrationPrompt } from '@/components/MigrationPrompt';
 import { AuthGate } from '@/components/AuthGate';
+import { Scanner } from '@/components/Scanner';
 import Link from 'next/link';
 
 export default function Home() {
@@ -35,6 +36,7 @@ export default function Home() {
             <TabsTrigger value="search">Search Market</TabsTrigger>
             <TabsTrigger value="history">Price History</TabsTrigger>
             <TabsTrigger value="tracked">Tracked Items</TabsTrigger>
+            <TabsTrigger value="scanner">Deal Spotter</TabsTrigger>
           </TabsList>
 
           <TabsContent value="search">
@@ -47,6 +49,10 @@ export default function Home() {
 
           <TabsContent value="tracked">
             <TrackedItems />
+          </TabsContent>
+
+          <TabsContent value="scanner">
+            <Scanner />
           </TabsContent>
         </Tabs>
       </div>
