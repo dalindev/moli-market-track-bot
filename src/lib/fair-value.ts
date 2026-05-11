@@ -20,7 +20,7 @@ export interface FairValueResult {
   source: FairValueSource;
 }
 
-const MIN_SAMPLES = 3;
+const MIN_SAMPLES = 1; // any historical sale informs fair value (single rare-pet sales still useful)
 const RATIO_TOLERANCE = 2; // gold-from-crystal must be within [0.5x, 2x] of gold-median to "agree"
 
 export function computeFairValue(input: FairValueInput): FairValueResult {
