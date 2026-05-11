@@ -3,11 +3,25 @@ import { writeFile, mkdir, access } from 'node:fs/promises';
 import { constants } from 'node:fs';
 import path from 'node:path';
 
-const IMAGE_URL_PATTERN = (baseImageNumber: number) =>
-  `https://member.starcg.net/metamo/item/${baseImageNumber}.gif`;
+// Item icons live at two patterns on member.starcg.net depending on image number range:
+//   - Older 5-digit numbers (gems, etc.): /metamo/item/{N}.gif
+//   - Newer numbers (food, 升星卡, etc.): /metamo/png/{N}.png
+// We try both. Some items (e.g., 改造圖) have no icon at either — return 404 from this route.
+const URL_PATTERNS: Array<{ url: (n: number) => string; ext: 'gif' | 'png' }> = [
+  { url: (n) => `https://member.starcg.net/metamo/item/${n}.gif`, ext: 'gif' },
+  { url: (n) => `https://member.starcg.net/metamo/png/${n}.png`, ext: 'png' },
+];
 
 const IMAGE_DIR = path.join(process.cwd(), 'public', 'item-images');
-const IMAGE_EXT = 'gif';
+
+async function fileExists(p: string): Promise<boolean> {
+  try {
+    await access(p, constants.F_OK);
+    return true;
+  } catch {
+    return false;
+  }
+}
 
 export async function POST(request: NextRequest) {
   try {
@@ -17,29 +31,46 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'invalid base_image_number' }, { status: 400 });
     }
 
-    const filename = `${baseImageNumber}.${IMAGE_EXT}`;
-    const fullPath = path.join(IMAGE_DIR, filename);
-    const publicPath = `/item-images/${filename}`;
-
-    // Skip if exists
-    try {
-      await access(fullPath, constants.F_OK);
-      return NextResponse.json({ ok: true, image_path: publicPath, cached: true });
-    } catch {
-      // not present, fall through
+    // Check cache: an item may already be saved under either extension
+    for (const { ext } of URL_PATTERNS) {
+      const filename = `${baseImageNumber}.${ext}`;
+      const fullPath = path.join(IMAGE_DIR, filename);
+      if (await fileExists(fullPath)) {
+        return NextResponse.json({
+          ok: true,
+          image_path: `/item-images/${filename}`,
+          cached: true,
+        });
+      }
     }
 
     await mkdir(IMAGE_DIR, { recursive: true });
-    const upstream = await fetch(IMAGE_URL_PATTERN(baseImageNumber), {
-      headers: { 'User-Agent': 'Mozilla/5.0 (compatible; StarCGMarketTracker/1.0)' },
-    });
-    if (!upstream.ok) {
-      return NextResponse.json({ error: `upstream ${upstream.status}` }, { status: 502 });
-    }
-    const buf = Buffer.from(await upstream.arrayBuffer());
-    await writeFile(fullPath, buf);
 
-    return NextResponse.json({ ok: true, image_path: publicPath, cached: false });
+    // Try each upstream pattern in order
+    const attempts: string[] = [];
+    for (const { url, ext } of URL_PATTERNS) {
+      const upstream = await fetch(url(baseImageNumber), {
+        headers: { 'User-Agent': 'Mozilla/5.0 (compatible; StarCGMarketTracker/1.0)' },
+      });
+      attempts.push(`${url(baseImageNumber)} → ${upstream.status}`);
+      if (upstream.ok) {
+        const filename = `${baseImageNumber}.${ext}`;
+        const fullPath = path.join(IMAGE_DIR, filename);
+        const buf = Buffer.from(await upstream.arrayBuffer());
+        await writeFile(fullPath, buf);
+        return NextResponse.json({
+          ok: true,
+          image_path: `/item-images/${filename}`,
+          cached: false,
+        });
+      }
+    }
+
+    // No pattern returned a valid image
+    return NextResponse.json(
+      { error: 'no image found', attempts },
+      { status: 404 }
+    );
   } catch (err) {
     const msg = err instanceof Error ? err.message : String(err);
     return NextResponse.json({ error: msg }, { status: 500 });
