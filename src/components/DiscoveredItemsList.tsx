@@ -3,8 +3,8 @@
 import { useEffect, useState } from 'react';
 import { createClient } from '@/lib/supabase/client';
 
-const GOLD = '🪙';
-const CRYSTAL = '🔷';
+const GOLD = '💰';
+const CRYSTAL = '💎';
 
 interface ItemRow {
   id: string;
