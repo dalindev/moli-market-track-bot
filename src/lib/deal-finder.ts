@@ -23,6 +23,9 @@ export interface RankedListing {
   coords: string;
   quantity: number;
   recordedAt: string;
+  durability: number | null;       // current durability; null = no durability concept
+  maxDurability: number | null;    // max durability
+  durabilityPct: number | null;    // 0-100; null when no durability concept
 
   // References
   fairValueGold: number | null;       // from item.fair_value_gold
@@ -64,6 +67,8 @@ export interface DealFinderInput {
     coords: string;
     quantity: number;
     recorded_at: string;
+    durability?: number | null;
+    max_durability?: number | null;
   }>;
   fallbackExchangeRate: number;  // when item has no fair_value_exchange_rate
   minDealPct: number;            // typically 30
@@ -145,6 +150,12 @@ export function findDeals(input: DealFinderInput): RankedListing[] {
     else if (passFair || passMedian) confidence = 'modest';
     else confidence = 'borderline';
 
+    const durability = s.durability ?? null;
+    const maxDurability = s.max_durability ?? null;
+    const durabilityPct = durability != null && maxDurability != null && maxDurability > 0
+      ? Math.round((durability / maxDurability) * 100)
+      : null;
+
     ranked.push({
       snapshotId: s.id,
       itemId: item.id,
@@ -162,6 +173,9 @@ export function findDeals(input: DealFinderInput): RankedListing[] {
       coords: s.coords,
       quantity: s.quantity,
       recordedAt: s.recorded_at,
+      durability,
+      maxDurability,
+      durabilityPct,
       fairValueGold,
       listingMedianGold,
       pctBelowFair,
