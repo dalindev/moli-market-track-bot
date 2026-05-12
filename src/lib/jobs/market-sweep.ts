@@ -95,14 +95,25 @@ export async function runMarketSweep(deps: MarketSweepDeps): Promise<ScanRunOutc
   let itemsScanned = 0;
   let pricesRecorded = 0;
   try {
-    // Step 1: Fetch all items from DB into a lookup map
-    const { data: knownRows, error: knownErr } = await deps.supabase
-      .from('items')
-      .select('id, name, item_type, item_level');
-    if (knownErr) throw new Error(knownErr.message);
+    // Step 1: Fetch all items from DB into a lookup map.
+    // PostgREST caps default max_rows at 1000, so paginate explicitly.
+    const knownRows: Array<{ id: string; name: string; item_type: string; item_level: number | null }> = [];
+    const KNOWN_PAGE = 1000;
+    let knownFrom = 0;
+    for (;;) {
+      const { data: pageRows, error: knownErr } = await deps.supabase
+        .from('items')
+        .select('id, name, item_type, item_level')
+        .range(knownFrom, knownFrom + KNOWN_PAGE - 1);
+      if (knownErr) throw new Error(knownErr.message);
+      if (!pageRows || pageRows.length === 0) break;
+      knownRows.push(...pageRows);
+      if (pageRows.length < KNOWN_PAGE) break;
+      knownFrom += KNOWN_PAGE;
+    }
 
     const known = new Map<string, string>(); // key: name::item_type::level → uuid
-    for (const it of knownRows ?? []) {
+    for (const it of knownRows) {
       const lvl = isGaiZaoTuLevel(it.item_level) ? it.item_level : 0;
       known.set(`${it.name}::${it.item_type}::${lvl}`, it.id);
     }
