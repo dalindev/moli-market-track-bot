@@ -15,6 +15,8 @@ export interface MarketListingRow {
   quantity: number;
   source: 'market';
   listing_key: string;
+  durability: number | null;       // ITEM_DURABILITY (current), null for items without durability concept
+  max_durability: number | null;   // ITEM_MAXDURABILITY
 }
 
 // Build the lookup key consistent with how we store items
@@ -54,6 +56,8 @@ export function filterRelevantListings(
         quantity: item.ITEM_REMAIN ?? 1,
         source: 'market',
         listing_key: `${itemId}:${cdkey}:${item.price}:${item.pricetype}`,
+        durability: (item.ITEM_MAXDURABILITY ?? 0) > 0 ? (item.ITEM_DURABILITY ?? null) : null,
+        max_durability: (item.ITEM_MAXDURABILITY ?? 0) > 0 ? item.ITEM_MAXDURABILITY : null,
       });
     }
   }
@@ -230,6 +234,8 @@ export async function runMarketSweep(deps: MarketSweepDeps): Promise<ScanRunOutc
             quantity: it.ITEM_REMAIN ?? 1,
             source: 'market',
             listing_key: `${itemId}:${cdkey}:${it.price}:${it.pricetype}`,
+            durability: (it.ITEM_MAXDURABILITY ?? 0) > 0 ? (it.ITEM_DURABILITY ?? null) : null,
+            max_durability: (it.ITEM_MAXDURABILITY ?? 0) > 0 ? it.ITEM_MAXDURABILITY : null,
           });
           if (it.ITEM_BASEIMAGENUMBER && !imageHints.has(itemId)) {
             imageHints.set(itemId, it.ITEM_BASEIMAGENUMBER);
@@ -254,6 +260,8 @@ export async function runMarketSweep(deps: MarketSweepDeps): Promise<ScanRunOutc
             quantity: 1,
             source: 'market',
             listing_key: `${itemId}:${cdkey}:${pet.price}:${pet.pricetype}`,
+            durability: null,
+            max_durability: null,
           });
           if (pet.BaseImgnum && !imageHints.has(itemId)) {
             imageHints.set(itemId, pet.BaseImgnum);

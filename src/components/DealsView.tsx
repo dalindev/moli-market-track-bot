@@ -55,6 +55,7 @@ export function DealsView() {
   const [minProfitGold, setMinProfitGold] = useState(0);
   const [minItemValue, setMinItemValue] = useState(0);
   const [fairValueOnly, setFairValueOnly] = useState(false);
+  const [hideNearBroken, setHideNearBroken] = useState(true); // default on — broken gear isn't a deal
   const [serverFilter, setServerFilter] = useState<ServerFilter>('all');
   const [currencyFilter, setCurrencyFilter] = useState<CurrencyFilter>('all');
   const [hidePets, setHidePets] = useState(false);
@@ -104,7 +105,7 @@ export function DealsView() {
       for (;;) {
         const { data, error } = await supabase
           .from('price_snapshots')
-          .select('id, item_id, price, pricetype, server, stall_name, stall_cdkey, coords, quantity, recorded_at')
+          .select('id, item_id, price, pricetype, server, stall_name, stall_cdkey, coords, quantity, recorded_at, durability, max_durability')
           .eq('source', 'market')
           .gte('recorded_at', freshnessCutoff)
           .range(from, from + PAGE - 1);
@@ -155,6 +156,8 @@ export function DealsView() {
     if (fairValueOnly && d.fairValueGold == null) return false;
     if (minProfitGold > 0 && d.profitGold < minProfitGold) return false;
     if (minItemValue > 0 && (d.fairValueGold ?? d.listingMedianGold ?? 0) < minItemValue) return false;
+    // Hide gear at < 50% durability (broken-soon, not really a deal)
+    if (hideNearBroken && d.durabilityPct != null && d.durabilityPct < 50) return false;
     return true;
   });
 
@@ -299,6 +302,16 @@ export function DealsView() {
           />
           Fair value only
         </label>
+
+        <label className="text-xs text-zinc-600 dark:text-zinc-400 flex items-center gap-1.5" title="Hide gear listings with less than 50% durability remaining (耐久 — about to break)">
+          <input
+            type="checkbox"
+            checked={hideNearBroken}
+            onChange={(e) => setHideNearBroken(e.target.checked)}
+            className="rounded"
+          />
+          Hide low 耐久
+        </label>
       </div>
 
       {sweepRunning && (
@@ -369,6 +382,22 @@ export function DealsView() {
                         )}
                         {d.itemLevel != null && d.itemLevel > 0 && (
                           <span className="text-[10px] text-zinc-500">Lv{d.itemLevel}</span>
+                        )}
+                        {d.durabilityPct != null && (
+                          <span
+                            className={`text-[10px] px-1 py-0.5 rounded ${
+                              d.durabilityPct < 25
+                                ? 'bg-red-100 text-red-700 dark:bg-red-950 dark:text-red-300 font-bold'
+                                : d.durabilityPct < 50
+                                ? 'bg-orange-100 text-orange-700 dark:bg-orange-950 dark:text-orange-300'
+                                : d.durabilityPct < 80
+                                ? 'bg-amber-100 text-amber-700 dark:bg-amber-950 dark:text-amber-300'
+                                : 'bg-zinc-100 text-zinc-600 dark:bg-zinc-800 dark:text-zinc-400'
+                            }`}
+                            title={`Durability ${d.durability}/${d.maxDurability}`}
+                          >
+                            耐久 {d.durability}/{d.maxDurability}
+                          </span>
                         )}
                         {d.isScreamingDeal && (
                           <span className="text-[10px] px-1 py-0.5 rounded bg-red-100 text-red-700 dark:bg-red-950 dark:text-red-300 font-bold">🔥</span>

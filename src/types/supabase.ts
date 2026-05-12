@@ -112,6 +112,8 @@ export interface Database {
           listing_key: string | null;
           transaction_id: number | null;
           recorded_at: string;
+          durability: number | null;
+          max_durability: number | null;
         };
         Insert: {
           id?: string;
@@ -127,6 +129,8 @@ export interface Database {
           listing_key?: string | null;
           transaction_id?: number | null;
           recorded_at?: string;
+          durability?: number | null;
+          max_durability?: number | null;
         };
         Update: {
           id?: string;
@@ -142,6 +146,8 @@ export interface Database {
           listing_key?: string | null;
           transaction_id?: number | null;
           recorded_at?: string;
+          durability?: number | null;
+          max_durability?: number | null;
         };
         Relationships: [
           {

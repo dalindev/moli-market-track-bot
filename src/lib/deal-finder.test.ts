@@ -138,6 +138,7 @@ function makeRanked(o: { snapshotId: string; profitGold: number; isMispriceCandi
     price: 0, pricetype: 0 as const, priceGold: 0, server: 1,
     stallName: '', stallCdkey: '', coords: '', quantity: 1,
     recordedAt: '2026-05-12T00:00:00Z',
+    durability: null, maxDurability: null, durabilityPct: null,
     fairValueGold: null, listingMedianGold: null,
     pctBelowFair: null, pctBelowListingMedian: null,
     profitGold: o.profitGold,

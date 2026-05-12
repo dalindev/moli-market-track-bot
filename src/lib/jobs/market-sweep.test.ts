@@ -109,9 +109,9 @@ describe('dedupeByListingKey', () => {
 
   it('keeps only first occurrence of each listing_key', () => {
     const rows = [
-      { item_id: 'a', price: 100, pricetype: 0, server: 1, stall_name: 's', stall_cdkey: 'c1', coords: 'x', quantity: 1, source: 'market' as const, listing_key: 'k1' },
-      { item_id: 'a', price: 100, pricetype: 0, server: 1, stall_name: 's', stall_cdkey: 'c1', coords: 'x', quantity: 1, source: 'market' as const, listing_key: 'k1' },
-      { item_id: 'b', price: 200, pricetype: 0, server: 1, stall_name: 's', stall_cdkey: 'c2', coords: 'x', quantity: 1, source: 'market' as const, listing_key: 'k2' },
+      { item_id: 'a', price: 100, pricetype: 0, server: 1, stall_name: 's', stall_cdkey: 'c1', coords: 'x', quantity: 1, source: 'market' as const, listing_key: 'k1', durability: null, max_durability: null },
+      { item_id: 'a', price: 100, pricetype: 0, server: 1, stall_name: 's', stall_cdkey: 'c1', coords: 'x', quantity: 1, source: 'market' as const, listing_key: 'k1', durability: null, max_durability: null },
+      { item_id: 'b', price: 200, pricetype: 0, server: 1, stall_name: 's', stall_cdkey: 'c2', coords: 'x', quantity: 1, source: 'market' as const, listing_key: 'k2', durability: null, max_durability: null },
     ];
     const result = dedupeByListingKey(rows);
     expect(result).toHaveLength(2);
