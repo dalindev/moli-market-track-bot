@@ -11,16 +11,16 @@ export interface MarketFetchParams {
 
 export interface MarketFetchOptions {
   signal?: AbortSignal;
-  minDelayMs?: number;     // default 1500
-  maxDelayMs?: number;     // default 3000
+  minDelayMs?: number;     // default 400
+  maxDelayMs?: number;     // default 900
 }
 
 export async function fetchMarketPage(
   params: MarketFetchParams,
   opts: MarketFetchOptions = {}
 ): Promise<MarketResponse> {
-  const minDelay = opts.minDelayMs ?? 1500;
-  const maxDelay = opts.maxDelayMs ?? 3000;
+  const minDelay = opts.minDelayMs ?? 400;
+  const maxDelay = opts.maxDelayMs ?? 900;
   await jitteredSleep(minDelay, maxDelay);
 
   if (opts.signal?.aborted) {

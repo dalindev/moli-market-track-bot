@@ -25,8 +25,8 @@ export async function fetchMarketRecord(
   params: MarketRecordFetchParams,
   opts: MarketRecordFetchOptions = {}
 ): Promise<MarketRecordResponseV2> {
-  const minDelay = opts.minDelayMs ?? 1500;
-  const maxDelay = opts.maxDelayMs ?? 3000;
+  const minDelay = opts.minDelayMs ?? 400;
+  const maxDelay = opts.maxDelayMs ?? 900;
   await jitteredSleep(minDelay, maxDelay);
 
   if (opts.signal?.aborted) {
