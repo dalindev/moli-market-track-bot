@@ -6,11 +6,17 @@ import path from 'node:path';
 // Item icons live at two patterns on member.starcg.net depending on image number range:
 //   - Older 5-digit numbers (gems, etc.): /metamo/item/{N}.gif
 //   - Newer numbers (food, 升星卡, etc.): /metamo/png/{N}.png
-// We try both. Some items (e.g., 改造圖) have no icon at either — return 404 from this route.
-const URL_PATTERNS: Array<{ url: (n: number) => string; ext: 'gif' | 'png' }> = [
-  { url: (n) => `https://member.starcg.net/metamo/item/${n}.gif`, ext: 'gif' },
-  { url: (n) => `https://member.starcg.net/metamo/png/${n}.png`, ext: 'png' },
-];
+// Pet icons live on guide.starcg.net: /pet/{N}.gif
+// We pick patterns by item_type. Some items (e.g., 改造圖) have no icon — return 404 from this route.
+const URL_PATTERNS: Record<string, Array<{ url: (n: number) => string; ext: 'gif' | 'png' }>> = {
+  item: [
+    { url: (n) => `https://member.starcg.net/metamo/item/${n}.gif`, ext: 'gif' },
+    { url: (n) => `https://member.starcg.net/metamo/png/${n}.png`, ext: 'png' },
+  ],
+  pet: [
+    { url: (n) => `https://guide.starcg.net/pet/${n}.gif`, ext: 'gif' },
+  ],
+};
 
 const IMAGE_DIR = path.join(process.cwd(), 'public', 'item-images');
 
@@ -31,8 +37,11 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'invalid base_image_number' }, { status: 400 });
     }
 
-    // Check cache: an item may already be saved under either extension
-    for (const { ext } of URL_PATTERNS) {
+    const itemType = (body?.item_type === 'pet' ? 'pet' : 'item') as 'item' | 'pet';
+    const patterns = URL_PATTERNS[itemType];
+
+    // Check cache: an item may already be saved under any extension for this type
+    for (const { ext } of patterns) {
       const filename = `${baseImageNumber}.${ext}`;
       const fullPath = path.join(IMAGE_DIR, filename);
       if (await fileExists(fullPath)) {
@@ -48,7 +57,7 @@ export async function POST(request: NextRequest) {
 
     // Try each upstream pattern in order
     const attempts: string[] = [];
-    for (const { url, ext } of URL_PATTERNS) {
+    for (const { url, ext } of patterns) {
       const upstream = await fetch(url(baseImageNumber), {
         headers: { 'User-Agent': 'Mozilla/5.0 (compatible; StarCGMarketTracker/1.0)' },
       });

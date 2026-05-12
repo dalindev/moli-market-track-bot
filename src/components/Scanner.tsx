@@ -5,8 +5,10 @@ import { ScannerJobCard } from '@/components/ScannerJobCard';
 import { DiscoveredItemsList } from '@/components/DiscoveredItemsList';
 import { Card } from '@/components/ui/card';
 
+const VISIBLE_KINDS = ['market_sweep', 'stats_refresh'] as const;
+
 export function Scanner() {
-  const { jobStates, start, stop, KINDS } = useScanner();
+  const { jobStates, start, stop } = useScanner();
 
   return (
     <div className="space-y-6">
@@ -17,8 +19,12 @@ export function Scanner() {
         </p>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        {KINDS.map((kind) => (
+      <p className="text-sm text-zinc-500">
+        Market sweep auto-discovers items and pets directly from current listings. Stats refresh fills in history.
+      </p>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        {VISIBLE_KINDS.map((kind) => (
           <ScannerJobCard
             key={kind}
             kind={kind}

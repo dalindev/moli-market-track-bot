@@ -66,17 +66,31 @@ export async function runStatsRefresh(deps: StatsRefreshDeps): Promise<ScanRunOu
   let itemsScanned = 0;
   let pricesRecorded = 0;
   try {
-    // Pick items, oldest refresh first
+    // Fetch items with current listings first (joins to price_snapshots)
+    // Use raw IN-clause via a subquery alternative: 2 queries
+    const { data: listedItemIds } = await deps.supabase
+      .from('price_snapshots')
+      .select('item_id')
+      .eq('source', 'market');
+    const listedSet = new Set((listedItemIds ?? []).map((r) => r.item_id));
+
     let query = deps.supabase
       .from('items')
       .select('id, name, item_level, last_history_refresh')
-      .eq('is_auto_discovered', true)
       .order('last_history_refresh', { ascending: true, nullsFirst: true });
     if (deps.scope === 'next_n') {
       query = query.limit(deps.nextN);
     }
     const { data: items, error } = await query;
     if (error) throw new Error(error.message);
+
+    // Sort: listed items first, then by stale-ness (already DB-sorted)
+    const sortedItems = [...(items ?? [])].sort((a, b) => {
+      const aL = listedSet.has(a.id) ? 0 : 1;
+      const bL = listedSet.has(b.id) ? 0 : 1;
+      if (aL !== bL) return aL - bL;
+      return 0; // preserve DB order for ties
+    });
 
     const { data: rateRow } = await deps.supabase
       .from('derived_exchange_rate')
@@ -86,7 +100,7 @@ export async function runStatsRefresh(deps: StatsRefreshDeps): Promise<ScanRunOu
       .maybeSingle();
     const exchangeRate = rateRow?.gold_per_crystal ?? 250; // fallback to ~observed rate
 
-    const total = items?.length ?? 0;
+    const total = sortedItems.length;
     if (total === 0) {
       deps.onProgress({ currentPage: 0, totalPages: 0, note: 'No items to refresh.' });
       return { status: 'completed', itemsScanned: 0, pricesRecorded: 0, errorMessage: null };
@@ -96,27 +110,19 @@ export async function runStatsRefresh(deps: StatsRefreshDeps): Promise<ScanRunOu
       if (deps.signal.aborted) {
         return { status: 'aborted', itemsScanned, pricesRecorded, errorMessage: null };
       }
-      const item = items![i];
+      const item = sortedItems[i];
       itemsScanned += 1;
       deps.onProgress({ currentPage: i + 1, totalPages: total, note: `Refreshing ${item.name}...` });
 
-      // Fetch with currency=0 then currency=1. Server may ignore currency for log filter,
-      // but pickPerCurrencyStats handles mixed responses too.
-      const goldRes = await fetchMarketRecord(
-        { page: 1, search: item.name, range: '30d', sort: 'time_desc', currency: '0' },
+      // Single call with currency=all — pickPerCurrencyStats handles the mixed response
+      const res = await fetchMarketRecord(
+        { page: 1, search: item.name, range: '30d', sort: 'time_desc', currency: 'all' },
         { signal: deps.signal }
       );
-      const crystalRes = await fetchMarketRecord(
-        { page: 1, search: item.name, range: '30d', sort: 'time_desc', currency: '1' },
-        { signal: deps.signal }
-      );
-
-      const goldStats = pickPerCurrencyStats(goldRes).gold;
-      const crystalStats = pickPerCurrencyStats(crystalRes).crystal;
-      // Use trend6m from whichever response has more data
-      const trend6m = (goldRes.trend6m.days.length >= crystalRes.trend6m.days.length)
-        ? goldRes.trend6m
-        : crystalRes.trend6m;
+      const stats = pickPerCurrencyStats(res);
+      const goldStats = stats.gold;
+      const crystalStats = stats.crystal;
+      const trend6m = res.trend6m;
 
       const update: Record<string, unknown> = {
         last_history_refresh: new Date().toISOString(),
