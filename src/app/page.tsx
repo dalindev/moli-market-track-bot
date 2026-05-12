@@ -8,11 +8,13 @@ import { MigrationPrompt } from '@/components/MigrationPrompt';
 import { AuthGate } from '@/components/AuthGate';
 import { Scanner } from '@/components/Scanner';
 import { DealsView } from '@/components/DealsView';
+import { ScannerProvider } from '@/components/providers/ScannerProvider';
 import Link from 'next/link';
 
 export default function Home() {
   return (
     <AuthGate>
+    <ScannerProvider>
     <div className="min-h-screen bg-zinc-50 dark:bg-zinc-950">
       <div className="container mx-auto py-8 px-4">
         <header className="mb-8">
@@ -63,6 +65,7 @@ export default function Home() {
         </Tabs>
       </div>
     </div>
+    </ScannerProvider>
     </AuthGate>
   );
 }

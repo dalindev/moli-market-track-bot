@@ -1,6 +1,6 @@
 'use client';
 
-import { useScanner } from '@/hooks/useScanner';
+import { useScannerState } from '@/components/providers/ScannerProvider';
 import { ScannerJobCard } from '@/components/ScannerJobCard';
 import { DiscoveredItemsList } from '@/components/DiscoveredItemsList';
 import { Card } from '@/components/ui/card';
@@ -8,7 +8,7 @@ import { Card } from '@/components/ui/card';
 const VISIBLE_KINDS = ['market_sweep', 'stats_refresh'] as const;
 
 export function Scanner() {
-  const { jobStates, start, stop } = useScanner();
+  const { jobStates, start, stop } = useScannerState();
 
   return (
     <div className="space-y-6">

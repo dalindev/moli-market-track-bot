@@ -3,7 +3,7 @@
 import { useCallback, useEffect, useState } from 'react';
 import { createClient } from '@/lib/supabase/client';
 import { findDeals, sortDeals, type RankedListing } from '@/lib/deal-finder';
-import { useScanner } from '@/hooks/useScanner';
+import { useScannerState } from '@/components/providers/ScannerProvider';
 
 const DEFAULT_MIN_DEAL_PCT = 30;
 const DEFAULT_SCREAMING_DEAL_PCT = 50;
@@ -57,7 +57,7 @@ export function DealsView() {
   const [hidePets, setHidePets] = useState(false);
   const [lastFetched, setLastFetched] = useState<Date | null>(null);
 
-  const { jobStates, start, stop } = useScanner();
+  const { jobStates, start, stop } = useScannerState();
   const sweepState = jobStates.market_sweep;
 
   const fetchDeals = useCallback(async () => {
@@ -100,7 +100,7 @@ export function DealsView() {
   }, [fetchDeals]);
 
   useEffect(() => {
-    if (sweepState.status === 'success' || sweepState.status === 'aborted') {
+    if (sweepState.status === 'success' || sweepState.status === 'aborted' || sweepState.status === 'failed') {
       fetchDeals();
     }
   }, [sweepState.status, fetchDeals]);
@@ -211,6 +211,17 @@ export function DealsView() {
       {sweepRunning && (
         <div className="text-xs p-2 rounded bg-blue-50 text-blue-700 dark:bg-blue-950 dark:text-blue-300">
           Refreshing market... page {sweepState.progress?.currentPage} / {sweepState.progress?.totalPages}. {sweepState.progress?.latestNote}
+        </div>
+      )}
+
+      {sweepState.status === 'failed' && sweepState.lastError && (
+        <div className="text-xs p-2 rounded bg-red-50 text-red-700 dark:bg-red-950 dark:text-red-300">
+          Last sweep failed: {sweepState.lastError}
+        </div>
+      )}
+      {sweepState.status === 'aborted' && (
+        <div className="text-xs p-2 rounded bg-amber-50 text-amber-700 dark:bg-amber-950 dark:text-amber-300">
+          Last sweep was stopped.
         </div>
       )}
 
