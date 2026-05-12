@@ -254,22 +254,35 @@ export async function runMarketSweep(deps: MarketSweepDeps): Promise<ScanRunOutc
     // Step 5: Deduplicate, delete prior market snapshots, batch insert
     const dedupedRows = dedupeByListingKey(allListings);
     const duplicatesRemoved = allListings.length - dedupedRows.length;
-    if (duplicatesRemoved > 0) {
-      deps.onProgress({
-        currentPage: totalPages,
-        totalPages,
-        note: `Removed ${duplicatesRemoved} duplicate stack listings`,
-      });
+    const sweepErrors: string[] = [];
+
+    deps.onProgress({
+      currentPage: totalPages,
+      totalPages,
+      note: `Built ${allListings.length} rows → ${dedupedRows.length} unique (removed ${duplicatesRemoved} dupes)`,
+    });
+
+    if (dedupedRows.length === 0) {
+      sweepErrors.push(
+        `No listings to insert. Built ${allListings.length} rows from market response; after dedup, 0 remain. Likely 'known' lookup never matched the live ITEM_TRUENAME — check name encoding or item_level handling.`
+      );
     }
 
+    // Delete prior market snapshots. Chunk the IN-clause to avoid PostgREST URL limits.
+    const DELETE_CHUNK = 500;
     const touchedItemIds = Array.from(new Set(dedupedRows.map((r) => r.item_id)));
-    if (touchedItemIds.length > 0) {
+    for (let i = 0; i < touchedItemIds.length; i += DELETE_CHUNK) {
+      const chunk = touchedItemIds.slice(i, i + DELETE_CHUNK);
       const { error: delErr } = await deps.supabase
         .from('price_snapshots')
         .delete()
-        .in('item_id', touchedItemIds)
+        .in('item_id', chunk)
         .eq('source', 'market');
-      if (delErr) console.error('[market-sweep] delete failed:', delErr.message);
+      if (delErr) {
+        const msg = `delete chunk failed: ${delErr.message}`;
+        console.error('[market-sweep]', msg);
+        sweepErrors.push(msg);
+      }
     }
 
     const BATCH_SIZE = 500;
@@ -277,7 +290,9 @@ export async function runMarketSweep(deps: MarketSweepDeps): Promise<ScanRunOutc
       const slice = dedupedRows.slice(i, i + BATCH_SIZE);
       const { error } = await deps.supabase.from('price_snapshots').insert(slice);
       if (error) {
-        console.error('[market-sweep] batch insert failed:', error.message);
+        const msg = `batch ${Math.floor(i / BATCH_SIZE) + 1} insert failed: ${error.message} (details: ${'details' in error ? (error as { details?: string }).details ?? '' : ''})`;
+        console.error('[market-sweep]', msg);
+        sweepErrors.push(msg);
         continue;
       }
       pricesRecorded += slice.length;
@@ -312,13 +327,21 @@ export async function runMarketSweep(deps: MarketSweepDeps): Promise<ScanRunOutc
       }
     }
 
+    const errorSummary = sweepErrors.length > 0 ? sweepErrors.slice(0, 3).join(' | ') : null;
     deps.onProgress({
       currentPage: totalPages,
       totalPages,
-      note: `Saved ${pricesRecorded} listings across ${touchedItemIds.length} items/pets.`,
+      note: `Saved ${pricesRecorded} listings across ${touchedItemIds.length} items/pets.${errorSummary ? ` (${sweepErrors.length} errors — see status)` : ''}`,
     });
 
-    return { status: 'completed', itemsScanned, pricesRecorded, errorMessage: null };
+    // Treat as failure if we built non-zero listings but saved zero — visible to user
+    const isFailure = pricesRecorded === 0 && allListings.length > 0;
+    return {
+      status: isFailure ? 'failed' : 'completed',
+      itemsScanned,
+      pricesRecorded,
+      errorMessage: errorSummary ?? (isFailure ? `Built ${allListings.length} listings but saved 0 — check console for inserts errors` : null),
+    };
   } catch (err) {
     if (err instanceof Error && err.name === 'AbortError') {
       return { status: 'aborted', itemsScanned, pricesRecorded, errorMessage: null };
