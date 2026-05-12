@@ -7,6 +7,7 @@ import { PriceHistory } from '@/components/PriceHistory';
 import { MigrationPrompt } from '@/components/MigrationPrompt';
 import { AuthGate } from '@/components/AuthGate';
 import { Scanner } from '@/components/Scanner';
+import { DealsView } from '@/components/DealsView';
 import Link from 'next/link';
 
 export default function Home() {
@@ -31,13 +32,18 @@ export default function Home() {
           <MigrationPrompt />
         </div>
 
-        <Tabs defaultValue="search" className="w-full">
+        <Tabs defaultValue="deals" className="w-full">
           <TabsList className="mb-4">
+            <TabsTrigger value="deals">🔥 Deals</TabsTrigger>
             <TabsTrigger value="search">Search Market</TabsTrigger>
             <TabsTrigger value="history">Price History</TabsTrigger>
             <TabsTrigger value="tracked">Tracked Items</TabsTrigger>
-            <TabsTrigger value="scanner">Deal Spotter</TabsTrigger>
+            <TabsTrigger value="scanner">Scanner</TabsTrigger>
           </TabsList>
+
+          <TabsContent value="deals">
+            <DealsView />
+          </TabsContent>
 
           <TabsContent value="search">
             <MarketSearch />
