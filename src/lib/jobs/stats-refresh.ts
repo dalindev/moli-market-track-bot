@@ -106,19 +106,34 @@ export async function runStatsRefresh(deps: StatsRefreshDeps): Promise<ScanRunOu
       return { status: 'completed', itemsScanned: 0, pricesRecorded: 0, errorMessage: null };
     }
 
+    // Cache responses keyed by item.name — multiple items can share a name
+    // (e.g., 改造圖A at levels 5/6/7). The marketrecord.php API doesn't
+    // differentiate by level so the response would be identical → cache.
+    const responseCache = new Map<string, MarketRecordResponseV2>();
+
     for (let i = 0; i < total; i += 1) {
       if (deps.signal.aborted) {
         return { status: 'aborted', itemsScanned, pricesRecorded, errorMessage: null };
       }
       const item = sortedItems[i];
       itemsScanned += 1;
-      deps.onProgress({ currentPage: i + 1, totalPages: total, note: `Refreshing ${item.name}...` });
+      const cached = responseCache.has(item.name);
+      deps.onProgress({
+        currentPage: i + 1,
+        totalPages: total,
+        note: `${cached ? '(cached) ' : ''}Refreshing ${item.name}...`,
+      });
 
       // Single call with currency=all — pickPerCurrencyStats handles the mixed response
-      const res = await fetchMarketRecord(
-        { page: 1, search: item.name, range: '30d', sort: 'time_desc', currency: 'all' },
-        { signal: deps.signal }
-      );
+      // If another item already triggered this exact API call this run, reuse the response.
+      let res = responseCache.get(item.name);
+      if (!res) {
+        res = await fetchMarketRecord(
+          { page: 1, search: item.name, range: '30d', sort: 'time_desc', currency: 'all' },
+          { signal: deps.signal }
+        );
+        responseCache.set(item.name, res);
+      }
       const stats = pickPerCurrencyStats(res);
       const goldStats = stats.gold;
       const crystalStats = stats.crystal;
