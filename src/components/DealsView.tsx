@@ -53,6 +53,7 @@ export function DealsView() {
   const [loading, setLoading] = useState(true);
   const [minPct, setMinPct] = useState(DEFAULT_MIN_DEAL_PCT);
   const [minProfitGold, setMinProfitGold] = useState(0);
+  const [minItemValue, setMinItemValue] = useState(0);
   const [fairValueOnly, setFairValueOnly] = useState(false);
   const [serverFilter, setServerFilter] = useState<ServerFilter>('all');
   const [currencyFilter, setCurrencyFilter] = useState<CurrencyFilter>('all');
@@ -153,6 +154,7 @@ export function DealsView() {
     if (currencyFilter === 'crystal' && d.pricetype !== 1) return false;
     if (fairValueOnly && d.fairValueGold == null) return false;
     if (minProfitGold > 0 && d.profitGold < minProfitGold) return false;
+    if (minItemValue > 0 && (d.fairValueGold ?? d.listingMedianGold ?? 0) < minItemValue) return false;
     return true;
   });
 
@@ -231,6 +233,25 @@ export function DealsView() {
             className={`text-xs px-2 py-1 rounded border ${minProfitGold === opt.v ? 'bg-zinc-900 text-white dark:bg-zinc-100 dark:text-zinc-900 border-zinc-900 dark:border-zinc-100' : 'border-zinc-300 dark:border-zinc-700 hover:bg-zinc-100 dark:hover:bg-zinc-800'}`}
           >
             {opt.label} 💰
+          </button>
+        ))}
+
+        <div className="h-6 w-px bg-zinc-300 dark:bg-zinc-700 mx-1" />
+
+        <span className="text-xs text-zinc-500" title="Hides low-value items like 水的水晶碎片">Item ≥:</span>
+        {[
+          { v: 0, label: 'any' },
+          { v: 10_000, label: '10k' },
+          { v: 50_000, label: '50k' },
+          { v: 100_000, label: '100k' },
+          { v: 1_000_000, label: '1M' },
+        ].map((opt) => (
+          <button
+            key={opt.v}
+            onClick={() => setMinItemValue(opt.v)}
+            className={`text-xs px-2 py-1 rounded border ${minItemValue === opt.v ? 'bg-zinc-900 text-white dark:bg-zinc-100 dark:text-zinc-900 border-zinc-900 dark:border-zinc-100' : 'border-zinc-300 dark:border-zinc-700 hover:bg-zinc-100 dark:hover:bg-zinc-800'}`}
+          >
+            {opt.label}
           </button>
         ))}
 
