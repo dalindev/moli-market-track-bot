@@ -52,6 +52,8 @@ export function DealsView() {
   const [deals, setDeals] = useState<RankedListing[]>([]);
   const [loading, setLoading] = useState(true);
   const [minPct, setMinPct] = useState(DEFAULT_MIN_DEAL_PCT);
+  const [minProfitGold, setMinProfitGold] = useState(0);
+  const [fairValueOnly, setFairValueOnly] = useState(false);
   const [serverFilter, setServerFilter] = useState<ServerFilter>('all');
   const [currencyFilter, setCurrencyFilter] = useState<CurrencyFilter>('all');
   const [hidePets, setHidePets] = useState(false);
@@ -66,26 +68,65 @@ export function DealsView() {
 
     const freshnessCutoff = new Date(Date.now() - SNAPSHOT_FRESHNESS_HOURS * 60 * 60 * 1000).toISOString();
 
-    const { data: items } = await supabase
-      .from('items')
-      .select('id, name, item_type, item_level, image_path, fair_value_gold, fair_value_source, fair_value_exchange_rate, median_gold_value, median_crystal_value');
+    // PostgREST caps at 1000 rows per call — paginate explicitly for items + snapshots
+    async function fetchAll<T>(
+      builder: (from: number, to: number) => ReturnType<ReturnType<typeof createClient>['from']> extends infer R
+        ? R
+        : never
+    ): Promise<T[]> {
+      // Generic-free version below
+      throw new Error('use loadPaginated instead');
+    }
+    void fetchAll;
 
-    // Only include recent snapshots — stale rows from old sweeps are filtered out
-    const { data: snapshots } = await supabase
-      .from('price_snapshots')
-      .select('id, item_id, price, pricetype, server, stall_name, stall_cdkey, coords, quantity, recorded_at')
-      .eq('source', 'market')
-      .gte('recorded_at', freshnessCutoff);
+    async function loadPaginatedItems() {
+      const out: Array<Parameters<typeof findDeals>[0]['items'][number]> = [];
+      const PAGE = 1000;
+      let from = 0;
+      for (;;) {
+        const { data, error } = await supabase
+          .from('items')
+          .select('id, name, item_type, item_level, image_path, fair_value_gold, fair_value_source, fair_value_exchange_rate, median_gold_value, median_crystal_value')
+          .range(from, from + PAGE - 1);
+        if (error || !data || data.length === 0) break;
+        out.push(...(data as typeof out));
+        if (data.length < PAGE) break;
+        from += PAGE;
+      }
+      return out;
+    }
 
-    if (!items || !snapshots) {
+    async function loadPaginatedSnapshots() {
+      const out: Array<Parameters<typeof findDeals>[0]['snapshots'][number]> = [];
+      const PAGE = 1000;
+      let from = 0;
+      for (;;) {
+        const { data, error } = await supabase
+          .from('price_snapshots')
+          .select('id, item_id, price, pricetype, server, stall_name, stall_cdkey, coords, quantity, recorded_at')
+          .eq('source', 'market')
+          .gte('recorded_at', freshnessCutoff)
+          .range(from, from + PAGE - 1);
+        if (error || !data || data.length === 0) break;
+        out.push(...(data as typeof out));
+        if (data.length < PAGE) break;
+        from += PAGE;
+      }
+      return out;
+    }
+
+    const [items, snapshots] = await Promise.all([loadPaginatedItems(), loadPaginatedSnapshots()]);
+
+    if (!items.length || !snapshots.length) {
       setDeals([]);
       setLoading(false);
+      setLastFetched(new Date());
       return;
     }
 
     const found = findDeals({
-      items: items as Parameters<typeof findDeals>[0]['items'],
-      snapshots: snapshots as Parameters<typeof findDeals>[0]['snapshots'],
+      items,
+      snapshots,
       fallbackExchangeRate: FALLBACK_RATE,
       minDealPct: minPct,
       screamingDealPct: DEFAULT_SCREAMING_DEAL_PCT,
@@ -110,6 +151,8 @@ export function DealsView() {
     if (serverFilter !== 'all' && String(d.server) !== serverFilter) return false;
     if (currencyFilter === 'gold' && d.pricetype !== 0) return false;
     if (currencyFilter === 'crystal' && d.pricetype !== 1) return false;
+    if (fairValueOnly && d.fairValueGold == null) return false;
+    if (minProfitGold > 0 && d.profitGold < minProfitGold) return false;
     return true;
   });
 
@@ -161,7 +204,7 @@ export function DealsView() {
 
         <div className="h-6 w-px bg-zinc-300 dark:bg-zinc-700 mx-1" />
 
-        <span className="text-xs text-zinc-500">Min:</span>
+        <span className="text-xs text-zinc-500">% off:</span>
         {[20, 30, 50, 75].map((pct) => (
           <button
             key={pct}
@@ -169,6 +212,25 @@ export function DealsView() {
             className={`text-xs px-2 py-1 rounded border ${minPct === pct ? 'bg-zinc-900 text-white dark:bg-zinc-100 dark:text-zinc-900 border-zinc-900 dark:border-zinc-100' : 'border-zinc-300 dark:border-zinc-700 hover:bg-zinc-100 dark:hover:bg-zinc-800'}`}
           >
             {pct}%+
+          </button>
+        ))}
+
+        <div className="h-6 w-px bg-zinc-300 dark:bg-zinc-700 mx-1" />
+
+        <span className="text-xs text-zinc-500">Profit:</span>
+        {[
+          { v: 0, label: 'any' },
+          { v: 1_000, label: '1k+' },
+          { v: 10_000, label: '10k+' },
+          { v: 100_000, label: '100k+' },
+          { v: 1_000_000, label: '1M+' },
+        ].map((opt) => (
+          <button
+            key={opt.v}
+            onClick={() => setMinProfitGold(opt.v)}
+            className={`text-xs px-2 py-1 rounded border ${minProfitGold === opt.v ? 'bg-zinc-900 text-white dark:bg-zinc-100 dark:text-zinc-900 border-zinc-900 dark:border-zinc-100' : 'border-zinc-300 dark:border-zinc-700 hover:bg-zinc-100 dark:hover:bg-zinc-800'}`}
+          >
+            {opt.label} 💰
           </button>
         ))}
 
@@ -205,6 +267,16 @@ export function DealsView() {
             className="rounded"
           />
           Hide pets
+        </label>
+
+        <label className="text-xs text-zinc-600 dark:text-zinc-400 flex items-center gap-1.5" title="Only show deals where we have history-backed fair value (excludes peer-median-only deals)">
+          <input
+            type="checkbox"
+            checked={fairValueOnly}
+            onChange={(e) => setFairValueOnly(e.target.checked)}
+            className="rounded"
+          />
+          Fair value only
         </label>
       </div>
 
