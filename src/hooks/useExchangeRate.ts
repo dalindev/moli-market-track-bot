@@ -11,7 +11,7 @@ const GOLD_BOX_NAME = '魔幣箱（100萬）';
 const GOLD_BOX_VALUE = 1000000; // 1 million gold
 
 // Default exchange rate fallback
-const DEFAULT_GOLD_PER_CRYSTAL = 263;
+const DEFAULT_GOLD_PER_CRYSTAL = 330;
 
 export interface ExchangeRateInfo {
   goldPerCrystal: number;

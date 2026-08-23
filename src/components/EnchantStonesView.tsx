@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useMemo, useRef, useState, useSyncExternalStore } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState, useSyncExternalStore } from 'react';
 import Link from 'next/link';
 import { useMarket } from '@/hooks/useMarket';
 import { useExchangeRate } from '@/hooks/useExchangeRate';
@@ -20,30 +20,35 @@ import {
   MAX_STONE_LEVEL,
 } from '@/lib/enchant-fair-price';
 
-const ANCHOR_STORAGE_KEY = 'enchant-stones-anchor-crystal';
-const ANCHOR_CHANGE_EVENT = 'enchant-anchor-change';
-
-// localStorage-backed anchor via useSyncExternalStore (SSR-safe, no hydration mismatch)
-function anchorSnapshot(): number {
-  const stored = Number(localStorage.getItem(ANCHOR_STORAGE_KEY));
-  return Number.isFinite(stored) && stored > 0 ? stored : DEFAULT_ANCHOR_CRYSTAL;
-}
-
-function subscribeAnchor(cb: () => void): () => void {
-  window.addEventListener('storage', cb);
-  window.addEventListener(ANCHOR_CHANGE_EVENT, cb);
-  return () => {
-    window.removeEventListener('storage', cb);
-    window.removeEventListener(ANCHOR_CHANGE_EVENT, cb);
+// localStorage-backed numeric settings via useSyncExternalStore (SSR-safe, no hydration mismatch).
+// Snapshot returns 0 when unset so callers can fall back to their own default.
+function createStoredNumber(key: string) {
+  const eventName = `stored-number:${key}`;
+  return {
+    snapshot(): number {
+      const stored = Number(localStorage.getItem(key));
+      return Number.isFinite(stored) && stored > 0 ? stored : 0;
+    },
+    subscribe(cb: () => void): () => void {
+      window.addEventListener('storage', cb);
+      window.addEventListener(eventName, cb);
+      return () => {
+        window.removeEventListener('storage', cb);
+        window.removeEventListener(eventName, cb);
+      };
+    },
+    store(value: number) {
+      if (Number.isFinite(value) && value > 0) {
+        localStorage.setItem(key, String(value));
+        window.dispatchEvent(new Event(eventName));
+      }
+    },
   };
 }
 
-function storeAnchor(value: number) {
-  if (Number.isFinite(value) && value > 0) {
-    localStorage.setItem(ANCHOR_STORAGE_KEY, String(value));
-    window.dispatchEvent(new Event(ANCHOR_CHANGE_EVENT));
-  }
-}
+const anchorStore = createStoredNumber('enchant-stones-anchor-crystal');
+const rateStore = createStoredNumber('enchant-stones-rate-override');
+const zeroSnapshot = () => 0;
 const DEFAULT_MIN_DISCOUNT_PCT = 20;
 const SCREAMING_DISCOUNT_PCT = 50;
 
@@ -106,9 +111,14 @@ function CopyButton({ text }: { text: string }) {
 
 export function EnchantStonesView() {
   const { matchingItems, loading, loadingMore, error, search, progress, hasMore, loadMore } = useMarket();
-  const { currentRate, crystalToGold, DEFAULT_GOLD_PER_CRYSTAL } = useExchangeRate();
+  const { currentRate, DEFAULT_GOLD_PER_CRYSTAL } = useExchangeRate();
 
-  const anchor = useSyncExternalStore(subscribeAnchor, anchorSnapshot, () => DEFAULT_ANCHOR_CRYSTAL);
+  const storedAnchor = useSyncExternalStore(anchorStore.subscribe, anchorStore.snapshot, zeroSnapshot);
+  const anchor = storedAnchor || DEFAULT_ANCHOR_CRYSTAL;
+  // Manual rate override wins; otherwise follow the app-wide live rate
+  const storedRate = useSyncExternalStore(rateStore.subscribe, rateStore.snapshot, zeroSnapshot);
+  const rate = storedRate || currentRate?.goldPerCrystal || DEFAULT_GOLD_PER_CRYSTAL;
+  const toGold = useCallback((crystal: number) => Math.round(crystal * rate), [rate]);
   const [minPct, setMinPct] = useState(DEFAULT_MIN_DISCOUNT_PCT);
   const [showAll, setShowAll] = useState(false);
   const [serverFilter, setServerFilter] = useState<ServerFilter>('all');
@@ -128,8 +138,6 @@ export function EnchantStonesView() {
     if (!loading && !loadingMore && hasMore) void loadMore();
   }, [loading, loadingMore, hasMore, loadMore]);
 
-  const rate = currentRate?.goldPerCrystal ?? DEFAULT_GOLD_PER_CRYSTAL;
-
   const stoneByStatLevel = useMemo(
     () => new Map(ENCHANT_STONES.map(s => [`${s.stat}-${s.level}`, s])),
     []
@@ -148,8 +156,8 @@ export function EnchantStonesView() {
 
       const fairCrystal = fairCrystalPrice(stone.level, anchor);
       if (fairCrystal == null) continue;
-      const fairGold = crystalToGold(fairCrystal);
-      const goldEq = item.pricetype === 1 ? crystalToGold(item.price) : item.price;
+      const fairGold = toGold(fairCrystal);
+      const goldEq = item.pricetype === 1 ? toGold(item.price) : item.price;
       // Crystal listings compare in crystal so the discount is exchange-rate independent
       const discount = item.pricetype === 1
         ? discountPercent(item.price, fairCrystal)
@@ -187,7 +195,7 @@ export function EnchantStonesView() {
       unknownNames: unknown,
       belowFairCount: all.filter(r => r.discount > 0).length,
     };
-  }, [matchingItems, anchor, crystalToGold]);
+  }, [matchingItems, anchor, toGold]);
 
   const visibleRows = rows.filter(r => {
     if (!showAll && r.discount < minPct) return false;
@@ -233,7 +241,17 @@ export function EnchantStonesView() {
             type="number"
             min={1}
             value={anchor}
-            onChange={e => storeAnchor(Number(e.target.value))}
+            onChange={e => anchorStore.store(Number(e.target.value))}
+            className="w-24 px-2 py-1 rounded border border-zinc-300 dark:border-zinc-700 bg-transparent"
+          />
+        </label>
+        <label className="text-sm">
+          <span className="block text-xs text-zinc-500 dark:text-zinc-400 mb-1">匯率（1{CRYSTAL} = ?{GOLD}）</span>
+          <input
+            type="number"
+            min={1}
+            value={rate}
+            onChange={e => rateStore.store(Number(e.target.value))}
             className="w-24 px-2 py-1 rounded border border-zinc-300 dark:border-zinc-700 bg-transparent"
           />
         </label>
@@ -328,7 +346,7 @@ export function EnchantStonesView() {
                         Lv{lv}
                       </span>
                       <span className="block text-xs mt-1 text-zinc-500 dark:text-zinc-400">
-                        {fmt(c)}{CRYSTAL} / {fmt(crystalToGold(c))}{GOLD}
+                        {fmt(c)}{CRYSTAL} / {fmt(toGold(c))}{GOLD}
                       </span>
                     </td>
                     {STATS.map(stat => {
