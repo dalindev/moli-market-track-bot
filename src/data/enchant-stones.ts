@@ -17,6 +17,9 @@ export interface EnchantStone {
   max: number;
 }
 
+// Stats whose stones trade well above the merge-cost baseline (rare / in demand)
+export const HIGH_VALUE_STATS: ReadonlySet<EnchantStat> = new Set(['生命', '攻擊']);
+
 export const ENCHANT_STAT_SLOTS: Record<EnchantStat, string> = {
   防禦: '全身',
   敏捷: '足部',

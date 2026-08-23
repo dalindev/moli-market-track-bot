@@ -6,6 +6,9 @@ import { useMarket } from '@/hooks/useMarket';
 import { useExchangeRate } from '@/hooks/useExchangeRate';
 import {
   parseEnchantStoneName,
+  ENCHANT_STONES,
+  ENCHANT_STAT_SLOTS,
+  HIGH_VALUE_STATS,
   type EnchantStone,
   type EnchantStat,
 } from '@/data/enchant-stones';
@@ -126,6 +129,11 @@ export function EnchantStonesView() {
   }, [loading, loadingMore, hasMore, loadMore]);
 
   const rate = currentRate?.goldPerCrystal ?? DEFAULT_GOLD_PER_CRYSTAL;
+
+  const stoneByStatLevel = useMemo(
+    () => new Map(ENCHANT_STONES.map(s => [`${s.stat}-${s.level}`, s])),
+    []
+  );
 
   const { rows, unknownNames, belowFairCount } = useMemo(() => {
     const grouped = new Map<string, StoneRow>();
@@ -282,19 +290,69 @@ export function EnchantStonesView() {
         </label>
       </div>
 
-      {/* Fair price reference */}
-      <details className="text-sm text-zinc-600 dark:text-zinc-400">
-        <summary className="cursor-pointer select-none">各級公道價一覽</summary>
-        <div className="flex flex-wrap gap-2 mt-2">
-          {Array.from({ length: 10 }, (_, i) => i + 1).map(lv => {
-            const c = fairCrystalPrice(lv, anchor)!;
-            return (
-              <span key={lv} className="px-2 py-1 rounded border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900">
-                <span className={`inline-block px-1 mr-1 rounded border text-xs ${levelBadgeClass(lv)}`}>Lv{lv}</span>
-                {fmt(c)}{CRYSTAL} / {fmt(crystalToGold(c))}{GOLD}
-              </span>
-            );
-          })}
+      {/* Fair price reference table (mirrors the guide's stone grid) */}
+      <details open className="text-sm text-zinc-600 dark:text-zinc-400">
+        <summary className="cursor-pointer select-none font-medium">
+          各級公道價一覽 <span className="text-xs font-normal">（⭐ = 高價值稀有屬性，實際成交常高於公道價）</span>
+        </summary>
+        <div className="overflow-x-auto rounded-lg border border-zinc-200 dark:border-zinc-800 mt-2">
+          <table className="w-full text-sm">
+            <thead className="bg-zinc-100 dark:bg-zinc-900">
+              <tr>
+                <th className="px-3 py-2 text-left font-medium whitespace-nowrap">等級 / 公道價</th>
+                {STATS.map(stat => {
+                  const highValue = HIGH_VALUE_STATS.has(stat);
+                  return (
+                    <th
+                      key={stat}
+                      className={`px-3 py-2 text-center font-medium whitespace-nowrap ${
+                        highValue
+                          ? 'bg-amber-100 text-amber-800 dark:bg-amber-950/70 dark:text-amber-300'
+                          : 'text-zinc-600 dark:text-zinc-400'
+                      }`}
+                    >
+                      {highValue && '⭐ '}{stat}加成
+                      <span className="block text-xs font-normal opacity-75">限{ENCHANT_STAT_SLOTS[stat]}</span>
+                    </th>
+                  );
+                })}
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-zinc-100 dark:divide-zinc-800 bg-white dark:bg-zinc-950">
+              {Array.from({ length: 10 }, (_, i) => i + 1).map(lv => {
+                const c = fairCrystalPrice(lv, anchor)!;
+                return (
+                  <tr key={lv}>
+                    <td className="px-3 py-2 whitespace-nowrap">
+                      <span className={`px-1.5 py-0.5 rounded border text-xs font-medium ${levelBadgeClass(lv)}`}>
+                        Lv{lv}
+                      </span>
+                      <span className="block text-xs mt-1 text-zinc-500 dark:text-zinc-400">
+                        {fmt(c)}{CRYSTAL} / {fmt(crystalToGold(c))}{GOLD}
+                      </span>
+                    </td>
+                    {STATS.map(stat => {
+                      const stone = stoneByStatLevel.get(`${stat}-${lv}`);
+                      if (!stone) return <td key={stat} />;
+                      return (
+                        <td
+                          key={stat}
+                          className={`px-3 py-2 text-center whitespace-nowrap ${
+                            HIGH_VALUE_STATS.has(stat) ? 'bg-amber-50/70 dark:bg-amber-950/30' : ''
+                          }`}
+                        >
+                          <span className="font-medium text-zinc-900 dark:text-zinc-100">【{stone.stoneName}】</span>
+                          <span className="block text-xs text-zinc-500 dark:text-zinc-400">
+                            {stone.stat}+{stone.min}~{stone.max}
+                          </span>
+                        </td>
+                      );
+                    })}
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
         </div>
       </details>
 
@@ -350,7 +408,12 @@ export function EnchantStonesView() {
                       </span>
                       <span className="font-medium text-zinc-900 dark:text-zinc-100">{row.stone.fullName}</span>
                     </div>
-                    <div className="text-xs text-zinc-500 dark:text-zinc-400 mt-0.5 whitespace-nowrap">
+                    <div className={`text-xs mt-0.5 whitespace-nowrap ${
+                      HIGH_VALUE_STATS.has(row.stone.stat)
+                        ? 'text-amber-600 dark:text-amber-400 font-medium'
+                        : 'text-zinc-500 dark:text-zinc-400'
+                    }`}>
+                      {HIGH_VALUE_STATS.has(row.stone.stat) && '⭐ '}
                       {row.stone.stat}+{row.stone.min}~{row.stone.max} ・ 限{row.stone.slot}
                     </div>
                   </td>
