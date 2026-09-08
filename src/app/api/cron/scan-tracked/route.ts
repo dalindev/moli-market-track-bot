@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { createServiceClient } from '@/lib/supabase/server';
+import type { UpstreamMarketType } from '@/lib/market-params';
 
 // Rate limiting: 500ms delay between requests
 const FETCH_DELAY = 500;
@@ -156,7 +157,7 @@ interface MarketPrice {
 
 async function fetchMarketPrices(itemName: string, itemType: string, itemLevel: number | null = null): Promise<MarketPrice[]> {
   const prices: MarketPrice[] = [];
-  const type = itemType === 'pet' ? '寵物攤位' : '道具攤位';
+  const type: UpstreamMarketType = itemType === 'pet' ? 'pet' : 'item';
 
   for (let page = 1; page <= MAX_PAGES; page++) {
     try {

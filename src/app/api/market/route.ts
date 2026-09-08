@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { toUpstreamMarketType } from '@/lib/market-params';
 
 export async function GET(request: NextRequest) {
   const searchParams = request.nextUrl.searchParams;
@@ -7,7 +8,7 @@ export async function GET(request: NextRequest) {
     ajax: '1',
     page: searchParams.get('page') || '1',
     search: searchParams.get('search') || '',
-    type: searchParams.get('type') || 'all',
+    type: toUpstreamMarketType(searchParams.get('type')),
     server: searchParams.get('server') || 'all',
     exact: searchParams.get('exact') || '0',
   });
