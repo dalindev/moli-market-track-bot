@@ -15,8 +15,10 @@ const delay = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
 
 export async function GET(request: NextRequest) {
   // Verify cron secret for Vercel cron jobs
+  // Fail closed: with CRON_SECRET unset the expected header would be the guessable "Bearer undefined"
+  const cronSecret = process.env.CRON_SECRET;
   const authHeader = request.headers.get('authorization');
-  if (authHeader !== `Bearer ${process.env.CRON_SECRET}`) {
+  if (!cronSecret || authHeader !== `Bearer ${cronSecret}`) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
 

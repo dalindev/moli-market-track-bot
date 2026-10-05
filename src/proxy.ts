@@ -1,38 +1,76 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
+import { AUTH_COOKIE, AUTH_MAX_AGE_S, makeAuthToken, passwordMatches, verifyAuthToken } from '@/lib/site-auth';
 
-// Simple password protection using Next.js 16 Proxy
-// Password is stored server-side only (not exposed to client)
-const SITE_PASSWORD = process.env.SITE_PASSWORD;
+// Password protection using Next.js 16 Proxy. The password lives server-side only (SITE_PASSWORD).
+// The session cookie is a signed, expiring token (see src/lib/site-auth.ts), not a constant, so it cannot be forged.
 
-export function proxy(request: NextRequest) {
+function withAuthCookie(response: NextResponse, token: string): NextResponse {
+  response.cookies.set(AUTH_COOKIE, token, {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === 'production',
+    sameSite: 'lax',
+    maxAge: AUTH_MAX_AGE_S,
+    path: '/',
+  });
+  return response;
+}
+
+export async function proxy(request: NextRequest) {
   // Skip auth for API routes (cron jobs need access)
   if (request.nextUrl.pathname.startsWith('/api/')) {
     return NextResponse.next();
   }
 
-  // Skip if no password is set (dev mode or disabled)
-  if (!SITE_PASSWORD) {
-    return NextResponse.next();
-  }
-
-  // Check for auth cookie
-  const authCookie = request.cookies.get('site-auth');
-  if (authCookie?.value === 'authenticated') {
-    return NextResponse.next();
-  }
-
-  // Check for password in query param (for login)
-  const password = request.nextUrl.searchParams.get('password');
-  if (password === SITE_PASSWORD) {
-    const response = NextResponse.redirect(new URL('/', request.url));
-    response.cookies.set('site-auth', 'authenticated', {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === 'production',
-      sameSite: 'lax',
-      maxAge: 60 * 60 * 24 * 7, // 7 days
-    });
+  // The session cookie is httpOnly, so only the server can clear it (document.cookie cannot)
+  if (request.nextUrl.pathname === '/__logout') {
+    const response = NextResponse.redirect(new URL('/', request.url), 303);
+    response.cookies.set(AUTH_COOKIE, '', { httpOnly: true, secure: process.env.NODE_ENV === 'production', sameSite: 'lax', maxAge: 0, path: '/' });
+    response.headers.set('Cache-Control', 'no-store');
     return response;
+  }
+
+  const SITE_PASSWORD = process.env.SITE_PASSWORD;
+
+  // No password: open in dev, but never silently open in production
+  if (!SITE_PASSWORD) {
+    if (process.env.NODE_ENV === 'production') {
+      return new NextResponse('Site password is not configured.', {
+        status: 503,
+        headers: { 'Content-Type': 'text/plain; charset=utf-8', 'Cache-Control': 'no-store' },
+      });
+    }
+    return NextResponse.next();
+  }
+
+  const nowSec = Math.floor(Date.now() / 1000);
+
+  // Valid signed session cookie
+  if (await verifyAuthToken(SITE_PASSWORD, request.cookies.get(AUTH_COOKIE)?.value, nowSec)) {
+    return NextResponse.next();
+  }
+
+  // Login: the form POSTs the password; the old ?password= link still works so bookmarks keep working
+  let password: string | null = null;
+  let attempted = false;
+  if (request.method === 'POST' && request.nextUrl.pathname === '/__login') {
+    attempted = true;
+    try {
+      const form = await request.formData();
+      password = String(form.get('password') ?? '').slice(0, 200);
+    } catch {
+      password = '';
+    }
+  } else if (request.nextUrl.searchParams.has('password')) {
+    attempted = true;
+    password = request.nextUrl.searchParams.get('password');
+  }
+  if (attempted && (await passwordMatches(SITE_PASSWORD, password))) {
+    const token = await makeAuthToken(SITE_PASSWORD, nowSec + AUTH_MAX_AGE_S);
+    return withAuthCookie(NextResponse.redirect(new URL('/', request.url), 303), token);
+  }
+  if (attempted) {
+    await new Promise((r) => setTimeout(r, 800)); // cheap brake on guessing
   }
 
   // Show login page
@@ -93,18 +131,18 @@ export function proxy(request: NextRequest) {
   <div class="card">
     <h1>Market Tracker</h1>
     <p>Enter password to continue</p>
-    <form method="GET" action="/">
+    <form method="POST" action="/__login">
       <input type="password" name="password" placeholder="Password" required autofocus />
       <button type="submit">Enter</button>
     </form>
-    ${password !== null ? '<p class="error">Incorrect password</p>' : ''}
+    ${attempted ? '<p class="error">Incorrect password</p>' : ''}
   </div>
 </body>
 </html>`;
 
   return new NextResponse(loginHtml, {
     status: 401,
-    headers: { 'Content-Type': 'text/html' },
+    headers: { 'Content-Type': 'text/html', 'Cache-Control': 'no-store' },
   });
 }
 

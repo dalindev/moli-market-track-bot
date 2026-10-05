@@ -8,9 +8,8 @@ interface AuthGateProps {
 
 export function AuthGate({ children }: AuthGateProps) {
   const handleLogout = () => {
-    // Clear the auth cookie by setting it to expire
-    document.cookie = 'site-auth=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
-    window.location.reload();
+    // The auth cookie is httpOnly, so the server clears it (see src/proxy.ts)
+    window.location.assign('/__logout');
   };
 
   return (
