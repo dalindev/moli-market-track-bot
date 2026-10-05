@@ -31,6 +31,9 @@ export default function Home() {
             <Link href="/enchant-stones" className="inline-block mt-2 text-sm text-blue-600 dark:text-blue-400 hover:underline">
               附魔石撿漏 →
             </Link>
+            <Link href="/gear" className="inline-block mt-2 text-sm text-blue-600 dark:text-blue-400 hover:underline">
+              裝備品質掃描 →
+            </Link>
           </div>
         </header>
 

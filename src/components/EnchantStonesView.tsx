@@ -110,7 +110,7 @@ function CopyButton({ text }: { text: string }) {
 }
 
 export function EnchantStonesView() {
-  const { matchingItems, loading, loadingMore, error, search, progress, hasMore, loadMore } = useMarket();
+  const { matchingItems, loading, loadingMore, error, search, progress, hasMore, loadMore, retry, failedPages } = useMarket();
   const { currentRate, DEFAULT_GOLD_PER_CRYSTAL } = useExchangeRate();
 
   const storedAnchor = useSyncExternalStore(anchorStore.subscribe, anchorStore.snapshot, zeroSnapshot);
@@ -376,7 +376,18 @@ export function EnchantStonesView() {
 
       {/* Status */}
       <div className="text-sm text-zinc-500 dark:text-zinc-400">
-        {error && <span className="text-red-600 dark:text-red-400">讀取失敗：{error}</span>}
+        {error && (
+          <span className="inline-flex items-center gap-2 text-red-600 dark:text-red-400">
+            讀取失敗：{error}
+            <button
+              onClick={() => void retry()}
+              disabled={isFetching}
+              className="px-2 py-0.5 rounded border border-red-300 dark:border-red-800 hover:bg-red-50 dark:hover:bg-red-950 disabled:opacity-50"
+            >
+              重試
+            </button>
+          </span>
+        )}
         {!error && isFetching && (
           <span>
             掃描市場中…{progress ? ` 第 ${progress.current}/${progress.total} 頁` : ''}（{matchingItems.length} 筆附魔石）
@@ -386,6 +397,11 @@ export function EnchantStonesView() {
           <span>
             共 {rows.length} 筆附魔石掛售，其中 {belowFairCount} 筆低於公道價
             {unknownNames.size > 0 && `，${[...unknownNames.values()].reduce((a, b) => a + b, 0)} 筆無法辨識等級`}
+            {failedPages > 0 && (
+              <span className="text-amber-600 dark:text-amber-400">
+                {' '}・ {failedPages} 頁讀取失敗，結果可能不完整
+              </span>
+            )}
           </span>
         )}
       </div>

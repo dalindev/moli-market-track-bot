@@ -15,7 +15,7 @@ GET https://member.starcg.net/market.php
 | `ajax` | string | Yes | - | Must be `"1"` to receive JSON response |
 | `page` | number | No | `1` | Page number for pagination |
 | `search` | string | No | `""` | Search term (Traditional Chinese) |
-| `type` | string | No | `"all"` | Filter by stall type: `"all"`, `"道具攤位"` (items), `"寵物攤位"` (pets) |
+| `type` | string | No | `"all"` | Filter by stall type: `"all"`, `"item"` (道具攤位), `"pet"` (寵物攤位). **The Chinese labels are no longer accepted** — see "Verified contract" below. |
 | `server` | string | No | `"all"` | Filter by server: `"all"`, `"1"`, `"2"`, `"3"`, `"4"`, `"5"` |
 | `exact` | string | No | `"0"` | Exact match: `"1"` for exact, `"0"` for partial (contains) |
 
@@ -220,3 +220,62 @@ When saving items to database, focus on these key fields:
 - `price` / `pricetype` - Current listing price
 - `stall.server` - Which server the item is on
 - `stall.coords` - Location for in-game navigation
+
+---
+
+## Verified contract (re-measured 2026-09-12)
+
+Everything below was confirmed against the live endpoint on 2026-09-12. Where it contradicts the
+older sections above, this section wins.
+
+### `type` only accepts `all` / `item` / `pet`
+
+The upstream UI sends `data-type="all"|"item"|"pet"`. Passing the display labels
+(`道具攤位`, `寵物攤位`) now returns **HTTP 400**:
+
+```json
+{"status":"error","error":"invalid_query","message":"查詢條件格式不正確。","retry_after":0}
+```
+
+`src/lib/market-params.ts` translates the legacy labels at the proxy boundary.
+
+### Error envelopes and throttling
+
+Errors arrive as a JSON envelope with `status:"error"`, a machine-readable `error` code, and
+`retry_after` **in seconds**. There is **no `Retry-After` HTTP header** — the delay is only in the body.
+
+| HTTP | `error` | Meaning | Retry? |
+|------|---------|---------|--------|
+| 400 | `invalid_query` | Our query is malformed | No — fix the request |
+| 429 | `rate_limited` | 請求過於頻繁 — too many requests from us | Yes, after `retry_after` |
+| 503 | `service_busy` | Upstream shedding load | Yes, after `retry_after` |
+
+Both throttles are transient and common enough to matter: a single un-retried `503` on a page's
+first request is what made `/enchant-stones` look broken until you reloaded. All upstream calls go
+through `src/lib/upstream-fetch.ts`, which retries these and passes the real status through.
+
+Observed limits: ~24 concurrent proxy requests reliably trips `429 rate_limited`, and it stays
+tripped for several seconds afterwards. Sequential requests at ~0.5s spacing are fine. Budget a
+periodic scanner accordingly.
+
+### Size of a full sweep — `totalFiltered` counts STALLS, not listings
+
+`totalFiltered` is the number of **stalls**, and `perPage` is hard-locked at **20 stalls per page**
+(`perPage=100`, `limit`, `pageSize` are all ignored). Measured 2026-09-12: `totalFiltered: 2267`
+⇒ **114 pages**, with ~190 item listings + ~24 pet listings per page ⇒ **~24,000 live listings**.
+
+Stalls come back sorted by `time` **ascending**, and a stall lives ~4 days, so the most recently
+created stall in the whole game is the **last row of the last page** — reachable in 2 requests
+instead of 114. That is the basis of the fast-detection design.
+
+### Fields that matter for valuation
+
+- `ITEM_TRUENAME` — the item name, **without** brackets. (`marketrecord.php` returns the same item
+  wrapped in `[...]`; see that doc.)
+- `ITEM_REMAIN` / `ITEM_MAXREMAIN` — stack quantity.
+- `ITEM_DURABILITY` / `ITEM_MAXDURABILITY` — wear. `250/250` is new, `15/250` is about to break and
+  is worth far less. `ITEM_MAXDURABILITY = 0` means the item has no durability concept.
+- `ITEM_LEVEL` — meaningful for 改造圖-style items (5/6/7 = 普通/银/金); often `1` otherwise.
+- `ITEM_RARE_FLG`, `ITEM_SELLUNIT`, and the `ITEM_MODIFY*` stat block are also present.
+
+Stall objects carry `expires`, which bounds how long a listing can still be bought.

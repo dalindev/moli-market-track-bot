@@ -29,6 +29,17 @@ export interface MarketItem {
   ITEM_CANSELL: number;
   ITEM_REMAIN: number;        // Stack quantity remaining
   ITEM_MAXREMAIN: number;     // Maximum stack size
+  ITEM_UNIQUECODE?: string;   // Stable per-physical-item id; distinct for every listing
+  // Remaining rollable stats, used by gear-quality scoring. All present in every payload.
+  ITEM_MODIFYHP?: number;
+  ITEM_MODIFYFORCEPOINT?: number;
+  ITEM_MODIFYRECOVERY?: number;
+  ITEM_MODIFYCRITICAL?: number;
+  ITEM_MODIFYHITRATE?: number;
+  ITEM_MODIFYCOUNTER?: number;
+  ITEM_MODIFYAVOID?: number;
+  ITEM_ADM?: number;          // 魔攻
+  ITEM_RSS?: number;          // 魔抗
 }
 
 export interface MarketPet {
@@ -71,7 +82,9 @@ export interface PriceRecord {
 
 export interface SearchParams {
   search: string;
-  type: 'all' | '道具攤位' | '寵物攤位';
+  // 'item'/'pet' are the codes market.php actually accepts; the Chinese labels are the app's
+  // legacy spelling, translated at the proxy by toUpstreamMarketType(). Prefer the codes.
+  type: 'all' | 'item' | 'pet' | '道具攤位' | '寵物攤位';
   server: 'all' | '1' | '2' | '3' | '4' | '5';
   exact: boolean;
   page: number;

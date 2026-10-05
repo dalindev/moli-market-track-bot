@@ -1,6 +1,6 @@
 'use client';
 
-import { useCallback, useMemo } from 'react';
+import { useCallback } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { createClient } from '@/lib/supabase/client';
 import type { ExchangeRate } from '@/types/supabase';
@@ -10,8 +10,19 @@ import { queryKeys, cacheDurations } from '@/components/providers/QueryProvider'
 const GOLD_BOX_NAME = '魔幣箱（100萬）';
 const GOLD_BOX_VALUE = 1000000; // 1 million gold
 
-// Default exchange rate fallback
+// Default exchange rate fallback. Cross-checked 2026-09-12 against 魔幣箱（100萬） sales:
+// median 2,997 魔晶 per 1,000,000 金幣 box ⇒ ~334 金幣 per 魔晶.
 const DEFAULT_GOLD_PER_CRYSTAL = 330;
+
+// The stored rate drifts. A months-old row is worse than the default — the single row in
+// production is from 2026-01-17 at 263.16, which silently mispriced every crystal listing.
+const MAX_RATE_AGE_DAYS = 14;
+
+function daysSince(dateStr: string): number {
+  const then = new Date(dateStr).getTime();
+  if (!Number.isFinite(then)) return Number.POSITIVE_INFINITY;
+  return (Date.now() - then) / (24 * 60 * 60 * 1000);
+}
 
 export interface ExchangeRateInfo {
   goldPerCrystal: number;
@@ -19,6 +30,10 @@ export interface ExchangeRateInfo {
   sourcePrice: number | null;
   sampleCount: number;
   lastUpdated: string;
+  /** True when goldPerCrystal is the built-in default rather than a fresh stored rate. */
+  isFallback: boolean;
+  /** Age in days of the stored rate this was derived from; null when there is no stored rate. */
+  storedRateAgeDays: number | null;
 }
 
 export function useExchangeRate() {
@@ -41,12 +56,17 @@ export function useExchangeRate() {
       }
 
       if (data) {
+        const ageDays = daysSince(data.rate_date);
+        const stale = ageDays > MAX_RATE_AGE_DAYS;
         return {
-          goldPerCrystal: data.gold_per_crystal,
+          // A stale stored rate is actively misleading, so prefer the default until a scan refreshes it.
+          goldPerCrystal: stale ? DEFAULT_GOLD_PER_CRYSTAL : data.gold_per_crystal,
           rateDate: data.rate_date,
           sourcePrice: data.source_item_price,
           sampleCount: data.sample_count,
           lastUpdated: data.updated_at,
+          isFallback: stale,
+          storedRateAgeDays: Math.floor(ageDays),
         };
       }
 
@@ -57,6 +77,8 @@ export function useExchangeRate() {
         sourcePrice: null,
         sampleCount: 0,
         lastUpdated: new Date().toISOString(),
+        isFallback: true,
+        storedRateAgeDays: null,
       };
     },
     staleTime: cacheDurations.exchangeRate, // 5 minutes cache

@@ -2,8 +2,8 @@ import { fetchWithRetry, jitteredSleep } from '../rate-limiter';
 import type { MarketRecordResponseV2 } from '@/types/market';
 
 export type MarketRecordSort = 'time_desc' | 'time_asc' | 'price_asc' | 'price_desc';
-export type MarketRecordRange = '1d' | '7d' | '30d' | '6m';
-export type MarketRecordCurrency = 'all' | '0' | '1';
+export type MarketRecordRange = '7d' | '30d' | '90d';
+export type MarketRecordCurrency = 'all' | 'gold' | 'gem';
 export type MarketRecordType = 'all' | 'item' | 'pet';
 
 export interface MarketRecordFetchParams {

@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { toUpstreamMarketType } from '@/lib/market-params';
+import { fetchUpstreamJson } from '@/lib/upstream-fetch';
 
 export async function GET(request: NextRequest) {
   const searchParams = request.nextUrl.searchParams;
@@ -13,29 +14,33 @@ export async function GET(request: NextRequest) {
     exact: searchParams.get('exact') || '0',
   });
 
-  try {
-    const response = await fetch(
-      `https://member.starcg.net/market.php?${params.toString()}`,
-      {
-        headers: {
-          'Accept': 'application/json',
-          'User-Agent': 'Mozilla/5.0 (compatible; MarketTracker/1.0)',
-        },
-        cache: 'no-store', // Always fetch fresh data
-      }
-    );
+  const result = await fetchUpstreamJson(
+    `https://member.starcg.net/market.php?${params.toString()}`,
+    { signal: request.signal }
+  );
 
-    if (!response.ok) {
-      throw new Error(`API responded with status: ${response.status}`);
-    }
-
-    const data = await response.json();
-    return NextResponse.json(data);
-  } catch (error) {
-    console.error('Market API error:', error);
-    return NextResponse.json(
-      { error: 'Failed to fetch market data' },
-      { status: 500 }
-    );
+  if (result.ok) {
+    return NextResponse.json(result.data);
   }
+
+  const { failure } = result;
+  console.error(
+    `Market API error: ${failure.code} (${failure.status}) after ${failure.attempts} attempt(s): ${failure.message}`
+  );
+
+  // Pass the real cause through so the client can tell "the game server is busy, try again"
+  // apart from "we sent a malformed query".
+  return NextResponse.json(
+    {
+      error: failure.message || 'Failed to fetch market data',
+      code: failure.code,
+      retryAfter: failure.retryAfterSeconds,
+    },
+    {
+      status: failure.status,
+      headers: failure.retryAfterSeconds > 0
+        ? { 'Retry-After': String(failure.retryAfterSeconds) }
+        : undefined,
+    }
+  );
 }
